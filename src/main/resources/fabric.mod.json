@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "cabricality",
   "version": "${version}",
 
-  "name": "modid",
+  "name": "Cabricality",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "DM Earth"
@@ -12,17 +12,20 @@
     "homepage": "https://github.com/DM-Earth"
   },
 
-  "license": "MIT",
-  "icon": "assets/modid/icon.png",
+  "license": "CC0",
+  "icon": "assets/cabricality/icon.png",
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.dm.earth.modid.ModId"
+    "client": [
+      "com.dm.earth.cabricality.CabricalityClient"
+    ],
+    "server": [
+      "com.dm.earth.cabricality.CabricalityServer"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "cabricality.mixins.json"
   ],
 
   "depends": {
