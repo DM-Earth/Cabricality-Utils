@@ -17,7 +17,7 @@ public class ModChecker {
             if (requiredModList.isEmpty()) {
 
                 //Write mods here
-                requiredModList.put("krypton", "Krypton");
+                requiredModList.put("ftbquests", "FTB Quests");
             }
             for (Map.Entry<String, String> modEntry : requiredModList.entrySet()) {
                 if (!FabricLoader.getInstance().isModLoaded(modEntry.getKey()) && !missingModList.contains(modEntry.getValue()))
