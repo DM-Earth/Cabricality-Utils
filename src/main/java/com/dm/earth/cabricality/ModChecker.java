@@ -15,6 +15,7 @@ public class ModChecker {
     public static void check(){
         if (isFullLoaded()) {
             if (requiredModList.isEmpty()) {
+
                 //Write mods here
                 requiredModList.put("krypton", "Krypton");
             }
@@ -28,7 +29,15 @@ public class ModChecker {
     @Nullable
     public static String getMods(){
         if (isFullLoaded()) return null;
-        return missingModList.toArray().toString();
+        String mods = "";
+        for (String mod : missingModList){
+            if (!mods.equals("")){
+                mods = mods + ", " + mod;
+            } else {
+                mods = mod;
+            }
+        }
+        return mods;
     }
 
     public static Boolean isFullLoaded(){
