@@ -6,7 +6,6 @@
   "mixins": [
     "FlagBlockMixin",
     "KubeJSMixin",
-    "KubeJSRegistriesMixin",
     "SchemasMixin",
     "WrenchItemMixin"
   ],
