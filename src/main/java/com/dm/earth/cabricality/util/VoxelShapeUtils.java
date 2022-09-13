@@ -16,13 +16,13 @@ public class VoxelShapeUtils {
             case NORTH -> {
                 returnBox = simpleBox(x1, y1, z1, x2, y2, z2);
             }
-            case EAST -> {
+            case WEST -> {
                 returnBox = simpleBox(z1, y1, 16-x1, z2, y2, 16-x2);
             }
             case SOUTH -> {
                 returnBox = simpleBox(16-x1, y1, 16-z1, 16-x2, y2, 16-z2);
             }
-            case WEST -> {
+            case EAST -> {
                 returnBox = simpleBox(16-z1, y1, x1, 16-z2, y2, x2);
             }
         }
