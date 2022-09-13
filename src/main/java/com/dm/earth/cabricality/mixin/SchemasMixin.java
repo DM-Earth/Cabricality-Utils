@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.mixin;
 
-import com.dm.earth.cabricality.util.DataFixerUtil;
+import com.dm.earth.cabricality.util.DataFixerUtils;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.DataFixerBuilder;
 import com.mojang.datafixers.schemas.Schema;
@@ -28,7 +28,7 @@ public class SchemasMixin {
 
     @Inject(method = "build", at = @At("TAIL"))
     private static void CabricalitySchemasDFU(DataFixerBuilder builder, CallbackInfo ci) {
-        ImmutableMap<String, String> map = DataFixerUtil.read();
+        ImmutableMap<String, String> map = DataFixerUtils.read();
         if (!map.isEmpty()) {
             Schema schemaCabricality = builder.addSchema(114514, EMPTY_IDENTIFIER_NORMALIZE);
             builder.addFixer(ItemNameFix.create(schemaCabricality, "Cabricality DataFixers", replacing(map)));

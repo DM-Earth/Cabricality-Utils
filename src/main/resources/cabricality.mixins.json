@@ -6,7 +6,9 @@
   "mixins": [
     "FlagBlockMixin",
     "KubeJSMixin",
+    "RegistryMixin",
     "SchemasMixin",
+    "SimpleRegistryMixin",
     "WrenchItemMixin"
   ],
   "client": [

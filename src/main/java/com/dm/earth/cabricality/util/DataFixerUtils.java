@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataFixerUtil {
+public class DataFixerUtils {
     private static Map<String, String> dataFixerMapCommon = new HashMap<>();
 
     public static void addFixer(Identifier oldId, Identifier newId) {

@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.mixin;
 
-import com.dm.earth.cabricality.util.VoxelShapeUtil;
+import com.dm.earth.cabricality.util.VoxelShapeUtils;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -30,13 +30,13 @@ public class FlagBlockMixin {
         Direction direction = state.get(FACING);
         if (state.get(HALF).equals(DoubleBlockHalf.LOWER)) {
             cir.setReturnValue(VoxelShapes.union(
-                    VoxelShapeUtil.simpleBox(direction, 0, 0, 7, 5, 16, 9),
-                    VoxelShapeUtil.simpleBox(direction, 5, 0, 7.5, 13, 16, 8.5)
+                    VoxelShapeUtils.simpleBox(direction, 0, 0, 7, 5, 16, 9),
+                    VoxelShapeUtils.simpleBox(direction, 5, 0, 7.5, 13, 16, 8.5)
             ));
         } else {
             cir.setReturnValue(VoxelShapes.union(
-                    VoxelShapeUtil.simpleBox(direction, 0, 0, 7, 5, 14, 9),
-                    VoxelShapeUtil.simpleBox(direction, 5, 0, 7.5, 13, 15, 8.5)
+                    VoxelShapeUtils.simpleBox(direction, 0, 0, 7, 5, 14, 9),
+                    VoxelShapeUtils.simpleBox(direction, 5, 0, 7.5, 13, 15, 8.5)
             ));
         }
     }

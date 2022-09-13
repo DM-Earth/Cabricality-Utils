@@ -1,4 +1,6 @@
 {
   "util.cabricality.upside_down": "false",
-  "util.cabricality.missing_mod": "需要安装模组"
+  "util.cabricality.missing_mod": "需要安装模组",
+
+  "itemGroup.cabricality.main_group": "永无止境：重缝"
 }
