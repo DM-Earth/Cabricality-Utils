@@ -1,5 +1,6 @@
 package com.dm.earth.cabricality;
 
+import com.google.common.collect.ImmutableMap;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +18,11 @@ public class ModChecker {
             if (requiredModList.isEmpty()) {
 
                 //Write mods here
-                requiredModList.put("ftbquests", "FTB Quests");
+                requiredModList.putAll(ImmutableMap.of(
+                        "ftblibrary", "FTB Library",
+                        "ftbquests", "FTB Quests",
+                        "ftbteams", "FTB Teams"
+                ));
             }
             for (Map.Entry<String, String> modEntry : requiredModList.entrySet()) {
                 if (!FabricLoader.getInstance().isModLoaded(modEntry.getKey()) && !missingModList.contains(modEntry.getValue()))
