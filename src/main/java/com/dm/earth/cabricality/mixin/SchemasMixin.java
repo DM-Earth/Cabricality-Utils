@@ -12,9 +12,8 @@ import java.util.Map;
 
 @Mixin(Schemas.class)
 public class SchemasMixin {
-
     @ModifyVariable(method = "build", at = @At("STORE"), name = "immutableMap3")
-    private static ImmutableMap<String, String> CabricalitySchemasDFU(ImmutableMap<String, String> inputMap) {
+    private ImmutableMap<String, String> CabricalitySchemasDFU(ImmutableMap<String, String> inputMap) {
         ImmutableMap<String, String> map = DataFixerUtils.read();
         if (!map.isEmpty()) {
             Map<String, String> normalMap = new HashMap<>(Map.copyOf(map));
