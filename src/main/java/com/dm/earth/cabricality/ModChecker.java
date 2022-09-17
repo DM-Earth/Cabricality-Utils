@@ -21,7 +21,8 @@ public class ModChecker {
                 requiredModList.putAll(ImmutableMap.of(
                         "ftblibrary", "FTB Library",
                         "ftbquests", "FTB Quests",
-                        "ftbteams", "FTB Teams"
+                        "ftbteams", "FTB Teams",
+                        "questsadditions", "Quests Additions"
                 ));
             }
             for (Map.Entry<String, String> modEntry : requiredModList.entrySet()) {
