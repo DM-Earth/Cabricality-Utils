@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ModChecker {
-    private static List<String> missingModList = new ArrayList<String>();
+    private static List<String> missingModList = new ArrayList<>();
     private static Map<String, String> requiredModList = new HashMap<>();
 
     public static void check(){
