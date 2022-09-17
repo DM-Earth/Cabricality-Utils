@@ -38,6 +38,7 @@ dependencies {
     modImplementation "maven.modrinth:create-fabric:${project.minecraft_version}-${project.create_version}"
     modImplementation "maven.modrinth:kubejs:${project.kubejs_version}+fabric"
     modImplementation "maven.modrinth:architectury-api:${project.architectury_version}+fabric"
+    modImplementation "maven.modrinth:bits-and-chisels:${project.bits_and_chisels_version}"
 }
 
 processResources {
