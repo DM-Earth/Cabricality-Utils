@@ -1,5 +1,7 @@
 <div align="center"> <img src="https://github.com/DM-Earth/Cabricality-Utils/blob/1.18/icon.png?raw=true" width = 250 alt="Cabricality Utils"> </div>
-<h1 align="center"> Cabricality Utils </h1>
+<p> </p>
+<div align="center"> <img src="https://img.shields.io/modrinth/dt/cabricality-utils" width = 100 alt="Cabricality Utils"> </div>
+<h1 align="center"> Modrinth Downloads </h1>
 
 This is a small Minecraft mod for [Cabricality](https://github.com/DM-Earth/Cabricality) Modpack. Currently, it only supports Fabric/Quilt 1.18.2.
 
