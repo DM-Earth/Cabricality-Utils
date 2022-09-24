@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataFixerUtils {
-    private static Map<String, String> dataFixerMapCommon = new HashMap<>();
+    private static final Map<String, String> dataFixerMapCommon = new HashMap<>();
 
     public static void addFixer(Identifier oldId, Identifier newId) {
         dataFixerMapCommon.put(oldId.toString(), newId.toString());

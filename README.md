@@ -9,8 +9,7 @@ This is a small Minecraft mod for [Cabricality](https://github.com/DM-Earth/Cabr
 
 - Make Trade Cards and Profession Cards easier to translate.
 - Replace Ad Astra and Bits and Chisels' wrench with the Create one.
-- Tweak bounding boxes of Flags from Ad Astra to match the custom models in Cabricality.
-- Catch the registrations with namespace of `cabricality` and add them to vanilla datafixers.
+- Catch the registrations with namespace of `cabricality` and add them to vanilla DataFixers.
 - Move items form KubeJS to a new item group instead of that KubeJS one.
 
 When certain necessary mods are not loaded:
@@ -31,7 +30,6 @@ When certain necessary mods are not loaded:
 
 ### With Changes
 
-- `com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock`
 - `com.simibubi.create.content.contraptions.wrench.WrenchItem`
 - `dev.latvian.mods.kubejs.KubeJS`
 - `net.minecraft.util.registry.Registry`

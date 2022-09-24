@@ -44,34 +44,34 @@ public class WrenchItemMixin {
 
     void invert(Axis axis, BitsBlockEntity e) {
         BlockState[][][] rotated = new BlockState[16][16][16];
-        switch(axis) {
-            case X:
+        switch (axis) {
+            case X -> {
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         for (int k = 0; k < 16; k++) {
-                            rotated[i][j][k] = e.getState(i, j, -k+15);
+                            rotated[i][j][k] = e.getState(i, j, -k + 15);
                         }
                     }
                 }
-                break;
-            case Y:
+            }
+            case Y -> {
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         for (int k = 0; k < 16; k++) {
-                            rotated[i][j][k] = e.getState( i, -j+15,k);
+                            rotated[i][j][k] = e.getState(i, -j + 15, k);
                         }
                     }
                 }
-                break;
-            case Z:
+            }
+            case Z -> {
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         for (int k = 0; k < 16; k++) {
-                            rotated[i][j][k] = e.getState(-i+15, j, k);
+                            rotated[i][j][k] = e.getState(-i + 15, j, k);
                         }
                     }
                 }
-                break;
+            }
         }
         e.setStates(rotated);
         e.rebuildServer();
@@ -82,8 +82,8 @@ public class WrenchItemMixin {
     //Rotation Algorithm from https://stackoverflow.com/questions/53110374/how-to-rotate-2-d-array-in-java, extended to 3D
     void rotate(Axis axis, BitsBlockEntity e) {
         BlockState[][][] rotated = new BlockState[16][16][16];
-        switch(axis) {
-            case X:
+        switch (axis) {
+            case X -> {
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         for (int k = 0; k < 16; k++) {
@@ -91,8 +91,8 @@ public class WrenchItemMixin {
                         }
                     }
                 }
-                break;
-            case Y:
+            }
+            case Y -> {
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         for (int k = 0; k < 16; k++) {
@@ -100,8 +100,8 @@ public class WrenchItemMixin {
                         }
                     }
                 }
-                break;
-            case Z:
+            }
+            case Z -> {
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         for (int k = 0; k < 16; k++) {
@@ -109,7 +109,7 @@ public class WrenchItemMixin {
                         }
                     }
                 }
-                break;
+            }
         }
         e.setStates(rotated);
         e.rebuildServer();
