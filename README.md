@@ -7,7 +7,7 @@
   <br>
   </br>
   <a href="https://modrinth.com/mod/cabricality-utils" title="Modrinth">
-    <img src="https://img.shields.io/modrinth/dt/cabricality-utils?label=Downloads&style=for-the-badge&labelColor=1a1228&color=blueviolet" height = 35 alt="Modrinth Downloads">
+    <img src="https://img.shields.io/modrinth/dt/cabricality-utils?label=Downloads&style=for-the-badge&labelColor=1b122a&color=blueviolet" height = 35 alt="Modrinth Downloads">
     </img>
   </a>
 </div>
