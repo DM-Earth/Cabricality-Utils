@@ -21,6 +21,7 @@ public class Cabricality implements ModInitializer {
             .build();
 
     public static final Registries REGISTRIES_CABRICALITY = Registries.get(MODID);
+    public static boolean showInfo = false;
 
     @Override
     public void onInitialize() {

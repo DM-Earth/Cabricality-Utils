@@ -1,6 +1,10 @@
 {
   "util.cabricality.upside_down": "true",
   "util.cabricality.missing_mod": "mod needs to be installed for Cabricality",
+  "util.cabricality.prefix_missing_mod": "Missing ",
+  "util.cabricality.postfix_missing_mod": " mod!",
+  "util.cabricality.postfix_missing_mods": " mods!",
+  "util.cabricality.warn": "§cInstall the mods below!",
 
   "itemGroup.cabricality.main_group": "Cabricality"
 }

@@ -16,11 +16,18 @@ public class TranslatableTextMixin {
     private static String injected(String key) {
         String returnText = key;
         if (!ModChecker.isFullLoaded() && !key.startsWith(CabricalityClient.genTranslationKey("util", ""))) {
+            /*
             if (new TranslatableText(CabricalityClient.genTranslationKey("util", "upside_down")).getString().equals("false")) {
                 returnText = new TranslatableText(CabricalityClient.genTranslationKey("util", "missing_mod")).getString() + " " + ModChecker.getMods();
             } else if (new TranslatableText(CabricalityClient.genTranslationKey("util", "upside_down")).getString().equals("true")) {
                 returnText = ModChecker.getMods() + " " + new TranslatableText(CabricalityClient.genTranslationKey("util", "missing_mod")).getString();
             }
+             */
+            returnText = new TranslatableText(CabricalityClient.genTranslationKey("util", "prefix_missing_mod")).getString()
+                        + ModChecker.missingModCount()
+                        + (ModChecker.missingModCount() <= 1
+                        ? new TranslatableText(CabricalityClient.genTranslationKey("util", "postfix_missing_mod")).getString()
+                        : new TranslatableText(CabricalityClient.genTranslationKey("util", "postfix_missing_mods")).getString());
         }
 
         if (key.startsWith(CabricalityClient.genTranslationKey("item", "trade_card_")))

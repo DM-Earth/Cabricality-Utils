@@ -11,6 +11,9 @@
     "WrenchItemMixin"
   ],
   "client": [
+    "ScreenAccessor",
+    "SplashTextResourceSupplierMixin",
+    "TitleScreenMixin",
     "TranslatableTextMixin"
   ],
   "injectors": {

@@ -13,10 +13,9 @@ public class ModChecker {
     private static final List<String> missingModList = new ArrayList<>();
     private static final Map<String, String> requiredModList = new HashMap<>();
 
-    public static void check(){
+    public static void check() {
         if (isFullLoaded()) {
             if (requiredModList.isEmpty()) {
-
                 //Write mods here
                 requiredModList.putAll(ImmutableMap.of(
                         "ftblibrary", "FTB Library",
@@ -33,7 +32,7 @@ public class ModChecker {
     }
 
     @Nullable
-    public static String getMods(){
+    public static String getMods() {
         if (isFullLoaded()) return null;
         String mods = "";
         for (String mod : missingModList){
@@ -46,7 +45,15 @@ public class ModChecker {
         return mods;
     }
 
-    public static Boolean isFullLoaded(){
+    public static boolean checkMissingMod(String modName) {
+        return missingModList.contains(modName);
+    }
+
+    public static int missingModCount() {
+        return missingModList.size();
+    }
+
+    public static boolean isFullLoaded() {
         return missingModList.isEmpty();
     }
 }
