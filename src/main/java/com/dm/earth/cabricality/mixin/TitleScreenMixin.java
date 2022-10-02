@@ -5,6 +5,7 @@ import com.dm.earth.cabricality.CabricalityClient;
 import com.dm.earth.cabricality.ModChecker;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.RotatingCubeMapRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -25,17 +26,19 @@ import java.util.ArrayList;
 
 @Mixin(TitleScreen.class)
 public class TitleScreenMixin extends Screen {
+    @Shadow @Final private RotatingCubeMapRenderer backgroundRenderer;
+
     protected TitleScreenMixin(Text title) {
         super(title);
     }
 
     @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/TitleScreen;doBackgroundFade:Z"))
-    public boolean redirected(TitleScreen instance) {
+    public boolean renderRedirected(TitleScreen instance) {
         return false;
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void injected(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    public void renderInjectedTail(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (!ModChecker.isFullLoaded()) {
             Screen screen = MinecraftClient.getInstance().currentScreen;
             TextRenderer textRenderer = ((ScreenAccessor) screen).getTextRenderer();
