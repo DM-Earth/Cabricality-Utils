@@ -1,9 +1,6 @@
 {
-  "util.cabricality.upside_down": "false",
-  "util.cabricality.missing_mod": "需要安装模组",
-  "util.cabricality.prefix_missing_mod": "缺失",
-  "util.cabricality.postfix_missing_mod": "个模组！",
-  "util.cabricality.postfix_missing_mods": "个模组！",
+  "util.cabricality.missing_mod": "缺失模组！",
+  "util.cabricality.missing_mods": "缺失模组！",
   "util.cabricality.warn": "§c安装如下模组！",
 
   "itemGroup.cabricality.main_group": "永无止境：重缝"

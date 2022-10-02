@@ -1,5 +1,6 @@
 package com.dm.earth.cabricality.mixin;
 
+import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.CabricalityClient;
 import com.dm.earth.cabricality.ModChecker;
 import net.minecraft.client.MinecraftClient;
@@ -24,13 +25,13 @@ import java.util.ArrayList;
 
 @Mixin(TitleScreen.class)
 public class TitleScreenMixin extends Screen {
-    @Shadow
-    @Final
-    @Mutable
-    private boolean doBackgroundFade = false;
-
     protected TitleScreenMixin(Text title) {
         super(title);
+    }
+
+    @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/TitleScreen;doBackgroundFade:Z"))
+    public boolean redirected(TitleScreen instance) {
+        return false;
     }
 
     @Inject(method = "render", at = @At("TAIL"))
