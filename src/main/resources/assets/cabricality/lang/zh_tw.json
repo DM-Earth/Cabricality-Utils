@@ -1,6 +1,7 @@
 {
-  "util.cabricality.upside_down": "true",
-  "util.cabricality.missing_mod": "需要安裝模組",
+  "util.cabricality.missing_mod": "缺少模組！",
+  "util.cabricality.missing_mods": "缺少模組！",
+  "util.cabricality.warn": "§c安裝以下模組：",
 
   "itemGroup.cabricality.main_group": "永無止境：重縫"
 }
