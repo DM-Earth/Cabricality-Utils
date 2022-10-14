@@ -14,7 +14,7 @@
 
 <h1 align="center"> Cabricality Utils </h1>
 
-This is a small Minecraft mod for [Cabricality](https://github.com/DM-Earth/Cabricality) Modpack. Currently, it only supports Fabric/Quilt 1.18.2.
+This is a small Minecraft mod for [Cabricality](https://github.com/DM-Earth/Cabricality) Modpack. Currently, it only supports Quilt 1.18.2.
 
 ## Functions
 
@@ -34,19 +34,3 @@ When certain necessary mods are not loaded:
 - Bits and Chisels
 - Create
 - KubeJS
-
-## Mixins
-
-*The package names in `net.minecraft` are from **Yarn Mappings**.*
-
-### With Changes
-
-- `com.simibubi.create.content.contraptions.wrench.WrenchItem`
-- `dev.latvian.mods.kubejs.KubeJS`
-- `net.minecraft.util.registry.Registry`
-- `net.minecraft.datafixer.Schemas`
-- `net.minecraft.text.TranslatableText`
-
-### Without Changes
-
-- `net.minecraft.util.registry.SimpleRegistry`

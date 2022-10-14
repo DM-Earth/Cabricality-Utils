@@ -36,7 +36,6 @@ public class WrenchItemMixin {
                 else {
                     rotate(context.getSide().getAxis(), e);
                 }
-
                 cir.setReturnValue(ActionResult.SUCCESS);
             }
         }
@@ -77,8 +76,6 @@ public class WrenchItemMixin {
         e.rebuildServer();
         e.sync();
     }
-
-
     //Rotation Algorithm from https://stackoverflow.com/questions/53110374/how-to-rotate-2-d-array-in-java, extended to 3D
     void rotate(Axis axis, BitsBlockEntity e) {
         BlockState[][][] rotated = new BlockState[16][16][16];

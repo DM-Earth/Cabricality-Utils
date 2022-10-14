@@ -4,11 +4,10 @@
   "package": "com.dm.earth.cabricality.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BootstrapMixin",
     "FluidDrainingBehaviourMixin",
     "KubeJSMixin",
     "RegistryMixin",
-    "SchemasMixin",
-    "SimpleRegistryMixin",
     "WrenchItemMixin"
   ],
   "client": [
@@ -18,6 +17,6 @@
     "TranslatableTextMixin"
   ],
   "injectors": {
-    "defaultRequire": 0
+    "defaultRequire": 1
   }
 }

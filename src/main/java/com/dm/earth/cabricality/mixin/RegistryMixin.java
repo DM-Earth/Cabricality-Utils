@@ -14,9 +14,4 @@ public class RegistryMixin {
     private static <V, T extends V> void injected(Registry<V> registry, RegistryKey<V> key, T entry, CallbackInfoReturnable<T> cir) {
         if (RegistrationUtils.shouldBan(key.getValue())) cir.cancel();
     }
-
-    @Inject(method = "register(Lnet/minecraft/util/registry/Registry;ILjava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;", at = @At("HEAD"), cancellable = true)
-    private static <V, T extends V> void injected(Registry<V> registry, int rawId, String id, T entry, CallbackInfoReturnable<T> cir) {
-        if (RegistrationUtils.shouldBan(id)) cir.cancel();
-    }
 }
