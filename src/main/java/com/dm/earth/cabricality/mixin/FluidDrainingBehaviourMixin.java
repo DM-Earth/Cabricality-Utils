@@ -20,7 +20,7 @@ public class FluidDrainingBehaviourMixin extends FluidManipulationBehaviour {
         super(te);
     }
 
-    @Inject(method = "pullNext", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"), cancellable = true)
+    @Inject(method = "pullNext", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z", ordinal = 1), cancellable = true)
     private void injected(BlockPos root, TransactionContext ctx, CallbackInfoReturnable<Boolean> cir) {
         if (this.infinite) cir.setReturnValue(true);
     }
