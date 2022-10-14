@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/DM-Earth/Cabricality-Utils/blob/1.18/icon.png?raw=true" width = 250 alt="Cabricality Utils">
+  <img src="https://github.com/DM-Earth/Cabricality-Utils/blob/1.18-quilt/icon.png?raw=true" width = 250 alt="Cabricality Utils">
   </img>
 </div>
 

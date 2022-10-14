@@ -1,8 +1,8 @@
 package com.dm.earth.cabricality;
 
 import com.google.common.collect.ImmutableMap;
-import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.Nullable;
+import org.quiltmc.loader.api.QuiltLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class ModChecker {
                 ));
             }
             for (Map.Entry<String, String> modEntry : requiredModList.entrySet()) {
-                if (!FabricLoader.getInstance().isModLoaded(modEntry.getKey()) && !missingModList.contains(modEntry.getValue()))
+                if (!QuiltLoader.isModLoaded(modEntry.getKey()) && !missingModList.contains(modEntry.getValue()))
                     missingModList.add(modEntry.getValue());
             }
         }
@@ -34,15 +34,15 @@ public class ModChecker {
     @Nullable
     public static String getMods() {
         if (isFullLoaded()) return null;
-        String mods = "";
+        StringBuilder mods = new StringBuilder();
         for (String mod : missingModList){
-            if (!mods.equals("")){
-                mods = mods + ", " + mod;
+            if (!mods.toString().equals("")){
+                mods.append(", ").append(mod);
             } else {
-                mods = mod;
+                mods = new StringBuilder(mod);
             }
         }
-        return mods;
+        return mods.toString();
     }
 
     public static boolean checkMissingMod(String modName) {
