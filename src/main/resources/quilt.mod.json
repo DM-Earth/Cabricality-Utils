@@ -19,10 +19,7 @@
     "entrypoints": {
       "init": "com.dm.earth.cabricality.Cabricality",
       "client_init": "com.dm.earth.cabricality.CabricalityClient",
-      "server_init": "com.dm.earth.cabricality.CabricalityServer",
-      "client_events": [
-        "com.dm.earth.cabricality.util.DataFixerListener"
-      ]
+      "server_init": "com.dm.earth.cabricality.CabricalityServer"
     },
     "depends": [
       {
