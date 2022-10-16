@@ -15,20 +15,21 @@ import org.quiltmc.qsl.registry.api.event.RegistryEvents;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataFixerListener implements RegistryEvents.EntryAdded<Registry<Item>> {
+public class DataFixerListener {
     private static Map<Identifier, Identifier> dataFixerMapItem = new HashMap<>();
     private static Map<Identifier, Identifier> dataFixerMapBlock = new HashMap<>();
 
-    @Override
-    public void onAdded(RegistryEntryContext context) {
-        if (context.id().getNamespace().equals("cabricality")) {
-            if (context.value() instanceof BlockItem) {
-                dataFixerMapBlock.put(new Identifier("kubejs", context.id().getPath()), context.id());
-                dataFixerMapItem.put(new Identifier("kubejs", context.id().getPath()), context.id());
+    public static void load() {
+        RegistryEvents.getEntryAddEvent(Registry.ITEM).register(context -> {
+            if (context.id().getNamespace().equals("cabricality")) {
+                if (context.value() instanceof BlockItem) {
+                    dataFixerMapBlock.put(new Identifier("kubejs", context.id().getPath()), context.id());
+                    dataFixerMapItem.put(new Identifier("kubejs", context.id().getPath()), context.id());
+                }
+                else if (context.value() != null)
+                    dataFixerMapItem.put(new Identifier("kubejs", context.id().getPath()), context.id());
             }
-            else if (context.value() instanceof Item)
-                dataFixerMapItem.put(new Identifier("kubejs", context.id().getPath()), context.id());
-        }
+        });
     }
 
     public static void registerDataFixers() {
