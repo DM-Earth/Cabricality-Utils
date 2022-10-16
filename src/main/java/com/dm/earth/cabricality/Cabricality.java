@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality;
 
-import dev.architectury.registry.registries.Registries;
+import com.dm.earth.cabricality.util.DataFixerListener;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -24,5 +24,6 @@ public class Cabricality implements ModInitializer {
     @Override
     public void onInitialize(ModContainer mod) {
         LOGGER.info("Cabricality is initializing!");
+        DataFixerListener.load();
     }
 }
