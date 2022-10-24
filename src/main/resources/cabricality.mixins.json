@@ -7,7 +7,6 @@
     "BootstrapMixin",
     "FluidDrainingBehaviourMixin",
     "KubeJSMixin",
-    "QuiltLoaderMixin",
     "RegistryMixin",
     "WrenchItemMixin"
   ],
