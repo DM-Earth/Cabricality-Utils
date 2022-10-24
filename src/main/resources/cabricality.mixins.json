@@ -14,8 +14,7 @@
     "ScreenAccessor",
     "SplashTextResourceSupplierMixin",
     "TitleScreenMixin",
-    "TranslatableTextMixin",
-    "SodiumExtraGameOptionsMixin"
+    "TranslatableTextMixin"
   ],
   "injectors": {
     "defaultRequire": 1
