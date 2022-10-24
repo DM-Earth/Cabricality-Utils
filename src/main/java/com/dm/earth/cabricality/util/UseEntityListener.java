@@ -3,9 +3,11 @@ package com.dm.earth.cabricality.util;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.BlazeEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -17,17 +19,28 @@ public class UseEntityListener {
                 if (stack.isOf(Items.BUCKET)) {
                     ItemStack bucket = new ItemStack(Registry.ITEM.get(new Identifier("tconstruct", "blazing_blood_bucket")));
                     bucket.setCount(1);
-                    if (stack.getCount() == 1) {
-                        player.setStackInHand(hand, bucket);
-                    } else {
-                        stack.setCount(stack.getCount() - 1);
-                        player.giveItemStack(bucket);
-                    }
+                    replaceItemStack(stack, bucket, 1, player, hand);
+                    blaze.damage(DamageSource.player(player), 10);
+                    return ActionResult.SUCCESS;
+                }
+                if (stack.isOf(Items.WATER_BUCKET)) {
+                    ItemStack bucket = Items.BUCKET.getDefaultStack();
+                    bucket.setCount(1);
+                    replaceItemStack(stack, bucket, 1, player, hand);
                     blaze.damage(DamageSource.player(player), 10);
                     return ActionResult.SUCCESS;
                 }
             }
             return ActionResult.PASS;
         });
+    }
+
+    private static void replaceItemStack(ItemStack oldStack, ItemStack newStack, int count, PlayerEntity player, Hand hand) {
+        if (oldStack.getCount() == count) {
+            player.setStackInHand(hand, newStack);
+        } else if (oldStack.getCount() > count) {
+            oldStack.setCount(oldStack.getCount() - count);
+            player.giveItemStack(newStack);
+        }
     }
 }
