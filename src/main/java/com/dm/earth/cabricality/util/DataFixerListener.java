@@ -9,7 +9,6 @@ import net.minecraft.util.registry.Registry;
 import org.quiltmc.qsl.datafixerupper.api.QuiltDataFixerBuilder;
 import org.quiltmc.qsl.datafixerupper.api.QuiltDataFixes;
 import org.quiltmc.qsl.datafixerupper.api.SimpleFixes;
-import org.quiltmc.qsl.registry.api.event.RegistryEntryContext;
 import org.quiltmc.qsl.registry.api.event.RegistryEvents;
 
 import java.util.HashMap;

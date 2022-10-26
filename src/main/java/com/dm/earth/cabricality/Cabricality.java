@@ -1,5 +1,7 @@
 package com.dm.earth.cabricality;
 
+import com.dm.earth.cabricality.content.entries.CabfBlockEntityTypes;
+import com.dm.earth.cabricality.content.entries.CabfBlocks;
 import com.dm.earth.cabricality.util.DataFixerListener;
 import com.dm.earth.cabricality.util.UseEntityListener;
 import net.minecraft.item.ItemGroup;
@@ -25,6 +27,10 @@ public class Cabricality implements ModInitializer {
     @Override
     public void onInitialize(ModContainer mod) {
         LOGGER.info("Cabricality is initializing!");
+
+        CabfBlocks.register();
+        CabfBlockEntityTypes.register();
+
         DataFixerListener.load();
         UseEntityListener.load();
     }
