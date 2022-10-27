@@ -1,5 +1,6 @@
 package com.dm.earth.cabricality.content.extractor;
 
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -31,5 +32,10 @@ public class ExtractorMachineBlock extends BlockWithEntity {
         if (world.getBlockEntity(pos) instanceof ExtractorMachineBlockEntity blockEntity) {
             blockEntity.tick();
         }
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 }
