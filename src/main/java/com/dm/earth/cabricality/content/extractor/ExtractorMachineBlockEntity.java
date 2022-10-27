@@ -15,6 +15,7 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
 import org.quiltmc.qsl.networking.api.PacketByteBufs;
 import org.quiltmc.qsl.networking.api.PlayerLookup;
@@ -68,23 +69,26 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
         nbt.putLong("amount", storage.amount);
     }
 
-    public void tick() {
-        debug("randomTick from extractor block entity at " + pos.toShortString() + " capacity: " + storage.getCapacity());
-        if (isNextToTree() && storage.amount < storage.getCapacity()) {
+    public static void tick(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
+        ExtractorMachineBlock.ticks++;
+        if (ExtractorMachineBlock.ticks >= 60) ExtractorMachineBlock.ticks = 0;
+        else return;
+        debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
+        if (isNextToTree(world, blockPos, blockState, blockEntity) && blockEntity.storage.amount < blockEntity.storage.getCapacity()) {
             debug("extractor block entity: inserting to storage");
-            storage.insert(FluidVariant.of(Registry.FLUID.get(Cabricality.asIdentifier("resin"))), FluidConstants.BOTTLE, TransferUtil.getTransaction());
+            blockEntity.storage.insert(FluidVariant.of(Registry.FLUID.get(Cabricality.asIdentifier("resin"))), FluidConstants.BOTTLE, TransferUtil.getTransaction());
         }
     }
 
-    private boolean isNextToTree() {
+    private static boolean isNextToTree(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
         assert world != null;
         for (Direction direction : Arrays.stream(Direction.values()).filter((direction -> direction != Direction.UP && direction != Direction.DOWN)).toArray(Direction[]::new)) {
-            BlockState targetState = world.getBlockState(pos.offset(direction));
+            BlockState targetState = world.getBlockState(blockPos.offset(direction));
             if (isVecLog(targetState)) {
-                debug("extractor block entity: found log at " + pos.offset(direction).toShortString());
+                debug("extractor block entity: found log at " + blockPos.offset(direction).toShortString());
                 //check if there are enough logs
                 boolean enoughLogs = false;
-                BlockPos targetPos = pos.offset(direction);
+                BlockPos targetPos = blockPos.offset(direction);
                 int i = 0;
                 BlockPos upPos;
                 BlockPos downPos;

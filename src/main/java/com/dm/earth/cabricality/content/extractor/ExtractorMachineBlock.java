@@ -4,16 +4,16 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
-
-import static com.dm.earth.cabricality.util.CabfDebugger.debug;
 
 @SuppressWarnings("deprecation")
 public class ExtractorMachineBlock extends BlockWithEntity {
+    public static int ticks = 0;
+
     public ExtractorMachineBlock(Settings settings) {
         super(settings);
     }
@@ -25,20 +25,15 @@ public class ExtractorMachineBlock extends BlockWithEntity {
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        debug("randomTick from extractor block at " + pos.toShortString());
-        if (world.getBlockEntity(pos) instanceof ExtractorMachineBlockEntity blockEntity) {
-            blockEntity.tick();
-        }
-    }
-
-    @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return (world1, blockPos, blockState, blockEntity) -> {
+            if (blockEntity instanceof ExtractorMachineBlockEntity extractor) ExtractorMachineBlockEntity.tick(world1, blockPos, blockState, extractor);
+        };
     }
 }
