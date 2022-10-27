@@ -10,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+import static com.dm.earth.cabricality.util.CabfDebugger.debug;
+
 @SuppressWarnings("deprecation")
 public class ExtractorMachineBlock extends BlockWithEntity {
     public ExtractorMachineBlock(Settings settings) {
@@ -29,6 +31,7 @@ public class ExtractorMachineBlock extends BlockWithEntity {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        debug("randomTick from extractor block at " + pos.toShortString());
         if (world.getBlockEntity(pos) instanceof ExtractorMachineBlockEntity blockEntity) {
             blockEntity.tick();
         }

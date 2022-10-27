@@ -22,6 +22,8 @@ import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 import java.util.Arrays;
 
+import static com.dm.earth.cabricality.util.CabfDebugger.debug;
+
 @SuppressWarnings("UnstableApiUsage")
 public class ExtractorMachineBlockEntity extends BlockEntity {
     public static final BlockEntityType<ExtractorMachineBlockEntity> TYPE = QuiltBlockEntityTypeBuilder.create(ExtractorMachineBlockEntity::new, CabfBlocks.EXTRACTOR).build();
@@ -67,7 +69,9 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
     }
 
     public void tick() {
+        debug("randomTick from extractor block entity at " + pos.toShortString() + " capacity: " + storage.getCapacity());
         if (isNextToTree() && storage.amount < storage.getCapacity()) {
+            debug("extractor block entity: inserting to storage");
             storage.insert(FluidVariant.of(Registry.FLUID.get(Cabricality.asIdentifier("resin"))), FluidConstants.BOTTLE, TransferUtil.getTransaction());
         }
     }
@@ -77,6 +81,7 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
         for (Direction direction : Arrays.stream(Direction.values()).filter((direction -> direction != Direction.UP && direction != Direction.DOWN)).toArray(Direction[]::new)) {
             BlockState targetState = world.getBlockState(pos.offset(direction));
             if (isVecLog(targetState)) {
+                debug("extractor block entity: found log at " + pos.offset(direction).toShortString());
                 //check if there are enough logs
                 boolean enoughLogs = false;
                 BlockPos targetPos = pos.offset(direction);
@@ -106,12 +111,14 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
                     }
                 }
                 if (enoughLogs) {
+                    debug("extractor block entity: found enough logs at " + targetPos.toShortString());
                     //check if there are leaves
                     boolean enoughLeaves = true;
                     for (Direction leafDirection : Arrays.stream(Direction.values()).filter((leafDirection -> leafDirection != Direction.DOWN)).toArray(Direction[]::new)) {
                         BlockState targetLeafState = world.getBlockState(upPos.offset(leafDirection));
                         if (!(targetLeafState.getBlock() instanceof LeavesBlock)) enoughLeaves = false;
                     }
+                    if (enoughLeaves) debug("extractor block entity: found enough leaves at " + upPos.toShortString());
                     return enoughLeaves;
                 } else return false;
             }
