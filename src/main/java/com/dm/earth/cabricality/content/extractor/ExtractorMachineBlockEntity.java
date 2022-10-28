@@ -70,13 +70,15 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
     }
 
     public static void tick(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
-        ExtractorMachineBlock.ticks++;
-        if (ExtractorMachineBlock.ticks >= 60) ExtractorMachineBlock.ticks = 0;
-        else return;
-        debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
-        if (isNextToTree(world, blockPos, blockState, blockEntity) && blockEntity.storage.amount < blockEntity.storage.getCapacity()) {
-            debug("extractor block entity: inserting to storage");
-            blockEntity.storage.insert(FluidVariant.of(Registry.FLUID.get(Cabricality.asIdentifier("resin"))), FluidConstants.BOTTLE, TransferUtil.getTransaction());
+        if (!world.isClient()) {
+            ExtractorMachineBlock.ticks++;
+            if (ExtractorMachineBlock.ticks >= 1800) ExtractorMachineBlock.ticks = 0;
+            else return;
+            debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
+            if (isNextToTree(world, blockPos, blockState, blockEntity) && blockEntity.storage.amount < blockEntity.storage.getCapacity()) {
+                debug("extractor block entity: inserting to storage");
+                blockEntity.storage.insert(FluidVariant.of(Registry.FLUID.get(Cabricality.asIdentifier("resin"))), FluidConstants.BOTTLE, TransferUtil.getTransaction());
+            }
         }
     }
 
@@ -89,40 +91,40 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
                 //check if there are enough logs
                 boolean enoughLogs = false;
                 BlockPos targetPos = blockPos.offset(direction);
-                int i = 0;
-                BlockPos upPos;
-                BlockPos downPos;
+                int i = 1;
+                int ii = 1;
+                BlockPos upPos = blockPos;
+                BlockPos downPos = blockPos;
                 while (true) {
-                    if (isVecLog(world.getBlockState(targetPos.offset(Direction.UP, i)))) i++;
-                    else {
-                        upPos = targetPos.offset(Direction.UP, i);
-                        break;
-                    }
-                    if (i >= 4) {
-                        upPos = targetPos.offset(Direction.UP, i);
+                    if (ii >= 4) {
+                        upPos = targetPos.offset(Direction.UP, i - 1);
                         enoughLogs = true;
                     }
+                    if (isVecLog(world.getBlockState(targetPos.offset(Direction.UP, i)))) {
+                        i++;
+                        ii++;
+                    } else break;
                 }
+                i = 1;
                 while (true) {
-                    if (isVecLog(world.getBlockState(targetPos.offset(Direction.DOWN, i)))) i++;
-                    else {
-                        downPos = targetPos.offset(Direction.DOWN, i);
-                        break;
-                    }
-                    if (i >= 4) {
-                        downPos = targetPos.offset(Direction.DOWN, i);
+                    if (ii >= 4) {
+                        downPos = targetPos.offset(Direction.DOWN, i - 1);
                         enoughLogs = true;
                     }
+                    if (isVecLog(world.getBlockState(targetPos.offset(Direction.DOWN, i)))) {
+                        i++;
+                        ii++;
+                    } else break;
                 }
                 if (enoughLogs) {
                     debug("extractor block entity: found enough logs at " + targetPos.toShortString());
                     //check if there are leaves
                     boolean enoughLeaves = true;
                     for (Direction leafDirection : Arrays.stream(Direction.values()).filter((leafDirection -> leafDirection != Direction.DOWN)).toArray(Direction[]::new)) {
-                        BlockState targetLeafState = world.getBlockState(upPos.offset(leafDirection));
-                        if (!(targetLeafState.getBlock() instanceof LeavesBlock)) enoughLeaves = false;
+                        if (!isPersistentLeaves(world, upPos, direction)) enoughLeaves = false;
                     }
                     if (enoughLeaves) debug("extractor block entity: found enough leaves at " + upPos.toShortString());
+                    else debug("extractor block entity: not enough leaves at " + upPos.toShortString());
                     return enoughLeaves;
                 } else return false;
             }
@@ -130,7 +132,11 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
         return false;
     }
 
-    //TODO: check tag working?
+    private static boolean isPersistentLeaves(World world, BlockPos blockPos, Direction direction) {
+        BlockState blockState = world.getBlockState(blockPos.offset(direction));
+        return Registry.BLOCK.getTag(BlockTags.LEAVES).get().stream().anyMatch(blockHolder -> blockHolder.value() == blockState.getBlock()) && !blockState.get(LeavesBlock.PERSISTENT);
+    }
+
     private static boolean isVecLog(BlockState blockState) {
         return blockState.getBlock() instanceof PillarBlock block && Registry.BLOCK.getTag(BlockTags.LOGS).get().stream().anyMatch(blockHolder -> blockHolder.value() == block) && blockState.get(PillarBlock.AXIS) == Direction.Axis.Y;
     }

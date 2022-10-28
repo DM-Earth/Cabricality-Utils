@@ -10,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ExtractorMachineBlock extends BlockWithEntity {
     public static int ticks = 0;
 
@@ -32,8 +31,6 @@ public class ExtractorMachineBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return (world1, blockPos, blockState, blockEntity) -> {
-            if (blockEntity instanceof ExtractorMachineBlockEntity extractor) ExtractorMachineBlockEntity.tick(world1, blockPos, blockState, extractor);
-        };
+        return checkType(type, ExtractorMachineBlockEntity.TYPE, ExtractorMachineBlockEntity::tick);
     }
 }
