@@ -2,6 +2,7 @@ package com.dm.earth.cabricality.content.extractor;
 
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.entries.CabfBlocks;
+import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.util.TransferUtil;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -77,7 +78,7 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
             debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
             if (isNextToTree(world, blockPos, blockState, blockEntity) && blockEntity.storage.amount < blockEntity.storage.getCapacity()) {
                 debug("extractor block entity: inserting to storage");
-                blockEntity.storage.insert(FluidVariant.of(Registry.FLUID.get(Cabricality.asIdentifier("resin"))), FluidConstants.BOTTLE, TransferUtil.getTransaction());
+                blockEntity.storage.insert(FluidVariant.of(CabfFluids.RESIN), FluidConstants.BOTTLE, TransferUtil.getTransaction());
             }
         }
     }
