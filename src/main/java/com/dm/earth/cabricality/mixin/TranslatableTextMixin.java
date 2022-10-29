@@ -1,9 +1,7 @@
 package com.dm.earth.cabricality.mixin;
 
 import com.dm.earth.cabricality.CabricalityClient;
-import com.dm.earth.cabricality.ModChecker;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import com.dm.earth.cabricality.util.ModChecker;
 import net.minecraft.item.BlockItem;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;

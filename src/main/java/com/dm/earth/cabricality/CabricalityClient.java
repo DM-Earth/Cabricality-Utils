@@ -1,6 +1,7 @@
 package com.dm.earth.cabricality;
 
 import com.dm.earth.cabricality.content.entries.CabfFluids;
+import com.dm.earth.cabricality.util.ModChecker;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;

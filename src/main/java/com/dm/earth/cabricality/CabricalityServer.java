@@ -1,5 +1,6 @@
 package com.dm.earth.cabricality;
 
+import com.dm.earth.cabricality.util.ModChecker;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.server.DedicatedServerModInitializer;
 

@@ -1,8 +1,7 @@
 package com.dm.earth.cabricality.mixin;
 
-import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.CabricalityClient;
-import com.dm.earth.cabricality.ModChecker;
+import com.dm.earth.cabricality.util.ModChecker;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.RotatingCubeMapRenderer;
@@ -17,7 +16,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;

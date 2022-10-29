@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality;
+package com.dm.earth.cabricality.util;
 
 import com.google.common.collect.ImmutableMap;
 import org.jetbrains.annotations.Nullable;

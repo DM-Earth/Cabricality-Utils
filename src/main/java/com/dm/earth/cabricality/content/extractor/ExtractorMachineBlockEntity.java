@@ -74,7 +74,8 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
     public static void tick(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
         if (!world.isClient()) {
             ExtractorMachineBlock.ticks++;
-            if (ExtractorMachineBlock.ticks >= 1800) ExtractorMachineBlock.ticks = 0;
+            //TODO: Make this 1800
+            if (ExtractorMachineBlock.ticks >= 180) ExtractorMachineBlock.ticks = 0;
             else return;
             debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
             float f = isNextToTree(world, blockPos, blockState, blockEntity);

@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.mixin;
 
-import com.dm.earth.cabricality.ModChecker;
+import com.dm.earth.cabricality.util.ModChecker;
 import net.minecraft.client.resource.SplashTextResourceSupplier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
