@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.content.core;
+package com.dm.earth.cabricality.content.fluids;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -6,13 +6,16 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public abstract class BaseFluid extends FlowableFluid {
+public abstract class BaseFlowableFluid extends FlowableFluid {
 
     @Override
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
@@ -36,7 +39,19 @@ public abstract class BaseFluid extends FlowableFluid {
     }
 
     @Override
+    protected int getLevelDecreasePerBlock(WorldView world) {
+        return 1;
+    }
+
+    @Override
     protected boolean isInfinite() {
         return false;
     }
+
+    @Override
+    protected BlockState toBlockState(FluidState state) {
+        return Registry.BLOCK.get(getIdentifier()).getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(state));
+    }
+
+    protected abstract Identifier getIdentifier();
 }

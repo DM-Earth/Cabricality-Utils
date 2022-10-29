@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistrationUtils {
+public class RegistrationUtil {
     private static List<Identifier> list = new ArrayList<>();
 
     public static void banRegistration(Identifier id) {

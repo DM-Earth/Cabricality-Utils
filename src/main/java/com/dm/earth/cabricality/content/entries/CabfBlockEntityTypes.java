@@ -14,6 +14,6 @@ public class CabfBlockEntityTypes {
     }
 
     private static void registerBlockEntityType(String name, BlockEntityType<?> blockEntityType) {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, Cabricality.asIdentifier(name), blockEntityType);
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, Cabricality.id(name), blockEntityType);
     }
 }

@@ -11,6 +11,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static com.dm.earth.cabricality.util.ItemStackUtil.replaceItemStack;
+
 public class UseEntityListener {
     public static void load() {
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
@@ -33,14 +35,5 @@ public class UseEntityListener {
             }
             return ActionResult.PASS;
         });
-    }
-
-    private static void replaceItemStack(ItemStack oldStack, ItemStack newStack, int count, PlayerEntity player, Hand hand) {
-        if (oldStack.getCount() == count) {
-            player.setStackInHand(hand, newStack);
-        } else if (oldStack.getCount() > count) {
-            oldStack.setCount(oldStack.getCount() - count);
-            player.giveItemStack(newStack);
-        }
     }
 }

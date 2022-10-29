@@ -2,9 +2,8 @@ package com.dm.earth.cabricality.content.entries;
 
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.extractor.ExtractorMachineBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.util.registry.Registry;
 import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
@@ -17,8 +16,12 @@ public class CabfBlocks {
         registerBlock("extractor_machine", EXTRACTOR);
     }
 
+    public static void registerFluidBlock(String name, FlowableFluid fluid) {
+        Registry.register(Registry.BLOCK, Cabricality.id(name), new FluidBlock(fluid, QuiltBlockSettings.copy(Blocks.WATER)));
+    }
+
     private static void registerBlock(String name, Block block) {
-        Registry.register(Registry.BLOCK, Cabricality.asIdentifier(name), block);
-        Registry.register(Registry.ITEM, Cabricality.asIdentifier(name), new BlockItem(block, new QuiltItemSettings().group(Cabricality.MAIN_GROUP)));
+        Registry.register(Registry.BLOCK, Cabricality.id(name), block);
+        Registry.register(Registry.ITEM, Cabricality.id(name), new BlockItem(block, new QuiltItemSettings().group(Cabricality.MAIN_GROUP)));
     }
 }

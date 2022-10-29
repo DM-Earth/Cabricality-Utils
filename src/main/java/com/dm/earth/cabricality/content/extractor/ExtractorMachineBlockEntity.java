@@ -7,6 +7,7 @@ import com.dm.earth.cabricality.util.TransferUtil;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -47,7 +48,7 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
             assert world != null;
             if (!world.isClient()) {
                 PacketByteBuf buf = PacketByteBufs.create();
-                PlayerLookup.tracking(ExtractorMachineBlockEntity.this).forEach(player -> ServerPlayNetworking.send(player, Cabricality.asIdentifier("extractor_buf"), buf));
+                PlayerLookup.tracking(ExtractorMachineBlockEntity.this).forEach(player -> ServerPlayNetworking.send(player, Cabricality.id("extractor_buf"), buf));
             }
         }
     };
@@ -76,14 +77,15 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
             if (ExtractorMachineBlock.ticks >= 1800) ExtractorMachineBlock.ticks = 0;
             else return;
             debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
-            if (isNextToTree(world, blockPos, blockState, blockEntity) && blockEntity.storage.amount < blockEntity.storage.getCapacity()) {
+            float f = isNextToTree(world, blockPos, blockState, blockEntity);
+            if (f > 0.0F && blockEntity.storage.amount < blockEntity.storage.getCapacity()) {
                 debug("extractor block entity: inserting to storage");
-                blockEntity.storage.insert(FluidVariant.of(CabfFluids.RESIN), FluidConstants.BOTTLE, TransferUtil.getTransaction());
+                blockEntity.storage.insert(FluidVariant.of(CabfFluids.RESIN), (long) (f * FluidConstants.INGOT), TransferUtil.getTransaction());
             }
         }
     }
 
-    private static boolean isNextToTree(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
+    private static float isNextToTree(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
         assert world != null;
         for (Direction direction : Arrays.stream(Direction.values()).filter((direction -> direction != Direction.UP && direction != Direction.DOWN)).toArray(Direction[]::new)) {
             BlockState targetState = world.getBlockState(blockPos.offset(direction));
@@ -124,13 +126,16 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
                     for (Direction leafDirection : Arrays.stream(Direction.values()).filter((leafDirection -> leafDirection != Direction.DOWN)).toArray(Direction[]::new)) {
                         if (!isPersistentLeaves(world, upPos, direction)) enoughLeaves = false;
                     }
-                    if (enoughLeaves) debug("extractor block entity: found enough leaves at " + upPos.toShortString());
-                    else debug("extractor block entity: not enough leaves at " + upPos.toShortString());
-                    return enoughLeaves;
-                } else return false;
+                    if (enoughLeaves) {
+                        debug("extractor block entity: found enough leaves at " + upPos.toShortString());
+                        if (Registry.BLOCK.getId(world.getBlockState(targetPos).getBlock()).getPath().contains("rubber"))
+                            return 1.5F;
+                        else return 1.0F;
+                    } else debug("extractor block entity: not enough leaves at " + upPos.toShortString());
+                } else return 0.0F;
             }
         }
-        return false;
+        return 0.0F;
     }
 
     private static boolean isPersistentLeaves(World world, BlockPos blockPos, Direction direction) {
