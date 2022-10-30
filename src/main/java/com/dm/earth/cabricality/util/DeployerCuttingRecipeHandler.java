@@ -30,7 +30,7 @@ public class DeployerCuttingRecipeHandler implements RecipeLoadingEvents.AddReci
             if (boardRecipe.getIngredients().stream().anyMatch(ingredient -> Arrays.stream(ingredient.getMatchingStacks()).anyMatch(stack -> Registry.ITEM.getId(stack.getItem()).getPath().contains("slime_fern"))))
                 params.keepHeldItem();
             DeployerApplicationRecipe recipe = new DeployerApplicationRecipe(params);
-            handler.register(id, inputId -> recipe);
+            handler.register(id, identifier -> recipe);
         }
     }
 }
