@@ -19,8 +19,12 @@
     "entrypoints": {
       "init": "com.dm.earth.cabricality.Cabricality",
       "client_init": "com.dm.earth.cabricality.CabricalityClient",
-      "server_init": "com.dm.earth.cabricality.CabricalityServer"
+      "server_init": "com.dm.earth.cabricality.CabricalityServer",
+      "events": [
+        "com.dm.earth.cabricality.util.DeployerCuttingRecipeHandler"
+      ]
     },
+    "accessWidener": "cabricality.accesswidener",
     "depends": [
       {
         "id": "quilt_loader",

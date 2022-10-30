@@ -15,6 +15,15 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
+
+	maven { url = "https://mvn.devos.one/snapshots/" }
+	maven {
+		url = "https://jitpack.io"
+		content {
+			includeGroup("com.github.Chocohead")
+			includeGroup("com.github.LlamaLad7")
+		}
+	}
 }
 
 dependencies {
@@ -34,7 +43,10 @@ dependencies {
     modImplementation "maven.modrinth:kubejs:${project.kubejs_version}+fabric"
     modImplementation "maven.modrinth:architectury-api:${project.architectury_version}+fabric"
     modImplementation "maven.modrinth:bits-and-chisels:${project.bits_and_chisels_version}"
+	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmers_delight_version}"
 	modImplementation "maven.modrinth:brrp:${project.brrp_version}"
+
+	modImplementation "io.github.fabricators_of_create:Porting-Lib:1.2.575-beta+1.18.2-stable"
 }
 
 processResources {
@@ -87,4 +99,8 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/cabricality.accesswidener")
 }

@@ -4,16 +4,19 @@ import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.entries.CabfBlocks;
 import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.util.TransferUtil;
+import com.simibubi.create.content.contraptions.goggles.IHaveGoggleInformation;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
@@ -24,11 +27,12 @@ import org.quiltmc.qsl.networking.api.PlayerLookup;
 import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static com.dm.earth.cabricality.util.CabfDebugger.debug;
 
 @SuppressWarnings("UnstableApiUsage")
-public class ExtractorMachineBlockEntity extends BlockEntity {
+public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGoggleInformation {
     public static final BlockEntityType<ExtractorMachineBlockEntity> TYPE = QuiltBlockEntityTypeBuilder.create(ExtractorMachineBlockEntity::new, CabfBlocks.EXTRACTOR).build();
 
     public final SingleVariantStorage<FluidVariant> storage = new SingleVariantStorage<>() {
@@ -74,8 +78,7 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
     public static void tick(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
         if (!world.isClient()) {
             ExtractorMachineBlock.ticks++;
-            //TODO: Make this 1800
-            if (ExtractorMachineBlock.ticks >= 180) ExtractorMachineBlock.ticks = 0;
+            if (ExtractorMachineBlock.ticks >= 360) ExtractorMachineBlock.ticks = 0;
             else return;
             debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
             float f = isNextToTree(world, blockPos, blockState, blockEntity);
@@ -146,5 +149,10 @@ public class ExtractorMachineBlockEntity extends BlockEntity {
 
     private static boolean isVecLog(BlockState blockState) {
         return blockState.getBlock() instanceof PillarBlock block && Registry.BLOCK.getTag(BlockTags.LOGS).get().stream().anyMatch(blockHolder -> blockHolder.value() == block) && blockState.get(PillarBlock.AXIS) == Direction.Axis.Y;
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(List<Text> tooltip, boolean isPlayerSneaking) {
+        return !(isPlayerSneaking || this.storage.getAmount() == 0);
     }
 }
