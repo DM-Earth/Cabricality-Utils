@@ -11,10 +11,12 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 public class CabfItems {
     public static final BucketItem RESIN_BUCKET = new BucketItem(CabfFluids.RESIN, Properties.DEFAULT_ONE);
     public static final BucketItem REDSTONE_BUCKET = new BucketItem(CabfFluids.REDSTONE, Properties.DEFAULT_ONE);
+    public static final BucketItem WASTE_BUCKET = new BucketItem(CabfFluids.WASTE, Properties.DEFAULT_ONE);
 
     public static void register() {
         registerItemModeled("resin_bucket", RESIN_BUCKET, ItemModelGenerator.generated("item/bucket", "resin_bucket"));
         registerItemModeled("redstone_bucket", REDSTONE_BUCKET, ItemModelGenerator.generated("item/bucket", "redstone_bucket"));
+        registerItemModeled("waste_bucket", WASTE_BUCKET, ItemModelGenerator.generated("item/bucket", "waste_bucket"));
     }
 
     private static void registerItemModeled(String name, Item item, JModel model) {

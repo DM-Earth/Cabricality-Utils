@@ -17,9 +17,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +53,7 @@ public class ExtractorMachineBlock extends BlockWithEntity {
     @Override
     @SuppressWarnings("UnstableApiUsage")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!(hit.getSide() == Direction.UP || hit.getSide() == Direction.DOWN || player.getStackInHand(hand).isOf(Items.BUCKET))) return ActionResult.PASS;
+        if (!(hit.getSide() == Direction.UP || hit.getSide() == Direction.DOWN || Registry.ITEM.getId(player.getStackInHand(hand).getItem()).equals(new Identifier("minecraft", "bucket")))) return ActionResult.PASS;
         ExtractorMachineBlockEntity extractor = (ExtractorMachineBlockEntity) world.getBlockEntity(pos);
         assert extractor != null;
         ItemStack stack = player.getStackInHand(hand);

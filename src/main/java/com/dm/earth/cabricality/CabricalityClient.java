@@ -9,6 +9,7 @@ import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 
 import static com.dm.earth.cabricality.Cabricality.ID;
+import static com.dm.earth.cabricality.content.entries.CabfFluids.*;
 
 public class CabricalityClient implements ClientModInitializer {
 
@@ -19,13 +20,10 @@ public class CabricalityClient implements ClientModInitializer {
     @Override
     public void onInitializeClient(ModContainer mod) {
         ModChecker.check();
-        initFluidRendering();
-    }
-
-    private static void initFluidRendering() {
         renderFluids(
-                CabfFluids.RESIN,
-                CabfFluids.REDSTONE
+                RESIN,
+                REDSTONE,
+                WASTE
         );
     }
 

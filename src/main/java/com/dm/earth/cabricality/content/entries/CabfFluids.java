@@ -16,10 +16,14 @@ public class CabfFluids {
 
     public static final Fluid RESIN = new BaseFluid("resin");
     public static final Fluid REDSTONE = new BaseFluid("redstone");
+    public static final Fluid WASTE = new BaseFluid("waste");
 
     public static void register() {
-        registerFluid(RESIN);
-        registerFluid(REDSTONE);
+        registerFluids(
+                RESIN,
+                REDSTONE,
+                WASTE
+        );
     }
 
     private static void registerFluid(Identifier id, Fluid fluid) {
@@ -35,5 +39,9 @@ public class CabfFluids {
             Cabricality.CLIENT_RESOURCES.addBlockState(FluidBlockStatesGenerator.simple(flowable.getName() + "_flowing"), flowable.getId());
             Cabricality.CLIENT_RESOURCES.addModel(FluidModelGenerator.simple(flowable.getName() + "_still", flowable.getName()), Cabricality.id("block/fluid/" + flowable.getName()));
         }
+    }
+
+    private static void registerFluids(Fluid... fluids) {
+        for (Fluid fluid : fluids) registerFluid(fluid);
     }
 }
