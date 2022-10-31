@@ -46,6 +46,8 @@ dependencies {
 	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmers_delight_version}"
 	modImplementation "maven.modrinth:brrp:${project.brrp_version}"
 
+	modImplementation include("maven.modrinth:deferred-registries:${project.deferred_registries_version}")
+
 	modImplementation "io.github.fabricators_of_create:Porting-Lib:1.2.575-beta+1.18.2-stable"
 }
 

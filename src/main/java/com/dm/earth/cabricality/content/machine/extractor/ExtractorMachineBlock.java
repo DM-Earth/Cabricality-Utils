@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.content.extractor;
+package com.dm.earth.cabricality.content.machine.extractor;
 
 import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.content.entries.CabfItems;

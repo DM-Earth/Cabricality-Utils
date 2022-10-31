@@ -9,7 +9,8 @@ import net.minecraft.util.registry.Registry;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 public class CabfItems {
-    public static final Item RESIN_BUCKET = new BucketItem(CabfFluids.RESIN, new QuiltItemSettings().group(Cabricality.MAIN_GROUP).maxCount(1));
+    public static final BucketItem RESIN_BUCKET = new BucketItem(CabfFluids.RESIN, Properties.DEFAULT_ONE);
+    public static final BucketItem REDSTONE_BUCKET = new BucketItem(CabfFluids.REDSTONE, Properties.DEFAULT_ONE);
 
     public static void register() {
         registerItemModeled("resin_bucket", RESIN_BUCKET, ItemModelGenerator.generated("item/bucket", "resin_bucket"));
@@ -22,5 +23,10 @@ public class CabfItems {
 
     private static void registerItem(String name, Item item) {
         Registry.register(Registry.ITEM, Cabricality.id(name), item);
+    }
+
+    private static final class Properties {
+        public static final Item.Settings DEFAULT = new QuiltItemSettings().group(Cabricality.MAIN_GROUP);
+        public static final Item.Settings DEFAULT_ONE = DEFAULT.maxCount(1);
     }
 }

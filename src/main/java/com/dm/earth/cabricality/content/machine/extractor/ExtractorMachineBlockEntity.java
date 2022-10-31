@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.content.extractor;
+package com.dm.earth.cabricality.content.machine.extractor;
 
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.entries.CabfBlocks;
@@ -153,6 +153,6 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 
     @Override
     public boolean addToGoggleTooltip(List<Text> tooltip, boolean isPlayerSneaking) {
-        return !(isPlayerSneaking || this.storage.getAmount() == 0);
+        return true;
     }
 }
