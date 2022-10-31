@@ -14,11 +14,12 @@ import net.minecraft.util.registry.Registry;
 
 public class CabfFluids {
 
-    public static final Fluid RESIN = new BaseFluid("resin", CabfItems.RESIN_BUCKET);
-    public static final Fluid REDSTONE = new BaseFluid("redstone", CabfItems.REDSTONE_BUCKET);
+    public static final Fluid RESIN = new BaseFluid("resin");
+    public static final Fluid REDSTONE = new BaseFluid("redstone");
 
     public static void register() {
         registerFluid(RESIN);
+        registerFluid(REDSTONE);
     }
 
     private static void registerFluid(Identifier id, Fluid fluid) {
@@ -32,7 +33,7 @@ public class CabfFluids {
         if (fluid instanceof BaseFlowableFluid flowable) {
             Cabricality.CLIENT_RESOURCES.addBlockState(FluidBlockStatesGenerator.simple(flowable.getName()), flowable.getId());
             Cabricality.CLIENT_RESOURCES.addBlockState(FluidBlockStatesGenerator.simple(flowable.getName() + "_flowing"), flowable.getId());
-            Cabricality.CLIENT_RESOURCES.addModel(FluidModelGenerator.simple(flowable.getName() + "_still"), Cabricality.id("block/fluid/" + flowable.getName()));
+            Cabricality.CLIENT_RESOURCES.addModel(FluidModelGenerator.simple(flowable.getName() + "_still", flowable.getName()), Cabricality.id("block/fluid/" + flowable.getName()));
         }
     }
 }

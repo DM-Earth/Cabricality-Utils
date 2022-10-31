@@ -14,6 +14,7 @@ public class CabfItems {
 
     public static void register() {
         registerItemModeled("resin_bucket", RESIN_BUCKET, ItemModelGenerator.generated("item/bucket", "resin_bucket"));
+        registerItemModeled("redstone_bucket", REDSTONE_BUCKET, ItemModelGenerator.generated("item/bucket", "redstone_bucket"));
     }
 
     private static void registerItemModeled(String name, Item item, JModel model) {

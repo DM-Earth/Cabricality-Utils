@@ -11,8 +11,8 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
@@ -27,14 +27,18 @@ import org.quiltmc.qsl.block.extensions.api.client.BlockRenderLayerMap;
 
 public abstract class BaseFlowableFluid extends FlowableFluid implements IFluid {
     private final boolean isStill;
-    private final BucketItem bucketItem;
-
     private final String name;
+    private int tint;
 
-    public BaseFlowableFluid(String name, boolean isStill, BucketItem bucketItem) {
+    public BaseFlowableFluid(String name, boolean isStill) {
         this.isStill = isStill;
-        this.bucketItem = bucketItem;
         this.name = name;
+        this.tint = -1;
+    }
+
+    public BaseFlowableFluid color(int tintInt) {
+        this.tint = tintInt;
+        return this;
     }
 
     @Override
@@ -95,9 +99,11 @@ public abstract class BaseFlowableFluid extends FlowableFluid implements IFluid 
     @Override
     public void setupRendering() {
         if (this.isStill(null)) {
-            Identifier stillId = Cabricality.id("fluid/" + this.getName() + "_still");
-            Identifier flowingId = Cabricality.id("fluid/" + this.getName() + "_flowing");
-            FluidRenderHandlerRegistry.INSTANCE.register(this.getStill(), this.getFlowing(), new SimpleFluidRenderHandler(stillId, flowingId));
+            Identifier stillId = Cabricality.id("fluid/" + this.getName() + "/" + this.getName() + "_still");
+            Identifier flowingId = Cabricality.id("fluid/" + this.getName() + "/" + this.getName() + "_flowing");
+            SimpleFluidRenderHandler handler;
+            if (this.tint < 0) handler = new SimpleFluidRenderHandler(stillId, flowingId); else handler = new SimpleFluidRenderHandler(stillId, flowingId, tint);
+            FluidRenderHandlerRegistry.INSTANCE.register(this.getStill(), this.getFlowing(), handler);
             BlockRenderLayerMap.put(RenderLayer.getTranslucent(), this.getStill(), this.getFlowing());
             ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
                 registry.register(stillId);
@@ -118,7 +124,9 @@ public abstract class BaseFlowableFluid extends FlowableFluid implements IFluid 
 
     @Override
     public Item getBucketItem() {
-        return this.bucketItem;
+        Identifier id = Cabricality.id(this.getName() + "_bucket");
+        if (Registry.ITEM.containsId(id)) return Registry.ITEM.get(id);
+        return Items.AIR;
     }
 
     @Override

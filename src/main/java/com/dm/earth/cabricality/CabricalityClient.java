@@ -24,7 +24,8 @@ public class CabricalityClient implements ClientModInitializer {
 
     private static void initFluidRendering() {
         renderFluids(
-                CabfFluids.RESIN
+                CabfFluids.RESIN,
+                CabfFluids.REDSTONE
         );
     }
 
