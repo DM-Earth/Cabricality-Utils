@@ -1,6 +1,5 @@
-package com.dm.earth.cabricality;
+package com.dm.earth.cabricality.client;
 
-import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.content.fluids.IFluid;
 import com.dm.earth.cabricality.util.ModChecker;
 import net.minecraft.fluid.FlowableFluid;
@@ -23,7 +22,8 @@ public class CabricalityClient implements ClientModInitializer {
         renderFluids(
                 RESIN,
                 REDSTONE,
-                WASTE
+                WASTE,
+                SKY_STONE
         );
     }
 

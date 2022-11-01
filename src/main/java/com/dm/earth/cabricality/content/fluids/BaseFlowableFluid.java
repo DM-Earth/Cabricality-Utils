@@ -1,19 +1,16 @@
 package com.dm.earth.cabricality.content.fluids;
 
 import com.dm.earth.cabricality.Cabricality;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
-import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import com.dm.earth.cabricality.client.FluidColorRegistry;
+import com.dm.earth.cabricality.client.FluidRendererRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -23,21 +20,18 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import org.quiltmc.qsl.block.extensions.api.client.BlockRenderLayerMap;
 
-public abstract class BaseFlowableFluid extends FlowableFluid implements IFluid {
+public class BaseFlowableFluid extends FlowableFluid implements IFluid {
     private final boolean isStill;
     private final String name;
-    private int tint;
 
     public BaseFlowableFluid(String name, boolean isStill) {
         this.isStill = isStill;
         this.name = name;
-        this.tint = -1;
     }
 
-    public BaseFlowableFluid color(int tintInt) {
-        this.tint = tintInt;
+    public BaseFlowableFluid color(int tint) {
+        FluidColorRegistry.register(name, tint);
         return this;
     }
 
@@ -98,18 +92,8 @@ public abstract class BaseFlowableFluid extends FlowableFluid implements IFluid 
 
     @Override
     public void setupRendering() {
-        if (this.isStill(null)) {
-            Identifier stillId = Cabricality.id("fluid/" + this.getName() + "/" + this.getName() + "_still");
-            Identifier flowingId = Cabricality.id("fluid/" + this.getName() + "/" + this.getName() + "_flowing");
-            SimpleFluidRenderHandler handler;
-            if (this.tint < 0) handler = new SimpleFluidRenderHandler(stillId, flowingId); else handler = new SimpleFluidRenderHandler(stillId, flowingId, tint);
-            FluidRenderHandlerRegistry.INSTANCE.register(this.getStill(), this.getFlowing(), handler);
-            BlockRenderLayerMap.put(RenderLayer.getTranslucent(), this.getStill(), this.getFlowing());
-            ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
-                registry.register(stillId);
-                registry.register(flowingId);
-            });
-        }
+        if (this.isStill(null))
+            FluidRendererRegistry.register(this.getName(), this.getTypical(), this.getFlowing(), true);
     }
 
     @Override
@@ -144,5 +128,17 @@ public abstract class BaseFlowableFluid extends FlowableFluid implements IFluid 
     public int getLevel(FluidState state) {
         if (!this.isStill(null)) return 8;
         return state.get(LEVEL);
+    }
+
+    @Override
+    public Fluid getFlowing() {
+        if (!this.isStill(null)) return this;
+        return Registry.FLUID.get(Cabricality.id(this.getName() + "_flowing"));
+    }
+
+    @Override
+    public Fluid getStill() {
+        if (this.isStill(null)) return this;
+        return Registry.FLUID.get(Cabricality.id(this.getName()));
     }
 }

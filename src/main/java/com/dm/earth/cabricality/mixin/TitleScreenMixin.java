@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.mixin;
 
-import com.dm.earth.cabricality.CabricalityClient;
+import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.util.ModChecker;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;

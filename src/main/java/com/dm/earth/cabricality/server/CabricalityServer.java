@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality;
+package com.dm.earth.cabricality.server;
 
 import com.dm.earth.cabricality.util.ModChecker;
 import org.quiltmc.loader.api.ModContainer;
