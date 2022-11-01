@@ -17,13 +17,15 @@ public class CabfFluids {
     public static final Fluid REDSTONE = new BaseFluid("redstone");
     public static final Fluid WASTE = new BaseFluid("waste");
     public static final Fluid SKY_STONE = new BaseFluid("sky_stone");
+    public static final Fluid COKE = new BaseFluid("coke");
 
     public static void register() {
         registerFluids(
                 RESIN,
                 REDSTONE,
                 WASTE,
-                SKY_STONE
+                SKY_STONE,
+                COKE
         );
     }
 

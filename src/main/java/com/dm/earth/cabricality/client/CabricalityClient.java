@@ -23,7 +23,8 @@ public class CabricalityClient implements ClientModInitializer {
                 RESIN,
                 REDSTONE,
                 WASTE,
-                SKY_STONE
+                SKY_STONE,
+                COKE
         );
     }
 
