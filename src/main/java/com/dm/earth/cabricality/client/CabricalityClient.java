@@ -21,23 +21,15 @@ public class CabricalityClient implements ClientModInitializer {
     @Override
     public void onInitializeClient(ModContainer mod) {
         ModChecker.check();
-        renderFluids(
-                RESIN,
-                REDSTONE,
-                WASTE,
-                SKY_STONE,
-                COKE,
-                FINE_SAND
-        );
+        renderFluids(RESIN, REDSTONE, WASTE, SKY_STONE, COKE, FINE_SAND, MATRIX, RAW_LOGIC);
+        renderFluids(POWERED_WATER, POWERED_WATER_FLOWING);
         renderFluids(NUMBERS);
     }
 
     private static void renderFluid(Fluid fluid) {
-        IFluid iFluid = (IFluid) fluid;
-        iFluid.setupRendering();
-        if (fluid instanceof FlowableFluid flowable) {
-            IFluid flowingIFluid = (IFluid) flowable.getFlowing();
-            flowingIFluid.setupRendering();
+        if (fluid.isStill(null)) {
+            IFluid iFluid = (IFluid) fluid;
+            iFluid.setupRendering();
         }
     }
 

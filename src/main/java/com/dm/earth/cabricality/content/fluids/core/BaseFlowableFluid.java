@@ -83,7 +83,7 @@ public class BaseFlowableFluid extends FlowableFluid implements IFluid {
 
     @Override
     public Identifier getId() {
-        return Cabricality.id(this.getName());
+        return Cabricality.id(this.isStill(null) ? this.getName() : (this.getName() + "flowing"));
     }
 
     @Override

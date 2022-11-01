@@ -7,7 +7,7 @@ public class FluidColorRegistry {
     private static Map<String, Integer> colors = new HashMap<>();
 
     public static void register(String fluid, int color) {
-        colors.put(fluid, color);
+        if (!colors.containsKey(fluid)) colors.put(fluid, color);
     }
 
     public static int get(String name) {
