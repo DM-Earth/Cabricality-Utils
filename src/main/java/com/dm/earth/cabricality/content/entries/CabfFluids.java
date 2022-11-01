@@ -29,16 +29,14 @@ public class CabfFluids {
     private static List<Fluid> getNumberFluids() {
         List<Integer> colors = List.of(0xCBE827, 0xAEE827, 0x68E827, 0x27E86E, 0x27E8B1, 0x27DEE8, 0x27B5E8, 0x2798E8, 0x2778E8, 0x2748E8);
         ArrayList<Fluid> numbers = new ArrayList<>();
-        int i = 0;
-        for (int color : colors) {
-            i++;
-            numbers.add(new NumberFluid(i).color(color));
+        for (int i = 0; i < 10; i++) {
+            numbers.add(new NumberFluid(i).color(colors.get(i)));
         }
         return numbers;
     }
 
     public static void register() {
-        registerFluids(
+        registerIFluids(
                 RESIN,
                 REDSTONE,
                 WASTE,
@@ -46,17 +44,17 @@ public class CabfFluids {
                 COKE,
                 FINE_SAND
         );
-        registerFluids(NUMBERS);
+        registerIFluids(NUMBERS);
     }
 
-    private static void registerIFluid(Identifier id, Fluid fluid) {
+    private static void registerFluid(Identifier id, Fluid fluid) {
         Registry.register(Registry.FLUID, id, fluid);
         if (fluid instanceof FlowableFluid flowable) CabfBlocks.registerFluidBlock(id, flowable);
     }
 
     private static void registerIFluid(Fluid fluid) {
         IFluid iFluid = (IFluid) fluid;
-        registerIFluid(iFluid.getId(), fluid);
+        registerFluid(iFluid.getId(), fluid);
         iFluid.registerBucketItem(Registry.ITEM);
         if (fluid instanceof BaseFlowableFluid flowable) {
             Cabricality.CLIENT_RESOURCES.addBlockState(FluidBlockStatesGenerator.simple(flowable.getName()), flowable.getId());
@@ -65,11 +63,11 @@ public class CabfFluids {
         }
     }
 
-    private static void registerFluids(Fluid... fluids) {
+    private static void registerIFluids(Fluid... fluids) {
         for (Fluid fluid : fluids) registerIFluid(fluid);
     }
 
-    private static void registerFluids(List<Fluid> fluids) {
+    private static void registerIFluids(List<Fluid> fluids) {
         for (Fluid fluid : fluids) registerIFluid(fluid);
     }
 }
