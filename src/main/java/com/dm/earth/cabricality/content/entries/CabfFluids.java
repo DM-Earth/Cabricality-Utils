@@ -8,7 +8,6 @@ import com.dm.earth.cabricality.content.fluids.BaseFluid;
 import com.dm.earth.cabricality.content.fluids.IFluid;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -28,14 +27,15 @@ public class CabfFluids {
         );
     }
 
-    private static void registerFluid(Identifier id, Fluid fluid) {
+    private static void registerIFluid(Identifier id, Fluid fluid) {
         Registry.register(Registry.FLUID, id, fluid);
         if (fluid instanceof FlowableFluid flowable) CabfBlocks.registerFluidBlock(id, flowable);
     }
 
-    private static void registerFluid(Fluid fluid) {
+    private static void registerIFluid(Fluid fluid) {
         IFluid iFluid = (IFluid) fluid;
-        registerFluid(iFluid.getId(), fluid);
+        registerIFluid(iFluid.getId(), fluid);
+        iFluid.registerBucketItem(Registry.ITEM);
         if (fluid instanceof BaseFlowableFluid flowable) {
             Cabricality.CLIENT_RESOURCES.addBlockState(FluidBlockStatesGenerator.simple(flowable.getName()), flowable.getId());
             Cabricality.CLIENT_RESOURCES.addBlockState(FluidBlockStatesGenerator.simple(flowable.getName() + "_flowing"), flowable.getId());
@@ -44,6 +44,6 @@ public class CabfFluids {
     }
 
     private static void registerFluids(Fluid... fluids) {
-        for (Fluid fluid : fluids) registerFluid(fluid);
+        for (Fluid fluid : fluids) registerIFluid(fluid);
     }
 }

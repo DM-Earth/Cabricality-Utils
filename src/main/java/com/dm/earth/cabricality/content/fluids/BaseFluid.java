@@ -91,6 +91,7 @@ public class BaseFluid extends Fluid implements IFluid {
         return Cabricality.id(this.getName());
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
@@ -103,6 +104,11 @@ public class BaseFluid extends Fluid implements IFluid {
     @Override
     public void setupRendering() {
         FluidRendererRegistry.register(this.getName(), this.getTypical(), this.getFlowing(), false);
+    }
+
+    @Override
+    public boolean hasBucketItem() {
+        return true;
     }
 
     @Override

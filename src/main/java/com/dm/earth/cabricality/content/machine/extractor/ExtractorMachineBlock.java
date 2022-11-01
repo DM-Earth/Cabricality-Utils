@@ -59,7 +59,7 @@ public class ExtractorMachineBlock extends BlockWithEntity {
         ItemStack stack = player.getStackInHand(hand);
         if (extractor.storage.getAmount() >= FluidConstants.BUCKET) {
             extractor.storage.extract(FluidVariant.of(CabfFluids.RESIN), FluidConstants.BUCKET, TransferUtil.getTransaction());
-            ItemStackUtil.replaceItemStack(stack, new ItemStack(CabfItems.RESIN_BUCKET), 1, player, hand);
+            ItemStackUtil.replaceItemStack(stack, new ItemStack(CabfFluids.RESIN.getBucketItem()), 1, player, hand);
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
