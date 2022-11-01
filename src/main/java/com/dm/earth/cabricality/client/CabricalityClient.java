@@ -1,11 +1,13 @@
 package com.dm.earth.cabricality.client;
 
-import com.dm.earth.cabricality.content.fluids.IFluid;
+import com.dm.earth.cabricality.content.fluids.core.IFluid;
 import com.dm.earth.cabricality.util.ModChecker;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
+
+import java.util.List;
 
 import static com.dm.earth.cabricality.Cabricality.ID;
 import static com.dm.earth.cabricality.content.entries.CabfFluids.*;
@@ -24,8 +26,10 @@ public class CabricalityClient implements ClientModInitializer {
                 REDSTONE,
                 WASTE,
                 SKY_STONE,
-                COKE
+                COKE,
+                FINE_SAND
         );
+        renderFluids(NUMBERS);
     }
 
     private static void renderFluid(Fluid fluid) {
@@ -38,6 +42,10 @@ public class CabricalityClient implements ClientModInitializer {
     }
 
     private static void renderFluids(Fluid... fluids) {
+        for (Fluid fluid : fluids) renderFluid(fluid);
+    }
+
+    private static void renderFluids(List<Fluid> fluids) {
         for (Fluid fluid : fluids) renderFluid(fluid);
     }
 }

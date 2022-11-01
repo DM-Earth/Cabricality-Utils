@@ -11,10 +11,10 @@ import net.minecraft.util.Identifier;
 import org.quiltmc.qsl.block.extensions.api.client.BlockRenderLayerMap;
 
 public class FluidRendererRegistry {
-    public static void register(String name, Fluid still, Fluid flowing, boolean flow) {
+    public static void register(String name, String texture, Fluid still, Fluid flowing, boolean flow) {
         int color = FluidColorRegistry.get(name);
-        Identifier stillId = Cabricality.id("fluid/" + name + "/" + name + "_still");
-        Identifier flowingId = Cabricality.id("fluid/" + name + "/" + name + "_flowing");
+        Identifier stillId = Cabricality.id("fluid/" + texture + "/" + texture + "_still");
+        Identifier flowingId = Cabricality.id("fluid/" + texture + "/" + texture + "_flowing");
         SimpleFluidRenderHandler handler;
         if (color < 0) handler = new SimpleFluidRenderHandler(stillId, flowingId);
         else handler = new SimpleFluidRenderHandler(stillId, flowingId, color);
@@ -25,5 +25,9 @@ public class FluidRendererRegistry {
             registry.register(stillId);
             registry.register(flowingId);
         });
+    }
+
+    public static void register(String name, Fluid still, Fluid flowing, boolean flow) {
+        register(name, name, still, flowing, flow);
     }
 }

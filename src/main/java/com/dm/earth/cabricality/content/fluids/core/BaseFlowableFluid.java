@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.content.fluids;
+package com.dm.earth.cabricality.content.fluids.core;
 
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.client.FluidColorRegistry;
