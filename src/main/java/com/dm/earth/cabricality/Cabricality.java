@@ -22,7 +22,6 @@ public class Cabricality implements ModInitializer {
     public static final String ID = "cabricality";
     public static final Logger LOGGER = LoggerFactory.getLogger(ID);
     public static final RuntimeResourcePack CLIENT_RESOURCES = RuntimeResourcePack.create(id("client_resources"));
-
     public static ItemGroup MAIN_GROUP = QuiltItemGroup.createWithIcon(id("main_group"), () -> Registry.ITEM.get(id("andesite_machine")).getDefaultStack());
 
     public static Identifier id(String id) {
