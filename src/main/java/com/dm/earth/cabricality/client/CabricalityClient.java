@@ -2,7 +2,6 @@ package com.dm.earth.cabricality.client;
 
 import com.dm.earth.cabricality.content.fluids.core.IFluid;
 import com.dm.earth.cabricality.util.ModChecker;
-import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
@@ -21,8 +20,13 @@ public class CabricalityClient implements ClientModInitializer {
     @Override
     public void onInitializeClient(ModContainer mod) {
         ModChecker.check();
+        renderFluidInit();
+    }
+
+    private static void renderFluidInit() {
         renderFluids(RESIN, REDSTONE, WASTE, SKY_STONE, COKE, FINE_SAND, MATRIX, RAW_LOGIC);
         renderFluids(POWERED_WATER, POWERED_WATER_FLOWING);
+        renderFluids(MOLTEN_DESH, MOLTEN_DESH_FLOWING, MOLTEN_OSTRUM, MOLTEN_OSTRUM_FLOWING, MOLTEN_CALORITE, MOLTEN_CALORITE_FLOWING);
         renderFluids(NUMBERS);
     }
 

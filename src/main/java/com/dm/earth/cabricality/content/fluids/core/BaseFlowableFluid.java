@@ -5,6 +5,8 @@ import com.dm.earth.cabricality.client.FluidColorRegistry;
 import com.dm.earth.cabricality.client.FluidRendererRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
@@ -12,7 +14,6 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -68,7 +69,9 @@ public class BaseFlowableFluid extends FlowableFluid implements IFluid {
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return Registry.BLOCK.get(this.getId()).getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(state));
+        Block block = Registry.BLOCK.get(((IFluid) this.getTypical()).getId());
+        if (block == null) return Blocks.AIR.getDefaultState();
+        return block.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
     }
 
     @Override
@@ -83,7 +86,7 @@ public class BaseFlowableFluid extends FlowableFluid implements IFluid {
 
     @Override
     public Identifier getId() {
-        return Cabricality.id(this.isStill(null) ? this.getName() : (this.getName() + "flowing"));
+        return Cabricality.id(this.isStill(null) ? this.getName() : (this.getName() + "_flowing"));
     }
 
     @Override
