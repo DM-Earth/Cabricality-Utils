@@ -19,27 +19,27 @@ import org.slf4j.LoggerFactory;
 
 public class Cabricality implements ModInitializer {
 
-    public static final String ID = "cabricality";
-    public static final Logger LOGGER = LoggerFactory.getLogger(ID);
-    public static final RuntimeResourcePack CLIENT_RESOURCES = RuntimeResourcePack.create(id("client_resources"));
-    public static ItemGroup MAIN_GROUP = QuiltItemGroup.createWithIcon(id("main_group"), () -> Registry.ITEM.get(id("andesite_machine")).getDefaultStack());
+	public static final String ID = "cabricality";
+	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
+	public static final RuntimeResourcePack CLIENT_RESOURCES = RuntimeResourcePack.create(id("client_resources"));
+	public static ItemGroup MAIN_GROUP = QuiltItemGroup.createWithIcon(id("main_group"), () -> Registry.ITEM.get(id("andesite_machine")).getDefaultStack());
 
-    public static Identifier id(String id) {
-        return new Identifier(ID, id);
-    }
+	public static Identifier id(String id) {
+		return new Identifier(ID, id);
+	}
 
-    @Override
-    public void onInitialize(ModContainer mod) {
-        LOGGER.info("Cabricality is initializing!");
+	@Override
+	public void onInitialize(ModContainer mod) {
+		LOGGER.info("Cabricality is initializing!");
 
-        CabfItems.register();
-        CabfBlocks.register();
-        CabfFluids.register();
-        CabfBlockEntityTypes.register();
+		CabfItems.register();
+		CabfBlocks.register();
+		CabfFluids.register();
+		CabfBlockEntityTypes.register();
 
-        DataFixerListener.load();
-        UseEntityListener.load();
+		DataFixerListener.load();
+		UseEntityListener.load();
 
-        RRPCallback.AFTER_VANILLA.register(list -> list.add(CLIENT_RESOURCES));
-    }
+		RRPCallback.AFTER_VANILLA.register(list -> list.add(CLIENT_RESOURCES));
+	}
 }

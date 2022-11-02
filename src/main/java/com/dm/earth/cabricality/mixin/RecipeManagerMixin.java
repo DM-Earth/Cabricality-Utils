@@ -13,8 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
-    @Inject(method = "deserialize", at = @At("RETURN"))
-    private static void read(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> cir) {
-        if (cir.getReturnValue() instanceof CuttingBoardRecipe boardRecipe) DeployerCuttingRecipeHandler.cuttingBoardRecipes.add(boardRecipe);
-    }
+	@Inject(method = "deserialize", at = @At("RETURN"))
+	private static void read(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> cir) {
+		if (cir.getReturnValue() instanceof CuttingBoardRecipe boardRecipe)
+			DeployerCuttingRecipeHandler.cuttingBoardRecipes.add(boardRecipe);
+	}
 }

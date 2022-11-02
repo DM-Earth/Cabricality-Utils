@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Screen.class)
 public interface ScreenAccessor {
-    @Accessor
-    TextRenderer getTextRenderer();
+	@Accessor
+	TextRenderer getTextRenderer();
 }

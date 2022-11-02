@@ -14,24 +14,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FluidDrainingBehaviour.class)
 public class FluidDrainingBehaviourMixin extends FluidManipulationBehaviour {
-    boolean infinite;
+	boolean infinite;
 
-    public FluidDrainingBehaviourMixin(SmartTileEntity te) {
-        super(te);
-    }
+	public FluidDrainingBehaviourMixin(SmartTileEntity te) {
+		super(te);
+	}
 
-    @Inject(method = "pullNext", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z", ordinal = 1), cancellable = true)
-    private void injected(BlockPos root, TransactionContext ctx, CallbackInfoReturnable<Boolean> cir) {
-        if (this.infinite) cir.setReturnValue(true);
-    }
+	@Inject(method = "pullNext", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z", ordinal = 1), cancellable = true)
+	private void injected(BlockPos root, TransactionContext ctx, CallbackInfoReturnable<Boolean> cir) {
+		if (this.infinite) cir.setReturnValue(true);
+	}
 
-    @Override
-    protected SnapshotParticipant<?> snapshotParticipant() {
-        return null;
-    }
+	@Override
+	protected SnapshotParticipant<?> snapshotParticipant() {
+		return null;
+	}
 
-    @Override
-    public BehaviourType<?> getType() {
-        return null;
-    }
+	@Override
+	public BehaviourType<?> getType() {
+		return null;
+	}
 }

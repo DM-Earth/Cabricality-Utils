@@ -9,10 +9,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SplashTextResourceSupplier.class)
 public class SplashTextResourceSupplierMixin {
-    @Inject(method = "get", at = @At("RETURN"), cancellable = true)
-    private void injected(CallbackInfoReturnable<String> cir) {
-        if (!ModChecker.isFullLoaded()) {
-            cir.setReturnValue(null);
-        }
-    }
+	@Inject(method = "get", at = @At("RETURN"), cancellable = true)
+	private void injected(CallbackInfoReturnable<String> cir) {
+		if (!ModChecker.isFullLoaded()) {
+			cir.setReturnValue(null);
+		}
+	}
 }

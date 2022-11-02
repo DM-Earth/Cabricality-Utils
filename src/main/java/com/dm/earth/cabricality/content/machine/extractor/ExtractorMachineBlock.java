@@ -1,7 +1,6 @@
 package com.dm.earth.cabricality.content.machine.extractor;
 
 import com.dm.earth.cabricality.content.entries.CabfFluids;
-import com.dm.earth.cabricality.content.entries.CabfItems;
 import com.dm.earth.cabricality.util.ItemStackUtil;
 import com.dm.earth.cabricality.util.TransferUtil;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
@@ -14,7 +13,6 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -27,41 +25,42 @@ import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class ExtractorMachineBlock extends BlockWithEntity {
-    public static int ticks = 0;
+	public static int ticks = 0;
 
-    public ExtractorMachineBlock(Settings settings) {
-        super(settings);
-    }
+	public ExtractorMachineBlock(Settings settings) {
+		super(settings);
+	}
 
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new ExtractorMachineBlockEntity(pos, state);
-    }
+	@Nullable
+	@Override
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new ExtractorMachineBlockEntity(pos, state);
+	}
 
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
+	@Override
+	public BlockRenderType getRenderType(BlockState state) {
+		return BlockRenderType.MODEL;
+	}
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ExtractorMachineBlockEntity.TYPE, ExtractorMachineBlockEntity::tick);
-    }
+	@Nullable
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return checkType(type, ExtractorMachineBlockEntity.TYPE, ExtractorMachineBlockEntity::tick);
+	}
 
-    @Override
-    @SuppressWarnings("UnstableApiUsage")
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!(hit.getSide() == Direction.UP || hit.getSide() == Direction.DOWN || Registry.ITEM.getId(player.getStackInHand(hand).getItem()).equals(new Identifier("minecraft", "bucket")))) return ActionResult.PASS;
-        ExtractorMachineBlockEntity extractor = (ExtractorMachineBlockEntity) world.getBlockEntity(pos);
-        assert extractor != null;
-        ItemStack stack = player.getStackInHand(hand);
-        if (extractor.storage.getAmount() >= FluidConstants.BUCKET && extractor.storage.getResource().isOf(CabfFluids.RESIN)) {
-            extractor.storage.extract(FluidVariant.of(CabfFluids.RESIN), FluidConstants.BUCKET, TransferUtil.getTransaction());
-            ItemStackUtil.replaceItemStack(stack, new ItemStack(CabfFluids.RESIN.getBucketItem()), 1, player, hand);
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
-    }
+	@Override
+	@SuppressWarnings("UnstableApiUsage")
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (!(hit.getSide() == Direction.UP || hit.getSide() == Direction.DOWN || Registry.ITEM.getId(player.getStackInHand(hand).getItem()).equals(new Identifier("minecraft", "bucket"))))
+			return ActionResult.PASS;
+		ExtractorMachineBlockEntity extractor = (ExtractorMachineBlockEntity) world.getBlockEntity(pos);
+		assert extractor != null;
+		ItemStack stack = player.getStackInHand(hand);
+		if (extractor.storage.getAmount() >= FluidConstants.BUCKET && extractor.storage.getResource().isOf(CabfFluids.RESIN)) {
+			extractor.storage.extract(FluidVariant.of(CabfFluids.RESIN), FluidConstants.BUCKET, TransferUtil.getTransaction());
+			ItemStackUtil.replaceItemStack(stack, new ItemStack(CabfFluids.RESIN.getBucketItem()), 1, player, hand);
+			return ActionResult.SUCCESS;
+		}
+		return ActionResult.PASS;
+	}
 }

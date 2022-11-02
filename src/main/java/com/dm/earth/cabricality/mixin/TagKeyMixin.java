@@ -8,10 +8,10 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(TagKey.class)
 public class TagKeyMixin {
-    @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-    private static Identifier modifyIdentifier(Identifier identifier) {
-        if (identifier.getNamespace().equals("forge"))
-            return new Identifier("c", identifier.getPath());
-        return identifier;
-    }
+	@ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0, argsOnly = true)
+	private static Identifier modifyIdentifier(Identifier identifier) {
+		if (identifier.getNamespace().equals("forge"))
+			return new Identifier("c", identifier.getPath());
+		return identifier;
+	}
 }

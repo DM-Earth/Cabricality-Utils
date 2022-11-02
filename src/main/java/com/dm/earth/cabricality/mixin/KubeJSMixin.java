@@ -12,12 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(KubeJS.class)
 public class KubeJSMixin {
-    @Shadow public static ItemGroup tab;
+	@Shadow
+	public static ItemGroup tab;
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Ldev/latvian/mods/kubejs/script/ScriptManager;unload()V"))
-    private void injected(CallbackInfo ci) {
-        if (!CommonProperties.get().serverOnly) {
-            tab = Cabricality.MAIN_GROUP;
-        }
-    }
+	@Inject(method = "<init>", at = @At(value = "INVOKE", target = "Ldev/latvian/mods/kubejs/script/ScriptManager;unload()V"))
+	private void injected(CallbackInfo ci) {
+		if (!CommonProperties.get().serverOnly) {
+			tab = Cabricality.MAIN_GROUP;
+		}
+	}
 }
