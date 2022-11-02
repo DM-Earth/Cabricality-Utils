@@ -20,106 +20,106 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
 public class BaseFluid extends Fluid implements IFluid {
-    private final String name;
+	private final String name;
 
-    public BaseFluid(String name) {
-        this.name = name;
-    }
+	public BaseFluid(String name) {
+		this.name = name;
+	}
 
-    public BaseFluid color(int tint) {
-        FluidColorRegistry.register(name, tint);
-        return this;
-    }
+	public BaseFluid color(int tint) {
+		FluidColorRegistry.register(name, tint);
+		return this;
+	}
 
-    @Override
-    protected boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
-        return true;
-    }
+	@Override
+	protected boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
+		return true;
+	}
 
-    @Override
-    protected Vec3d getVelocity(BlockView world, BlockPos pos, FluidState state) {
-        return Vec3d.ZERO;
-    }
+	@Override
+	protected Vec3d getVelocity(BlockView world, BlockPos pos, FluidState state) {
+		return Vec3d.ZERO;
+	}
 
-    @Override
-    public int getTickRate(WorldView world) {
-        return 0;
-    }
+	@Override
+	public int getTickRate(WorldView world) {
+		return 0;
+	}
 
-    @Override
-    protected float getBlastResistance() {
-        return 0;
-    }
+	@Override
+	protected float getBlastResistance() {
+		return 0;
+	}
 
-    @Override
-    public float getHeight(FluidState state, BlockView world, BlockPos pos) {
-        return 0;
-    }
+	@Override
+	public float getHeight(FluidState state, BlockView world, BlockPos pos) {
+		return 0;
+	}
 
-    @Override
-    public float getHeight(FluidState state) {
-        return 0;
-    }
+	@Override
+	public float getHeight(FluidState state) {
+		return 0;
+	}
 
-    @Override
-    protected BlockState toBlockState(FluidState state) {
-        return Blocks.AIR.getDefaultState();
-    }
+	@Override
+	protected BlockState toBlockState(FluidState state) {
+		return Blocks.AIR.getDefaultState();
+	}
 
-    @Override
-    public boolean isStill(FluidState state) {
-        return true;
-    }
+	@Override
+	public boolean isStill(FluidState state) {
+		return true;
+	}
 
-    @Override
-    public int getLevel(FluidState state) {
-        return 8;
-    }
+	@Override
+	public int getLevel(FluidState state) {
+		return 8;
+	}
 
-    @Override
-    public VoxelShape getShape(FluidState state, BlockView world, BlockPos pos) {
-        return VoxelShapes.empty();
-    }
+	@Override
+	public VoxelShape getShape(FluidState state, BlockView world, BlockPos pos) {
+		return VoxelShapes.empty();
+	}
 
-    @Override
-    public Identifier getRegistryName() {
-        return this.getId();
-    }
+	@Override
+	public Identifier getRegistryName() {
+		return this.getId();
+	}
 
-    @Override
-    public Identifier getId() {
-        return Cabricality.id(this.getName());
-    }
+	@Override
+	public Identifier getId() {
+		return Cabricality.id(this.getName());
+	}
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
+	@Override
+	public String getName() {
+		return this.name;
+	}
 
-    @Override
-    public Fluid getFlowing() {
-        return this.getTypical();
-    }
+	@Override
+	public Fluid getFlowing() {
+		return this.getTypical();
+	}
 
-    @Override
-    public void setupRendering() {
-        FluidRendererRegistry.register(this.getName(), this.getTypical(), this.getFlowing(), false);
-    }
+	@Override
+	public void setupRendering() {
+		FluidRendererRegistry.register(this.getName(), this.getTextureName(), this.getTypical(), this.getFlowing(), false);
+	}
 
-    @Override
-    public boolean hasBucketItem() {
-        return true;
-    }
+	@Override
+	public boolean hasBucketItem() {
+		return true;
+	}
 
-    @Override
-    public Fluid getTypical() {
-        return this;
-    }
+	@Override
+	public Fluid getTypical() {
+		return this;
+	}
 
-    @Override
-    public Item getBucketItem() {
-        Identifier id = Cabricality.id(this.getName() + "_bucket");
-        if (Registry.ITEM.containsId(id)) return Registry.ITEM.get(id);
-        return Items.AIR;
-    }
+	@Override
+	public Item getBucketItem() {
+		Identifier id = Cabricality.id(this.getName() + "_bucket");
+		if (Registry.ITEM.containsId(id)) return Registry.ITEM.get(id);
+		return Items.AIR;
+	}
 }

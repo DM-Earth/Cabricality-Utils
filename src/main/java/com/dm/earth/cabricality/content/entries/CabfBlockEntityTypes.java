@@ -8,12 +8,12 @@ import net.minecraft.util.registry.Registry;
 
 @SuppressWarnings("UnstableApiUsage")
 public class CabfBlockEntityTypes {
-    public static void register() {
-        registerBlockEntityType("extractor", ExtractorMachineBlockEntity.TYPE);
-        FluidStorage.SIDED.registerForBlockEntity((tank, direction) -> tank.storage, ExtractorMachineBlockEntity.TYPE);
-    }
+	public static void register() {
+		registerBlockEntityType("extractor", ExtractorMachineBlockEntity.TYPE);
+		FluidStorage.SIDED.registerForBlockEntity((tank, direction) -> tank.storage, ExtractorMachineBlockEntity.TYPE);
+	}
 
-    private static void registerBlockEntityType(String name, BlockEntityType<?> blockEntityType) {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, Cabricality.id(name), blockEntityType);
-    }
+	private static void registerBlockEntityType(String name, BlockEntityType<?> blockEntityType) {
+		Registry.register(Registry.BLOCK_ENTITY_TYPE, Cabricality.id(name), blockEntityType);
+	}
 }

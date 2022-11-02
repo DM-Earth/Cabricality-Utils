@@ -11,22 +11,26 @@ import net.minecraft.util.registry.Registry;
 import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 public interface IFluid {
-    @ClientOnly void setupRendering();
+	@ClientOnly void setupRendering();
 
-    boolean hasBucketItem();
+	boolean hasBucketItem();
 
-    Identifier getId();
+	Identifier getId();
 
-    Fluid getTypical();
+	Fluid getTypical();
 
-    Fluid getFlowing();
+	Fluid getFlowing();
 
-    String getName();
+	String getName();
 
-    default void registerBucketItem(Registry<Item> registry) {
-        if (this.getTypical() != this || !this.hasBucketItem()) return;
-        Identifier bucketId = Cabricality.id(this.getName() + "_bucket");
-        Registry.register(registry, bucketId, new BucketItem((Fluid) this, CabfItems.Properties.DEFAULT_SINGLE));
-        Cabricality.CLIENT_RESOURCES.addModel(ItemModelGenerator.generated("item/bucket", bucketId.getPath()), Cabricality.id("item/" + bucketId.getPath()));
-    }
+	default void registerBucketItem(Registry<Item> registry) {
+		if (this.getTypical() != this || !this.hasBucketItem()) return;
+		Identifier bucketId = Cabricality.id(this.getName() + "_bucket");
+		Registry.register(registry, bucketId, new BucketItem((Fluid) this, CabfItems.Properties.DEFAULT_SINGLE));
+		Cabricality.CLIENT_RESOURCES.addModel(ItemModelGenerator.generated("item/bucket", bucketId.getPath()), Cabricality.id("item/" + bucketId.getPath()));
+	}
+
+	default String getTextureName() {
+		return this.getName();
+	}
 }
