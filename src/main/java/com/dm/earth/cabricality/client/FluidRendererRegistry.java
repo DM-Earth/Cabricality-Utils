@@ -1,6 +1,7 @@
 package com.dm.earth.cabricality.client;
 
 import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.content.fluids.core.IFluid;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
@@ -21,7 +22,10 @@ import org.quiltmc.qsl.block.extensions.api.client.BlockRenderLayerMap;
 import org.quiltmc.qsl.resource.loader.api.ResourceLoader;
 import org.quiltmc.qsl.resource.loader.api.reloader.SimpleSynchronousResourceReloader;
 
+import java.util.List;
 import java.util.function.Function;
+
+import static com.dm.earth.cabricality.content.entries.CabfFluids.*;
 
 public class FluidRendererRegistry {
 	public static void register(String name, String texture, Fluid still, Fluid flowing, boolean flow) {
@@ -67,5 +71,27 @@ public class FluidRendererRegistry {
 
 	public static void register(String name, Fluid still, Fluid flowing, boolean flow) {
 		register(name, name, still, flowing, flow);
+	}
+
+	public static void renderFluidInit() {
+		renderFluids(RESIN, REDSTONE, WASTE, SKY_STONE, COKE, FINE_SAND, MATRIX, RAW_LOGIC);
+		renderFluids(POWERED_WATER, POWERED_WATER_FLOWING);
+		renderFluids(MOLTEN_DESH, MOLTEN_DESH_FLOWING, MOLTEN_OSTRUM, MOLTEN_OSTRUM_FLOWING, MOLTEN_CALORITE, MOLTEN_CALORITE_FLOWING);
+		renderFluids(NUMBERS);
+	}
+
+	private static void renderFluid(Fluid fluid) {
+		if (fluid.isStill(null)) {
+			IFluid iFluid = (IFluid) fluid;
+			iFluid.setupRendering();
+		}
+	}
+
+	private static void renderFluids(Fluid... fluids) {
+		for (Fluid fluid : fluids) renderFluid(fluid);
+	}
+
+	private static void renderFluids(List<Fluid> fluids) {
+		for (Fluid fluid : fluids) renderFluid(fluid);
 	}
 }

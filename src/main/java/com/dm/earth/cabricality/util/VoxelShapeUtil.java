@@ -1,12 +1,14 @@
 package com.dm.earth.cabricality.util;
 
-import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 
 public class VoxelShapeUtil {
 	public static VoxelShape simpleBox(double x1, double y1, double z1, double x2, double y2, double z2) {
-		return FlagBlock.boxSimple(x1, y1, z1, x2, y2, z2);
+		Box box = new Box(x1, y1, z1, x2, y2, z2);
+		return VoxelShapes.cuboid(box.minX / 16.0, box.minY / 16.0, box.minZ / 16.0, box.maxX / 16.0, box.maxY / 16.0, box.maxZ / 16.0);
 	}
 
 	//input: north
