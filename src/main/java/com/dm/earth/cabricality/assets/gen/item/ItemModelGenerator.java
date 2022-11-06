@@ -11,4 +11,8 @@ public class ItemModelGenerator {
 	public static JModel generated(String... id) {
 		return generated(String.join("/", id));
 	}
+
+	public static JModel parented(String parent) {
+		return new JModel().parent(parent);
+	}
 }

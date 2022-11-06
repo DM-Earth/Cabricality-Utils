@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.util;
+package com.dm.earth.cabricality.listener;
 
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.recipe.core.FreePRP;

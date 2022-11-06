@@ -1,7 +1,6 @@
 package com.dm.earth.cabricality.content.trading.item;
 
 import com.dm.earth.cabricality.client.CabricalityClient;
-import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -14,11 +13,11 @@ public abstract class AbstractTradeCardItem extends Item {
 	}
 
 	@Override
-	@SuppressWarnings("ConstantConditions")
 	public Text getName(ItemStack stack) {
-		if (!stack.hasNbt()) return new TranslatableText(this.getTranslationKey(stack));
-		return Text.of(new TranslatableText(this.getTranslationKey(stack)).getString() + " " + new TranslatableText(TradingEntryRegistry.fromNbt(stack.getNbt()).getItem().getTranslationKey()).getString());
+		return Text.of(new TranslatableText(this.getTranslationKey(stack)).getString() + " " + this.getContentString(stack));
 	}
+
+	public abstract String getContentString(ItemStack stack);
 
 	@Override
 	public String getTranslationKey() {

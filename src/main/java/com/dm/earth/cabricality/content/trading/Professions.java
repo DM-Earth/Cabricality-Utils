@@ -50,7 +50,7 @@ public enum Professions {
 		this.profession = profession;
 	}
 
-	public Profession getProfession() {
+	public Profession get() {
 		return profession;
 	}
-	}
+}

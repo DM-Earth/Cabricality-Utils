@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.mixin;
 
-import com.dm.earth.cabricality.util.DeployerCuttingRecipeHandler;
+import com.dm.earth.cabricality.listener.DeployerCuttingRecipeHandler;
 import com.google.gson.JsonObject;
 import com.nhoryzon.mc.farmersdelight.recipe.CuttingBoardRecipe;
 import net.minecraft.recipe.Recipe;

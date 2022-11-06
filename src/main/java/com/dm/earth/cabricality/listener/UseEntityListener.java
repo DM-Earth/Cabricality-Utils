@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.util;
+package com.dm.earth.cabricality.listener;
 
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.damage.DamageSource;

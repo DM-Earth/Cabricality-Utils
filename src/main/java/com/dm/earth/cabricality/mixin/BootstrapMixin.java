@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.mixin;
 
-import com.dm.earth.cabricality.util.DataFixerListener;
+import com.dm.earth.cabricality.listener.DataFixerListener;
 import net.minecraft.Bootstrap;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

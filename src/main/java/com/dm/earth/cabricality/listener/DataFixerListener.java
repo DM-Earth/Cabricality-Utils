@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.util;
+package com.dm.earth.cabricality.listener;
 
 import com.mojang.datafixers.schemas.Schema;
 import net.minecraft.datafixer.schema.IdentifierNormalizingSchema;

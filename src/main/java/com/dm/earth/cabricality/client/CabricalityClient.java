@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.client;
 
-import com.dm.earth.cabricality.client.util.ItemColorRegistryListener;
+import com.dm.earth.cabricality.client.listener.ItemColorRegistryListener;
 import com.dm.earth.cabricality.util.ModChecker;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;

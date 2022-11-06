@@ -1,6 +1,12 @@
 package com.dm.earth.cabricality.content.entries;
 
 import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.assets.gen.item.ItemModelGenerator;
+import com.dm.earth.cabricality.content.trading.Professions;
+import com.dm.earth.cabricality.content.trading.core.Profession;
+import com.dm.earth.cabricality.content.trading.core.TradingEntry;
+import com.dm.earth.cabricality.content.trading.item.ProfessionCardItem;
+import com.dm.earth.cabricality.content.trading.item.TradeCardItem;
 import net.devtech.arrp.json.models.JModel;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
@@ -8,6 +14,12 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 public class CabfItems {
 	public static void register() {
+		for (Professions professionEntry : Professions.values()) {
+			Profession profession = professionEntry.get();
+			registerItemModeled("profession_card_" + profession.hashCode(), new ProfessionCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("card/profession_card").toString()));
+			for (TradingEntry entry : profession.entries())
+				registerItemModeled("trade_card_" + entry.hashCode(), new TradeCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("card/trade_card").toString()));
+		}
 	}
 
 	private static void registerItemModeled(String name, Item item, JModel model) {
@@ -22,5 +34,6 @@ public class CabfItems {
 	public static final class Properties {
 		public static final Item.Settings DEFAULT = new QuiltItemSettings().group(Cabricality.MAIN_GROUP);
 		public static final Item.Settings DEFAULT_SINGLE = DEFAULT.maxCount(1);
+		public static final Item.Settings CARD = new QuiltItemSettings().maxCount(1);
 	}
 }

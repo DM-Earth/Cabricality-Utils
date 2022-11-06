@@ -5,24 +5,19 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public class Profession {
-	private final Identifier id;
-	private final List<TradingEntry> entries;
-
-	public Profession(Identifier id, List<TradingEntry> entries) {
-		this.id = id;
-		this.entries = entries;
-	}
+public record Profession(Identifier id, List<TradingEntry> entries) {
 
 	public static Profession of(String name, TradingEntry... entries) {
 		return new Profession(Cabricality.id(name), List.of(entries));
 	}
 
-	public Identifier getId() {
-		return id;
+	@Override
+	public List<TradingEntry> entries() {
+		return List.copyOf(entries);
 	}
 
-	public List<TradingEntry> getEntries() {
-		return List.copyOf(entries);
+	@Override
+	public int hashCode() {
+		return this.id().hashCode();
 	}
 }
