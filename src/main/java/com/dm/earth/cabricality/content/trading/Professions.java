@@ -1,6 +1,8 @@
 package com.dm.earth.cabricality.content.trading;
 
 import com.dm.earth.cabricality.content.trading.core.Profession;
+import com.dm.earth.cabricality.content.trading.core.TradingEntry;
+import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
 import net.minecraft.util.Identifier;
 
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTypes.SILVER;
@@ -48,9 +50,14 @@ public enum Professions {
 
 	Professions(Profession profession) {
 		this.profession = profession;
+		for (TradingEntry entry : profession.entries()) TradingEntryRegistry.register(entry);
 	}
 
 	public Profession get() {
 		return profession;
+	}
+
+	public static void load() {
+		// Load the enum
 	}
 }

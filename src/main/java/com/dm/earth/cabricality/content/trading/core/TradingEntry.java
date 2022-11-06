@@ -1,12 +1,13 @@
 package com.dm.earth.cabricality.content.trading.core;
 
 import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.core.IHashStringable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class TradingEntry {
+public class TradingEntry implements IHashStringable {
 	private final Identifier item;
 	private final int itemCount;
 	private final Identifier coin;

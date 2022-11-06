@@ -1,11 +1,12 @@
 package com.dm.earth.cabricality.content.trading.core;
 
 import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.core.IHashStringable;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public record Profession(Identifier id, List<TradingEntry> entries) {
+public record Profession(Identifier id, List<TradingEntry> entries) implements IHashStringable {
 
 	public static Profession of(String name, TradingEntry... entries) {
 		return new Profession(Cabricality.id(name), List.of(entries));

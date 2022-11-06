@@ -19,7 +19,7 @@ public class DeployerCuttingRecipeHandler implements RecipeLoadingEvents.AddReci
 	@Override
 	public void addRecipes(RecipeHandler handler) {
 		for (CuttingBoardRecipe boardRecipe : cuttingBoardRecipes) {
-			Identifier id = Cabricality.id("cutting/auto/" + boardRecipe.hashCode());
+			Identifier id = Cabricality.id("cutting/auto/" + String.valueOf(boardRecipe.hashCode()).replaceAll("-", "x"));
 			ArrayList<ProcessingOutput> outputs = new ArrayList<>();
 			for (ChanceResult chanceResult : boardRecipe.getRollableResults())
 				outputs.add(new ProcessingOutput(chanceResult.stack(), chanceResult.chance()));

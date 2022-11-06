@@ -16,9 +16,9 @@ public class CabfItems {
 	public static void register() {
 		for (Professions professionEntry : Professions.values()) {
 			Profession profession = professionEntry.get();
-			registerItemModeled("profession_card_" + profession.hashCode(), new ProfessionCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("card/profession_card").toString()));
+			registerItemModeled("profession_card_" + profession.hashString(), new ProfessionCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("item/card/profession_card").toString()));
 			for (TradingEntry entry : profession.entries())
-				registerItemModeled("trade_card_" + entry.hashCode(), new TradeCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("card/trade_card").toString()));
+				registerItemModeled("trade_card_" + entry.hashString(), new TradeCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("item/card/trade_card").toString()));
 		}
 	}
 

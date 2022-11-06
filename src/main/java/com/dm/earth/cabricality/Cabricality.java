@@ -4,6 +4,7 @@ import com.dm.earth.cabricality.content.entries.CabfBlockEntityTypes;
 import com.dm.earth.cabricality.content.entries.CabfBlocks;
 import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.content.entries.CabfItems;
+import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.listener.DataFixerListener;
 import com.dm.earth.cabricality.listener.UseEntityListener;
 import net.devtech.arrp.api.RRPCallback;
@@ -31,6 +32,8 @@ public class Cabricality implements ModInitializer {
 	@Override
 	public void onInitialize(ModContainer mod) {
 		LOGGER.info("Cabricality is initializing!");
+
+		Professions.load();
 
 		CabfItems.register();
 		CabfBlocks.register();

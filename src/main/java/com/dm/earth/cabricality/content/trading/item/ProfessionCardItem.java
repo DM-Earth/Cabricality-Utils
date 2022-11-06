@@ -2,7 +2,7 @@ package com.dm.earth.cabricality.content.trading.item;
 
 import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.content.trading.util.ProfessionUtil;
-import net.minecraft.item.ItemStack;
+import net.minecraft.text.TranslatableText;
 
 public class ProfessionCardItem extends AbstractTradeCardItem {
 	public ProfessionCardItem(Settings settings) {
@@ -11,8 +11,8 @@ public class ProfessionCardItem extends AbstractTradeCardItem {
 
 	@Override
 	@SuppressWarnings("ConstantConditions")
-	public String getContentString(ItemStack stack) {
-		return CabricalityClient.genTranslationKey("profession", ProfessionUtil.fromItem((ProfessionCardItem) stack.getItem()).id().getPath());
+	public String getContentString() {
+		return new TranslatableText(CabricalityClient.genTranslationKey("profession", ProfessionUtil.fromItem(this).id().getPath())).getString();
 	}
 
 	@Override

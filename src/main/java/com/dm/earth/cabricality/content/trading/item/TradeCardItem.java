@@ -1,7 +1,7 @@
 package com.dm.earth.cabricality.content.trading.item;
 
 import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
-import net.minecraft.item.ItemStack;
+import net.minecraft.text.TranslatableText;
 
 public class TradeCardItem extends AbstractTradeCardItem {
 	public TradeCardItem(Settings settings) {
@@ -9,8 +9,8 @@ public class TradeCardItem extends AbstractTradeCardItem {
 	}
 
 	@Override
-	public String getContentString(ItemStack stack) {
-		return TradingEntryRegistry.fromItem((AbstractTradeCardItem) stack.getItem()).getItem().getName().getString();
+	public String getContentString() {
+		return new TranslatableText(TradingEntryRegistry.fromItem(this).getItem().getTranslationKey()).getString();
 	}
 
 	@Override
