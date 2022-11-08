@@ -1,6 +1,7 @@
-package com.dm.earth.cabricality.content.trading;
+package com.dm.earth.cabricality.content.trading.recipe;
 
 import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
 import com.dm.earth.cabricality.content.trading.recipe.gen.JTradingRecipeGenerator;

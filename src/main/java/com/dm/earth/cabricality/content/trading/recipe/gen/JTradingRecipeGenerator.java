@@ -17,8 +17,8 @@ public class JTradingRecipeGenerator {
 		json.addProperty("type", "indrev:infuse");
 
 		JsonArray ingredients = new JsonArray();
-		ingredients.add(genItemEntry(Cabricality.id("profession_card_" + ProfessionUtil.fromTradingEntry(entry).hashString()), 0));
 		ingredients.add(genItemEntry(entry.getItemId(), entry.getItemCount()));
+		ingredients.add(genItemEntry(Cabricality.id("profession_card_" + ProfessionUtil.fromTradingEntry(entry).hashString()), 0));
 		json.add("ingredients", ingredients);
 
 		json.add("output", genItemEntry(entry.getCoinId(), entry.getCoinCount()));
@@ -36,8 +36,8 @@ public class JTradingRecipeGenerator {
 		json.addProperty("type", "indrev:infuse");
 
 		JsonArray ingredients = new JsonArray();
-		ingredients.add(genItemEntry(Cabricality.id("trade_card_" + entry.hashString()), 0));
 		ingredients.add(genItemEntry(entry.getCoinId(), entry.getCoinCount()));
+		ingredients.add(genItemEntry(Cabricality.id("trade_card_" + entry.hashString()), 0));
 		json.add("ingredients", ingredients);
 
 		json.add("output", genItemEntry(entry.getItemId(), entry.getItemCount()));
