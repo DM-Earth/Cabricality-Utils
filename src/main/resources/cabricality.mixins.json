@@ -7,7 +7,6 @@
     "BootstrapMixin",
     "FluidDrainingBehaviourMixin",
     "KubeJSMixin",
-    "RecipeEventJSMixin",
     "RecipeManagerMixin",
     "RegistryMixin",
     "TagKeyMixin",
