@@ -9,15 +9,15 @@ import com.simibubi.create.content.contraptions.processing.ProcessingOutput;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.quiltmc.qsl.recipe.api.RecipeLoadingEvents;
+import org.quiltmc.qsl.recipe.api.RecipeManagerHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DeployerCuttingRecipeHandler implements RecipeLoadingEvents.AddRecipesCallback {
+public class DeployerCuttingRecipeHandler {
 	public static ArrayList<CuttingBoardRecipe> cuttingBoardRecipes = new ArrayList<>();
 
-	@Override
-	public void addRecipes(RecipeHandler handler) {
+	private static void addRecipes(RecipeLoadingEvents.AddRecipesCallback.RecipeHandler handler) {
 		for (CuttingBoardRecipe boardRecipe : cuttingBoardRecipes) {
 			Identifier id = Cabricality.id("cutting/auto/" + String.valueOf(boardRecipe.hashCode()).replaceAll("-", "x"));
 			ArrayList<ProcessingOutput> outputs = new ArrayList<>();
@@ -32,5 +32,9 @@ public class DeployerCuttingRecipeHandler implements RecipeLoadingEvents.AddReci
 			DeployerApplicationRecipe recipe = new DeployerApplicationRecipe(params);
 			handler.register(id, identifier -> recipe);
 		}
+	}
+
+	public static void load() {
+		RecipeManagerHelper.addRecipes(DeployerCuttingRecipeHandler::addRecipes);
 	}
 }

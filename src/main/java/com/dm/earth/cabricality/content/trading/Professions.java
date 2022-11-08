@@ -9,7 +9,7 @@ import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTyp
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.of;
 
 public enum Professions {
-	FARMING(Profession.of("farming",
+	FARMING(Profession.of("farming", 0x7baf4a,
 			// Vanilla
 			of(new Identifier("minecraft", "carrot"), 9, SILVER, 1, 0xfd8e28),
 			of(new Identifier("minecraft", "beetroot"), 9, SILVER, 1, 0xa2292f),
@@ -21,7 +21,7 @@ public enum Professions {
 			of(new Identifier("minecraft", "wheat"), 16, SILVER, 1, 0x8c7641),
 			of(new Identifier("minecraft", "kelp"), 64, SILVER, 1, 0x5ca939),
 			of(new Identifier("minecraft", "melon_slice"), 64, SILVER, 1, 0xbd322a),
-			of(new Identifier("minecraft", "wool"), 64, SILVER, 1, 0xf8f9f9),
+			of(new Identifier("minecraft", "white_wool"), 64, SILVER, 1, 0xf8f9f9),
 			// Farmer's Delight
 			of(new Identifier("farmersdelight", "rice"), 9, SILVER, 1, 0xe6dfd7),
 			of(new Identifier("farmersdelight", "onion"), 9, SILVER, 1, 0xab7437),
@@ -32,7 +32,7 @@ public enum Professions {
 	)),
 
 	//TODO: terrestria
-	CARPENTRY(Profession.of("carpentry",
+	CARPENTRY(Profession.of("carpentry", 0x735a38,
 			of(new Identifier("minecraft", "oak_log"), 32, SILVER, 1, 0x735a38),
 			of(new Identifier("minecraft", "spruce_log"), 32, SILVER, 1, 0x3a2715),
 			of(new Identifier("minecraft", "jungle_log"), 32, SILVER, 1, 0x544c1e),

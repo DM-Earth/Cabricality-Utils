@@ -19,10 +19,7 @@
     "entrypoints": {
       "init": "com.dm.earth.cabricality.Cabricality",
       "client_init": "com.dm.earth.cabricality.client.CabricalityClient",
-      "server_init": "com.dm.earth.cabricality.server.CabricalityServer",
-      "events": [
-        "com.dm.earth.cabricality.listener.DeployerCuttingRecipeHandler"
-      ]
+      "server_init": "com.dm.earth.cabricality.server.CabricalityServer"
     },
     "accessWidener": "cabricality.accesswidener",
     "depends": [
