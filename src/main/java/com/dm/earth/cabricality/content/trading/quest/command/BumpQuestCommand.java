@@ -46,23 +46,21 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 	}
 
 	private static String generateQuest(int x, int y, TradingEntry entry) {
-		StringBuilder builder = new StringBuilder();
-		builder.append("{\n");
-		builder.append("title: \"").append(entry.getItemCount()).append(" × {").append(entry.getItem().getTranslationKey()).append("}\"\n");
-		builder.append("icon: \"").append(entry.getItemId()).append("\"\n");
-		builder.append("disable_toast: true\n");
-		builder.append("x: ").append(x).append("d\n");
-		builder.append("y: ").append(y).append("d\n");
-		builder.append("shape: \"hexagon\"\n");
-		builder.append("subtitle: \"").append(entry.getCoinCount()).append(" x {").append(entry.getCoin().getTranslationKey()).append("}\"\n");
-		builder.append("tasks: [{\ntype: \"item\"\n");
-		builder.append("item: \"").append(entry.getItemId()).append("\"\n");
-		builder.append("icon: \"").append(entry.getItemId()).append("\"\n");
-		builder.append("count: ").append(entry.getItemCount()).append("L\n");
-		builder.append("]}\nrewards: [\n{\ntype: \"item\"\nauto: \"enabled\"\n");
-		builder.append("item: \"" + "cabricality:trade_card_").append(entry.hashString()).append("\"\n}\n{\ntype: \"custom\"\n");
-		builder.append("title: \"{market.cabricality.shipments.repeatable}\"\n");
-		builder.append("icon: \"indrev:module_charger\"\ntags: [\"reset\"]\nauto: \"no_toast\"\n}\n]\n}");
-		return null;
+		return "{\n" +
+				"title: \"" + entry.getItemCount() + " × {" + entry.getItem().getTranslationKey() + "}\"\n" +
+				"icon: \"" + entry.getItemId() + "\"\n" +
+				"disable_toast: true\n" +
+				"x: " + x + "d\n" +
+				"y: " + y + "d\n" +
+				"shape: \"hexagon\"\n" +
+				"subtitle: \"" + entry.getCoinCount() + " x {" + entry.getCoin().getTranslationKey() + "}\"\n" +
+				"tasks: [{\ntype: \"item\"\n" +
+				"item: \"" + entry.getItemId() + "\"\n" +
+				"icon: \"" + entry.getItemId() + "\"\n" +
+				"count: " + entry.getItemCount() + "L\n" +
+				"]}\nrewards: [\n{\ntype: \"item\"\nauto: \"enabled\"\n" +
+				"item: \"" + "cabricality:trade_card_" + entry.hashString() + "\"\n}\n{\ntype: \"custom\"\n" +
+				"title: \"{market.cabricality.shipments.repeatable}\"\n" +
+				"icon: \"indrev:module_charger\"\ntags: [\"reset\"]\nauto: \"no_toast\"\n}\n]\n}";
 	}
 }

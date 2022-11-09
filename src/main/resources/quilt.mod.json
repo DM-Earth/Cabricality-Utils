@@ -19,7 +19,10 @@
     "entrypoints": {
       "init": "com.dm.earth.cabricality.Cabricality",
       "client_init": "com.dm.earth.cabricality.client.CabricalityClient",
-      "server_init": "com.dm.earth.cabricality.server.CabricalityServer"
+      "server_init": "com.dm.earth.cabricality.server.CabricalityServer",
+      "client_events":[
+        "com.dm.earth.cabricality.listener.ClientCommandRegistryListener"
+      ]
     },
     "accessWidener": "cabricality.accesswidener",
     "depends": [
