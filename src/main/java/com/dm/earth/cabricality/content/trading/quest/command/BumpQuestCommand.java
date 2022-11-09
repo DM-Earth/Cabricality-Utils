@@ -58,7 +58,7 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 				"item: \"" + entry.getItemId() + "\"\n" +
 				"icon: \"" + entry.getItemId() + "\"\n" +
 				"count: " + entry.getItemCount() + "L\n" +
-				"]}\nrewards: [\n{\ntype: \"item\"\nauto: \"enabled\"\n" +
+				"}]\nrewards: [\n{\ntype: \"item\"\nauto: \"enabled\"\n" +
 				"item: \"" + "cabricality:trade_card_" + entry.hashString() + "\"\n}\n{\ntype: \"custom\"\n" +
 				"title: \"{market.cabricality.shipments.repeatable}\"\n" +
 				"icon: \"indrev:module_charger\"\ntags: [\"reset\"]\nauto: \"no_toast\"\n}\n]\n}";
