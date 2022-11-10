@@ -1,6 +1,7 @@
 package com.dm.earth.cabricality.content.trading.quest.command;
 
 import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
@@ -23,18 +24,14 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 		boolean down = false;
 		for (Professions p : Professions.values()) {
 			Profession profession = p.get();
-
 			group++;
 			row += 2;
 			if (group >= Professions.values().length / 2 - 1 && group <= Professions.values().length / 2 && !down) {
 				row += 3;
 				down = true;
 			}
-
 			int col = -3;
-
-			list.add(generateQuest(-4, row, new TradingEntry(Cabricality.id("profession_card_" + profession.hashString()), 1, TradingEntry.CoinTypes.GOLD.getId(), 1, profession.tint())));
-
+			list.add(generateProfessionQuest(-4, row, profession));
 			for (TradingEntry entry : profession.entries()) {
 				if (col > 4) {
 					col = -4;
@@ -44,7 +41,6 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 				col++;
 			}
 		}
-
 		MinecraftClient.getInstance().keyboard.setClipboard(String.join("\n\n", list));
 		context.getSource().sendFeedback(Text.of("Copied to clipboard!"));
 		return SINGLE_SUCCESS;
@@ -66,6 +62,22 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 				"count: " + entry.getItemCount() + "L\n" +
 				"}]\nrewards: [\n{\ntype: \"item\"\nauto: \"enabled\"\n" +
 				"item: \"" + "cabricality:trade_card_" + entry.hashString() + "\"\n}\n{\ntype: \"custom\"\n" +
+				"title: \"{market.cabricality.shipments.repeatable}\"\n" +
+				"icon: \"indrev:module_charger\"\ntags: [\"reset\"]\nauto: \"no_toast\"\n}\n]\n}";
+	}
+
+	@NotNull
+	private static String generateProfessionQuest(int x, int y, @NotNull Profession entry) {
+		return "{\n" +
+				"title: \"{" + CabricalityClient.genTranslationKey("profession", entry.id().getPath()) + "}\"\n" +
+				"icon: \"" + Cabricality.id("profession_card_" + entry.hashString()) + "\"\n" +
+				"disable_toast: true\n" +
+				"x: " + x + "d\n" +
+				"y: " + y + "d\n" +
+				"shape: \"hexagon\"\n" +
+				"tasks: [{\ntype: \"checkmark\"\n" +
+				"}]\nrewards: [\n{\ntype: \"item\"\nauto: \"enabled\"\n" +
+				"item: \"" + "cabricality:profession_card_" + entry.hashString() + "\"\n}\n{\ntype: \"custom\"\n" +
 				"title: \"{market.cabricality.shipments.repeatable}\"\n" +
 				"icon: \"indrev:module_charger\"\ntags: [\"reset\"]\nauto: \"no_toast\"\n}\n]\n}";
 	}
