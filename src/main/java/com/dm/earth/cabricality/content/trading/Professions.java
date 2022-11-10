@@ -1,15 +1,15 @@
 package com.dm.earth.cabricality.content.trading;
 
-import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
 import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
-import net.minecraft.util.Identifier;
 
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTypes.GOLD;
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTypes.SILVER;
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.of;
+import static com.dm.earth.cabricality.util.ModEntry.*;
 
+//TODO: fill this out
 public enum Professions {
 	EXCHANGE(Profession.of("exchange", -1,
 			of(SILVER.getId(), 16, GOLD, 1, 0x9fadb4),
@@ -18,71 +18,95 @@ public enum Professions {
 
 	FARMING(Profession.of("farming", 0x7baf4a,
 			// Vanilla
-			of(new Identifier("minecraft", "carrot"), 9, SILVER, 1, 0xfd8e28),
-			of(new Identifier("minecraft", "beetroot"), 9, SILVER, 1, 0xa2292f),
-			of(new Identifier("minecraft", "potato"), 9, SILVER, 1, 0xc79643),
-			of(new Identifier("minecraft", "sweet_berries"), 12, SILVER, 1, 0xa30c0e),
-			of(new Identifier("minecraft", "cocoa_beans"), 16, SILVER, 1, 0x6f4428),
-			of(new Identifier("minecraft", "honey_bottle"), 8, SILVER, 1, 0xfd912d),
-			of(new Identifier("minecraft", "honeycomb"), 4, SILVER, 1, 0xf9be3d),
-			of(new Identifier("minecraft", "wheat"), 16, SILVER, 1, 0x8c7641),
-			of(new Identifier("minecraft", "kelp"), 64, SILVER, 1, 0x5ca939),
-			of(new Identifier("minecraft", "melon_slice"), 64, SILVER, 1, 0xbd322a),
-			of(new Identifier("minecraft", "white_wool"), 64, SILVER, 1, 0xf8f9f9),
+			of(MC.id("carrot"), 9, SILVER, 1, 0xfd8e28),
+			of(MC.id("beetroot"), 9, SILVER, 1, 0xa2292f),
+			of(MC.id("potato"), 9, SILVER, 1, 0xc79643),
+			of(MC.id("sweet_berries"), 12, SILVER, 1, 0xa30c0e),
+			of(MC.id("cocoa_beans"), 16, SILVER, 1, 0x6f4428),
+			of(MC.id("honey_bottle"), 8, SILVER, 1, 0xfd912d),
+			of(MC.id("honeycomb"), 4, SILVER, 1, 0xf9be3d),
+			of(MC.id("wheat"), 16, SILVER, 1, 0x8c7641),
+			of(MC.id("kelp"), 64, SILVER, 1, 0x5ca939),
+			of(MC.id("melon_slice"), 64, SILVER, 1, 0xbd322a),
+			of(MC.id("white_wool"), 64, SILVER, 1, 0xf8f9f9),
 			// Farmer's Delight
-			of(new Identifier("farmersdelight", "rice"), 9, SILVER, 1, 0xe6dfd7),
-			of(new Identifier("farmersdelight", "onion"), 9, SILVER, 1, 0xab7437),
-			of(new Identifier("farmersdelight", "tomato"), 9, SILVER, 1, 0xbc3427),
-			of(new Identifier("farmersdelight", "cabbage"), 9, SILVER, 1, 0x7baf4a),
-			of(new Identifier("farmersdelight", "canvas"), 9, SILVER, 1, 0xb69775),
-			of(new Identifier("farmersdelight", "pumpkin_slice"), 32, SILVER, 1, 0xde882e)
+			of(FD.id("rice"), 9, SILVER, 1, 0xe6dfd7),
+			of(FD.id("onion"), 9, SILVER, 1, 0xab7437),
+			of(FD.id("tomato"), 9, SILVER, 1, 0xbc3427),
+			of(FD.id("cabbage"), 9, SILVER, 1, 0x7baf4a),
+			of(FD.id("canvas"), 9, SILVER, 1, 0xb69775),
+			of(FD.id("pumpkin_slice"), 32, SILVER, 1, 0xde882e)
 	)),
 
 	//TODO: terrestria
 	CARPENTRY(Profession.of("carpentry", 0x735a38,
-			of(new Identifier("minecraft", "oak_log"), 32, SILVER, 1, 0x735a38),
-			of(new Identifier("minecraft", "spruce_log"), 32, SILVER, 1, 0x3a2715),
-			of(new Identifier("minecraft", "jungle_log"), 32, SILVER, 1, 0x544c1e),
-			of(new Identifier("minecraft", "dark_oak_log"), 32, SILVER, 1, 0x332716),
-			of(new Identifier("minecraft", "acacia_log"), 32, SILVER, 1, 0x696259),
-			of(new Identifier("minecraft", "birch_log"), 32, SILVER, 1, 0xf0eeeb),
-			of(new Identifier("minecraft", "crimson_stem"), 32, SILVER, 1, 0x871115),
-			of(new Identifier("minecraft", "warped_stem"), 32, SILVER, 1, 0x1b615b),
-			of(new Identifier("promenade", "palm_log"), 32, SILVER, 1, 0x4d433a),
-			of(new Identifier("promenade", "cherry_oak_log"), 32, SILVER, 1, 0x401c15),
-			of(new Identifier("promenade", "dark_amaranth_stem"), 24, SILVER, 1, 0x4e4053)
+			of(MC.id("oak_log"), 32, SILVER, 1, 0x735a38),
+			of(MC.id("spruce_log"), 32, SILVER, 1, 0x3a2715),
+			of(MC.id("jungle_log"), 32, SILVER, 1, 0x544c1e),
+			of(MC.id("dark_oak_log"), 32, SILVER, 1, 0x332716),
+			of(MC.id("acacia_log"), 32, SILVER, 1, 0x696259),
+			of(MC.id("birch_log"), 32, SILVER, 1, 0xf0eeeb),
+			of(MC.id("crimson_stem"), 32, SILVER, 1, 0x871115),
+			of(MC.id("warped_stem"), 32, SILVER, 1, 0x1b615b),
+			of(PMD.id("palm_log"), 32, SILVER, 1, 0x4d433a),
+			of(PMD.id("cherry_oak_log"), 32, SILVER, 1, 0x401c15),
+			of(PMD.id("dark_amaranth_stem"), 24, SILVER, 1, 0x4e4053)
 	)),
 
 	MINING(Profession.of("mining", 0x826357,
-			of(new Identifier("create", "crushed_iron_ore"), 3, SILVER, 1, 0xe8c8b2),
-			of(new Identifier("create", "crushed_copper_ore"), 3, SILVER, 1, 0xe77a57),
-			of(new Identifier("create", "crushed_zinc_ore"), 3, SILVER, 1, 0xbae8c2),
-			of(new Identifier("create", "crushed_gold_ore"), 3, SILVER, 2, 0xf9e845),
-			of(new Identifier("create", "crushed_nickel_ore"), 3, SILVER, 1, 0xe0dcab),
-			of(new Identifier("create", "crushed_lead_ore"), 3, SILVER, 2, 0x535466),
-			of(new Identifier("create", "crushed_tin_ore"), 3, SILVER, 1, 0xdcdcdc),
-			of(Cabricality.id("crushed_calorite_ore"), 1, SILVER, 5, 0xb22c45),
-			of(Cabricality.id("crushed_ostrum_ore"), 1, SILVER, 4, 0x644a59),
-			of(Cabricality.id("crushed_desh_ore"), 1, SILVER, 2, 0xdfa562),
-			of(Cabricality.id("crushed_cobalt_ore"), 2, SILVER, 3, 0x2a79da),
-			of(new Identifier("minecraft", "andesite"), 64, SILVER, 1, 0x868887),
-			of(new Identifier("minecraft", "granite"), 64, SILVER, 1, 0x9e6b5a),
-			of(new Identifier("minecraft", "diorite"), 64, SILVER, 1, 0xe6e2e6),
-			of(new Identifier("minecraft", "tuff"), 48, SILVER, 1, 0x85837b),
-			of(new Identifier("minecraft", "sandstone"), 64, SILVER, 1, 0xdfd3a9),
-			of(new Identifier("create", "limestone"), 64, SILVER, 1, 0xbbb6a9),
-			of(new Identifier("promenade", "blunite"), 64, SILVER, 1, 0x5f6874),
-			of(new Identifier("promenade", "carbonite"), 64, SILVER, 1, 0x514e52),
-			of(new Identifier("create", "scoria"), 16, SILVER, 1, 0x493a34),
-			of(new Identifier("create", "veridium"), 16, SILVER, 1, 0x205f4f),
-			of(new Identifier("create", "ochrum"), 16, SILVER, 1, 0xb29561),
-			of(new Identifier("create", "crimsite"), 16, SILVER, 1, 0x7f2f3d),
-			of(new Identifier("create", "asurine"), 16, SILVER, 1, 0x3f4b68),
-			of(new Identifier("indrev", "sulfur_crystal"), 4, SILVER, 1, 0xbbab53),
-			of(new Identifier("minecraft", "lapis_lazuli"), 6, SILVER, 1, 0x3761c0),
-			of(new Identifier("minecraft", "diamond"), 1, GOLD, 1, 0x54ecd9),
-			of(new Identifier("minecraft", "coal"), 16, SILVER, 1, 0x252525),
-			of(new Identifier("minecraft", "redstone"), 24, SILVER, 1, 0xfc0d1b)
+			of(CR.id("crushed_iron_ore"), 3, SILVER, 1, 0xe8c8b2),
+			of(CR.id("crushed_copper_ore"), 3, SILVER, 1, 0xe77a57),
+			of(CR.id("crushed_zinc_ore"), 3, SILVER, 1, 0xbae8c2),
+			of(CR.id("crushed_gold_ore"), 3, SILVER, 2, 0xf9e845),
+			of(CR.id("crushed_nickel_ore"), 3, SILVER, 1, 0xe0dcab),
+			of(CR.id("crushed_lead_ore"), 3, SILVER, 2, 0x535466),
+			of(CR.id("crushed_tin_ore"), 3, SILVER, 1, 0xdcdcdc),
+			of(CABF.id("crushed_calorite_ore"), 1, SILVER, 5, 0xb22c45),
+			of(CABF.id("crushed_ostrum_ore"), 1, SILVER, 4, 0x644a59),
+			of(CABF.id("crushed_desh_ore"), 1, SILVER, 2, 0xdfa562),
+			of(CABF.id("crushed_cobalt_ore"), 2, SILVER, 3, 0x2a79da),
+			of(MC.id("andesite"), 64, SILVER, 1, 0x868887),
+			of(MC.id("granite"), 64, SILVER, 1, 0x9e6b5a),
+			of(MC.id("diorite"), 64, SILVER, 1, 0xe6e2e6),
+			of(MC.id("tuff"), 48, SILVER, 1, 0x85837b),
+			of(MC.id("calcite"), 48, SILVER, 1, 0xedece6),
+			of(MC.id("sandstone"), 64, SILVER, 1, 0xdfd3a9),
+			of(CR.id("limestone"), 64, SILVER, 1, 0xbbb6a9),
+			of(PMD.id("blunite"), 64, SILVER, 1, 0x5f6874),
+			of(PMD.id("carbonite"), 64, SILVER, 1, 0x514e52),
+			of(CR.id("scoria"), 16, SILVER, 1, 0x493a34),
+			of(CR.id("veridium"), 16, SILVER, 1, 0x205f4f),
+			of(CR.id("ochrum"), 16, SILVER, 1, 0xb29561),
+			of(CR.id("crimsite"), 16, SILVER, 1, 0x7f2f3d),
+			of(CR.id("asurine"), 16, SILVER, 1, 0x3f4b68),
+			of(IV.id("sulfur_crystal"), 4, SILVER, 1, 0xbbab53),
+			of(MC.id("lapis_lazuli"), 6, SILVER, 1, 0x3761c0),
+			of(MC.id("diamond"), 1, GOLD, 1, 0x54ecd9),
+			of(MC.id("coal"), 16, SILVER, 1, 0x252525),
+			of(MC.id("redstone"), 24, SILVER, 1, 0xfc0d1b)
+	)),
+	MASONRY(Profession.of("masonry", 0xaf6250,
+			of(AP.id("basalt_tiles"), 12, SILVER, 1, 0x747474),
+			of(AP.id("sunmetal_block"), 8, SILVER, 1, 0x613c3d),
+			of(AP.id("osseous_bricks"), 12, SILVER, 1, 0xe8e5d3),
+			of(AP.id("packed_ice_bricks"), 12, SILVER, 1, 0x7ea7f1),
+			of(AP.id("flint_tiles"), 12, SILVER, 1, 0x302d30),
+			of(AP.id("abyssaline_bricks"), 8, SILVER, 1, 0x534265),
+			of(AP.id("gilded_sandstone"), 8, SILVER, 1, 0xf8bc39),
+			of(AP.id("olivestone_bricks"), 12, SILVER, 1, 0x51523e),
+			of(AP.id("algal_bricks"), 12, SILVER, 1, 0x38423b),
+			of(AP.id("myonite_bricks"), 12, SILVER, 1, 0x867967),
+			// Create
+			of(CR.id("ornate_iron_window"), 8, SILVER, 1, 0x7f786f),
+			// Tconstruct
+			of(TC.id("seared_bricks"), 12, SILVER, 1, 0x3f3c39),
+			of(TC.id("scorched_bricks"), 8, SILVER, 1, 0x2d231d),
+			of(TC.id("dried_clay_bricks"), 8, SILVER, 1, 0x817157),
+			// Vanilla
+			of(MC.id("bricks"), 12, SILVER, 1, 0xaf6250),
+			of(MC.id("nether_bricks"), 12, SILVER, 1, 0x37181e),
+			of(MC.id("quartz_bricks"), 8, SILVER, 1, 0xeeeae6),
+			of(MC.id("mossy_cobblestone"), 12, SILVER, 1, 0x738454)
 	));
 
 	private final Profession profession;
