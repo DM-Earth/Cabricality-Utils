@@ -29,6 +29,7 @@ public enum Professions {
 			of(MC.id("kelp"), 64, SILVER, 1, 0x5ca939),
 			of(MC.id("melon_slice"), 64, SILVER, 1, 0xbd322a),
 			of(MC.id("white_wool"), 64, SILVER, 1, 0xf8f9f9),
+			of(MC.id("cactus"), 16, SILVER, 1, 0x659739),
 			// Farmer's Delight
 			of(FD.id("rice"), 9, SILVER, 1, 0xe6dfd7),
 			of(FD.id("onion"), 9, SILVER, 1, 0xab7437),
