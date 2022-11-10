@@ -1,5 +1,6 @@
 package com.dm.earth.cabricality.content.trading.quest.command;
 
+import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
@@ -7,6 +8,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.NotNull;
 import org.quiltmc.qsl.command.api.client.QuiltClientCommandSource;
 
 import java.util.ArrayList;
@@ -29,7 +31,10 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 				down = true;
 			}
 
-			int col = -4;
+			int col = -3;
+
+			list.add(generateQuest(-4, row, new TradingEntry(Cabricality.id("profession_card_" + profession.hashString()), 1, TradingEntry.CoinTypes.GOLD.getId(), 1, profession.tint())));
+
 			for (TradingEntry entry : profession.entries()) {
 				if (col > 4) {
 					col = -4;
@@ -45,7 +50,8 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 		return SINGLE_SUCCESS;
 	}
 
-	private static String generateQuest(int x, int y, TradingEntry entry) {
+	@NotNull
+	private static String generateQuest(int x, int y, @NotNull TradingEntry entry) {
 		return "{\n" +
 				"title: \"" + entry.getItemCount() + " × {" + entry.getItem().getTranslationKey() + "}\"\n" +
 				"icon: \"" + entry.getItemId() + "\"\n" +
