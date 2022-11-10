@@ -7,6 +7,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.util.Identifier;
 
+/*
+ * This util class in used to generate the JSON objects for the trading recipes.
+ */
 public class JTradingRecipeGenerator {
 	/*
 	 * This method is used to generate a json object for a trading sell recipe.
@@ -17,11 +20,11 @@ public class JTradingRecipeGenerator {
 		json.addProperty("type", "indrev:infuse");
 
 		JsonArray ingredients = new JsonArray();
-		ingredients.add(genItemEntry(entry.getItemId(), entry.getItemCount()));
-		ingredients.add(genItemEntry(Cabricality.id("profession_card_" + ProfessionUtil.fromTradingEntry(entry).hashString()), 0));
+		ingredients.add(itemEntry(entry.getItemId(), entry.getItemCount()));
+		ingredients.add(itemEntry(Cabricality.id("profession_card_" + ProfessionUtil.fromTradingEntry(entry).hashString()), 0));
 		json.add("ingredients", ingredients);
 
-		json.add("output", genItemEntry(entry.getCoinId(), entry.getCoinCount()));
+		json.add("output", itemEntry(entry.getCoinId(), entry.getCoinCount()));
 
 		json.addProperty("processTime", 125);
 		return json;
@@ -36,17 +39,17 @@ public class JTradingRecipeGenerator {
 		json.addProperty("type", "indrev:infuse");
 
 		JsonArray ingredients = new JsonArray();
-		ingredients.add(genItemEntry(entry.getCoinId(), entry.getCoinCount()));
-		ingredients.add(genItemEntry(Cabricality.id("trade_card_" + entry.hashString()), 0));
+		ingredients.add(itemEntry(entry.getCoinId(), entry.getCoinCount()));
+		ingredients.add(itemEntry(Cabricality.id("trade_card_" + entry.hashString()), 0));
 		json.add("ingredients", ingredients);
 
-		json.add("output", genItemEntry(entry.getItemId(), entry.getItemCount()));
+		json.add("output", itemEntry(entry.getItemId(), entry.getItemCount()));
 
 		json.addProperty("processTime", 125);
 		return json;
 	}
 
-	private static JsonObject genItemEntry(Identifier id, int count) {
+	private static JsonObject itemEntry(Identifier id, int count) {
 		JsonObject json = new JsonObject();
 		json.addProperty("item", id.toString());
 		json.addProperty("count", count);

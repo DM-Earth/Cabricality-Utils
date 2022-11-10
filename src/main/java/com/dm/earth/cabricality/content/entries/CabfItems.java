@@ -20,6 +20,9 @@ public class CabfItems {
 			for (TradingEntry entry : profession.entries())
 				registerItemModeled("trade_card_" + entry.hashString(), new TradeCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("item/card/trade_card").toString()));
 		}
+
+		for (TradingEntry.CoinTypes coinType : TradingEntry.CoinTypes.values())
+			registerItemModeled(coinType.getId().getPath(), new Item(Properties.DEFAULT.maxCount(16)), ItemModelGenerator.generated("item/coin", coinType.getId().getPath()));
 	}
 
 	private static void registerItemModeled(String name, Item item, JModel model) {
