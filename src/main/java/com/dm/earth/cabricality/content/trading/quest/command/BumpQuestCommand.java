@@ -23,7 +23,7 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 			Profession profession = p.get();
 
 			group++;
-			row++;
+			row += 2;
 			if (group >= Professions.values().length / 2 - 1 && group <= Professions.values().length / 2 && !down) {
 				row += 3;
 				down = true;
