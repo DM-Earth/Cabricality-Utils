@@ -32,7 +32,7 @@ public class TradeCardItem extends AbstractTradeCardItem {
 		TradingEntry entry = TradingEntryRegistry.fromItem((AbstractTradeCardItem) player.getStackInHand(hand).getItem());
 		if (stack.getItem() != entry.getCoin() || stack.getCount() < entry.getCoinCount())
 			return TypedActionResult.fail(cardStack);
-		ItemStack item = new ItemStack(entry.getItem(), entry.getItemCount());
+		ItemStack item = entry.asItemStack();
 		if (stack.getCount() == entry.getCoinCount()) player.setStackInHand(Hand.OFF_HAND, item);
 		else {
 			stack.decrement(entry.getCoinCount());

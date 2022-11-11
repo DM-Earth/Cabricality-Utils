@@ -44,7 +44,7 @@ public class ProfessionCardItem extends AbstractTradeCardItem {
 
 		if (stack.getItem() != entry.getItem() || stack.getCount() < entry.getItemCount())
 			return TypedActionResult.fail(cardStack);
-		ItemStack coin = new ItemStack(entry.getCoin(), entry.getCoinCount());
+		ItemStack coin = entry.asCoinStack();
 		if (stack.getCount() == entry.getItemCount()) player.setStackInHand(Hand.OFF_HAND, coin);
 		else {
 			stack.decrement(entry.getItemCount());

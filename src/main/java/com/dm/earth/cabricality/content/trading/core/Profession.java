@@ -12,8 +12,15 @@ import java.util.List;
 public record Profession(Identifier id, List<TradingEntry> entries, int tint) implements IHashStringable {
 
 	@Contract("_, _, _ -> new")
-	public static @NotNull Profession of(String name, int tint, TradingEntry... entries) {
+	@NotNull
+	public static Profession of(String name, int tint, TradingEntry... entries) {
 		return new Profession(Cabricality.id(name), List.of(entries), tint);
+	}
+
+	@Contract("_, _ -> new")
+	@NotNull
+	public static Profession of(String name, TradingEntry... entries) {
+		return of(name, -1, entries);
 	}
 
 	@Override

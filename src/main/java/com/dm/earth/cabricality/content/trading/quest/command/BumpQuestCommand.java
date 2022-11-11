@@ -15,37 +15,6 @@ import org.quiltmc.qsl.command.api.client.QuiltClientCommandSource;
 import java.util.ArrayList;
 
 public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
-	@Override
-	public int run(CommandContext<QuiltClientCommandSource> context) {
-		ArrayList<String> list = new ArrayList<>();
-
-		int group = 0;
-		int row = 0;
-		boolean down = false;
-		for (Professions p : Professions.values()) {
-			Profession profession = p.get();
-			group++;
-			row += 2;
-			if (group >= Professions.values().length / 2 - 1 && group <= Professions.values().length / 2 && !down) {
-				row += 3;
-				down = true;
-			}
-			int col = -3;
-			list.add(generateProfessionQuest(-4, row, profession));
-			for (TradingEntry entry : profession.entries()) {
-				if (col > 4) {
-					col = -4;
-					row++;
-				}
-				list.add(generateQuest(col, row, entry));
-				col++;
-			}
-		}
-		MinecraftClient.getInstance().keyboard.setClipboard(String.join("\n\n", list));
-		context.getSource().sendFeedback(Text.of("Copied to clipboard!"));
-		return SINGLE_SUCCESS;
-	}
-
 	@NotNull
 	private static String generateQuest(int x, int y, @NotNull TradingEntry entry) {
 		return "{\n" +
@@ -80,5 +49,36 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 				"item: \"" + "cabricality:profession_card_" + entry.hashString() + "\"\n}\n{\ntype: \"custom\"\n" +
 				"title: \"{market.cabricality.shipments.repeatable}\"\n" +
 				"icon: \"indrev:module_charger\"\ntags: [\"reset\"]\nauto: \"no_toast\"\n}\n]\n}";
+	}
+
+	@Override
+	public int run(CommandContext<QuiltClientCommandSource> context) {
+		ArrayList<String> list = new ArrayList<>();
+
+		int group = 0;
+		int row = 0;
+		boolean down = false;
+		for (Professions p : Professions.values()) {
+			Profession profession = p.get();
+			group++;
+			row += 2;
+			if (group >= Professions.values().length / 2 - 1 && group <= Professions.values().length / 2 && !down) {
+				row += 3;
+				down = true;
+			}
+			int col = -3;
+			list.add(generateProfessionQuest(-4, row, profession));
+			for (TradingEntry entry : profession.entries()) {
+				if (col > 4) {
+					col = -4;
+					row++;
+				}
+				list.add(generateQuest(col, row, entry));
+				col++;
+			}
+		}
+		MinecraftClient.getInstance().keyboard.setClipboard(String.join("\n\n", list));
+		context.getSource().sendFeedback(Text.of("Copied to clipboard!"));
+		return SINGLE_SUCCESS;
 	}
 }
