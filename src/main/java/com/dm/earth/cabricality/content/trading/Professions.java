@@ -7,7 +7,7 @@ import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTypes.GOLD;
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTypes.SILVER;
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.of;
-import static com.dm.earth.cabricality.util.ModEntry.*;
+import static com.dm.earth.cabricality.ModEntry.*;
 
 //TODO: fill this out
 public enum Professions {
@@ -19,6 +19,7 @@ public enum Professions {
 	FARMING(Profession.of("farming", 0x7baf4a,
 			// Vanilla
 			of(MC.id("carrot"), 9, SILVER, 1, 0xfd8e28),
+			of(MC.id("apple"), 9, SILVER, 1, 0xfc2234),
 			of(MC.id("beetroot"), 9, SILVER, 1, 0xa2292f),
 			of(MC.id("potato"), 9, SILVER, 1, 0xc79643),
 			of(MC.id("sweet_berries"), 12, SILVER, 1, 0xa30c0e),
@@ -66,6 +67,7 @@ public enum Professions {
 			of(CABF.id("crushed_ostrum_ore"), 1, SILVER, 4, 0x644a59),
 			of(CABF.id("crushed_desh_ore"), 1, SILVER, 2, 0xdfa562),
 			of(CABF.id("crushed_cobalt_ore"), 2, SILVER, 3, 0x2a79da),
+			of(MUL.id("crushed_soulstone"), 1, SILVER, 1, 0x734c77),
 			of(MC.id("andesite"), 64, SILVER, 1, 0x868887),
 			of(MC.id("granite"), 64, SILVER, 1, 0x9e6b5a),
 			of(MC.id("diorite"), 64, SILVER, 1, 0xe6e2e6),
@@ -90,7 +92,7 @@ public enum Professions {
 			of(AP.id("basalt_tiles"), 12, SILVER, 1, 0x747474),
 			of(AP.id("sunmetal_block"), 8, SILVER, 1, 0x613c3d),
 			of(AP.id("osseous_bricks"), 12, SILVER, 1, 0xe8e5d3),
-			of(AP.id("packed_ice_bricks"), 12, SILVER, 1, 0x7ea7f1),
+			of(AP.id("packed_ice_pillar"), 12, SILVER, 1, 0x7ea7f1),
 			of(AP.id("flint_tiles"), 12, SILVER, 1, 0x302d30),
 			of(AP.id("abyssaline_bricks"), 8, SILVER, 1, 0x534265),
 			of(AP.id("gilded_sandstone"), 8, SILVER, 1, 0xf8bc39),
@@ -102,12 +104,26 @@ public enum Professions {
 			// Tconstruct
 			of(TC.id("seared_bricks"), 12, SILVER, 1, 0x3f3c39),
 			of(TC.id("scorched_bricks"), 8, SILVER, 1, 0x2d231d),
-			of(TC.id("dried_clay_bricks"), 8, SILVER, 1, 0x817157),
+			of(TC.id("mud_bricks"), 4, SILVER, 1, 0x6e4e34),
 			// Vanilla
 			of(MC.id("bricks"), 12, SILVER, 1, 0xaf6250),
 			of(MC.id("nether_bricks"), 12, SILVER, 1, 0x37181e),
 			of(MC.id("quartz_bricks"), 8, SILVER, 1, 0xeeeae6),
 			of(MC.id("mossy_cobblestone"), 12, SILVER, 1, 0x738454)
+	)),
+	HUNTING(Profession.of("hunting", 0x4f3c3e,
+			of(MC.id("phantom_membrane"), 1, SILVER, 8, 0x8e7f7a),
+			of(MC.id("rabbit_foot"), 1, SILVER, 8, 0xd7b184),
+			of(MC.id("nether_star"), 1, GOLD, 1, 0xfdfeac),
+			of(MC.id("dragon_breath"), 1, SILVER, 1, 0xaa307a),
+			of(MC.id("ghast_tear"), 1, SILVER, 4, 0xd0f1f1),
+			of(MC.id("dragon_egg"), 1, GOLD, 16, 0x2c0332)
+	)),
+	FISHING(Profession.of("fishing", 0x4772e6,
+			of(MC.id("cod"), 8, SILVER, 1, 0xc5a174),
+			of(MC.id("salmon"), 8, SILVER, 1, 0xa93636),
+			of(MC.id("pufferfish"), 8, SILVER, 1, 0xf9a62c),
+			of(MC.id("tropical_fish"), 8, SILVER, 1, 0xf26f2f)
 	));
 
 	private final Profession profession;

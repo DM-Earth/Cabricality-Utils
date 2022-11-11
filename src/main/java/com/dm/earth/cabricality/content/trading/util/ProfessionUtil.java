@@ -3,7 +3,7 @@ package com.dm.earth.cabricality.content.trading.util;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
-import com.dm.earth.cabricality.content.trading.item.ProfessionCardItem;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class ProfessionUtil {
 	@Nullable
-	public static Profession fromItem(ProfessionCardItem item) {
+	public static Profession fromItem(Item item) {
 		Optional<Professions> professions = Arrays.stream(Professions.values()).filter(p -> Objects.equals(p.get().hashString(), getHashString(Registry.ITEM.getId(item)))).findFirst();
 		return professions.map(Professions::get).orElse(null);
 	}

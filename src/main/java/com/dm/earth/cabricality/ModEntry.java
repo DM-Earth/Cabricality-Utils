@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.util;
+package com.dm.earth.cabricality;
 
 import com.dm.earth.cabricality.Cabricality;
 import net.minecraft.util.Identifier;
@@ -11,7 +11,8 @@ public enum ModEntry {
 	IV("indrev"),
 	FD("farmersdelight"),
 	AP("architects_palette"),
-	TC("tconstruct");
+	TC("tconstruct"),
+	MUL("malum");
 
 	final String modId;
 
