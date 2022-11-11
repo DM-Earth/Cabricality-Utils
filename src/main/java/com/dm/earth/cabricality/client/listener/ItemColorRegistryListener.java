@@ -20,7 +20,8 @@ public class ItemColorRegistryListener {
 			if (tintIndex > 0) {
 				Item item = itemStack.getItem();
 				if (item instanceof TradeCardItem card) return TradingEntryRegistry.fromItem(card).getTint();
-				if (item instanceof ProfessionCardItem card) return Objects.requireNonNull(ProfessionUtil.fromItem(card), "The profession can't be null!").tint();
+				if (item instanceof ProfessionCardItem card)
+					return Objects.requireNonNull(ProfessionUtil.fromItem(card), "The profession can't be null!").tint();
 			}
 			return -1;
 		}, getCards());

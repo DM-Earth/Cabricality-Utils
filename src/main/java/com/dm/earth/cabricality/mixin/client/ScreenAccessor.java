@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.mixin;
+package com.dm.earth.cabricality.mixin.client;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;

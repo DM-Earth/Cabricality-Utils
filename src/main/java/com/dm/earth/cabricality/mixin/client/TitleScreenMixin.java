@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.mixin;
+package com.dm.earth.cabricality.mixin.client;
 
 import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.util.ModChecker;

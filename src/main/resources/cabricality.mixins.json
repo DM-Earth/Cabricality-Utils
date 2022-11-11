@@ -13,11 +13,11 @@
     "WrenchItemMixin"
   ],
   "client": [
-    "MinecraftClientMixin",
-    "ScreenAccessor",
-    "SplashTextResourceSupplierMixin",
-    "TitleScreenMixin",
-    "TranslatableTextMixin"
+    "client.MinecraftClientMixin",
+    "client.ScreenAccessor",
+    "client.SplashTextResourceSupplierMixin",
+    "client.TitleScreenMixin",
+    "client.TranslatableTextMixin"
   ],
   "injectors": {
     "defaultRequire": 1
