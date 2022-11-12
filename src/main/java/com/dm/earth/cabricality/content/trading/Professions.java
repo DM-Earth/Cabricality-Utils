@@ -9,7 +9,6 @@ import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTyp
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.CoinTypes.SILVER;
 import static com.dm.earth.cabricality.content.trading.core.TradingEntry.of;
 
-//TODO: fill this out
 public enum Professions {
 	EXCHANGE(Profession.of("exchange",
 			of(SILVER.getId(), 16, GOLD, 1, 0x9fadb4),
@@ -116,7 +115,7 @@ public enum Professions {
 	HUNTING(Profession.of("hunting", 0x4f3c3e,
 			of(MC.id("phantom_membrane"), 1, SILVER, 8, 0x8e7f7a),
 			of(MC.id("rabbit_foot"), 1, SILVER, 8, 0xd7b184),
-			of(MC.id("nether_star"), 1, GOLD, 1, 0xfdfeac),
+			of(MC.id("nether_star"), 1, GOLD, 6, 0xfdfeac),
 			of(MC.id("dragon_breath"), 1, SILVER, 1, 0xaa307a),
 			of(MC.id("ghast_tear"), 1, SILVER, 4, 0xd0f1f1),
 			of(MC.id("dragon_egg"), 1, GOLD, 16, 0x2c0332)
@@ -181,6 +180,30 @@ public enum Professions {
 			of(FD.id("roast_chicken"), 4, SILVER, 1, 0xc4845b),
 			of(FD.id("stuffed_pumpkin"), 4, SILVER, 1, 0xe8b05d),
 			of(FD.id("honey_glazed_ham"), 4, SILVER, 1, 0xba6522)
+	)),
+	SMITHING(Profession.of("smithing", 0xb9b9b9,
+			of(MC.id("arrow"), 12, SILVER, 1, 0xc9c9c9),
+			// Iron
+			of(MC.id("iron_sword"), 1, SILVER, 1, 0xeeeeee),
+			of(MC.id("iron_axe"), 1, SILVER, 1, 0xeeeeee),
+			of(MC.id("iron_helmet"), 1, SILVER, 2, 0xeeeeee),
+			of(MC.id("iron_chestplate"), 1, SILVER, 4, 0xeeeeee),
+			of(MC.id("iron_leggings"), 1, SILVER, 3, 0xeeeeee),
+			of(MC.id("iron_boots"), 1, SILVER, 2, 0xeeeeee),
+			// Golden
+			of(MC.id("golden_sword"), 1, SILVER, 2, 0xece559),
+			of(MC.id("golden_axe"), 1, SILVER, 2, 0xece559),
+			of(MC.id("golden_helmet"), 1, SILVER, 4, 0xece559),
+			of(MC.id("golden_chestplate"), 1, SILVER, 8, 0xece559),
+			of(MC.id("golden_leggings"), 1, SILVER, 4, 0xece559),
+			of(MC.id("golden_boots"), 1, SILVER, 4, 0xece559),
+			// Netherite
+			of(MC.id("netherite_sword"), 1, GOLD, 1, 0x45263c),
+			of(MC.id("netherite_axe"), 1, GOLD, 1, 0x45263c),
+			of(MC.id("netherite_helmet"), 1, GOLD, 2, 0x45263c),
+			of(MC.id("netherite_chestplate"), 1, GOLD, 4, 0x45263c),
+			of(MC.id("netherite_leggings"), 1, GOLD, 3, 0x45263c),
+			of(MC.id("netherite_boots"), 1, GOLD, 2, 0x45263c)
 	));
 
 	private final Profession profession;

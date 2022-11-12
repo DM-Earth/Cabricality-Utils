@@ -34,7 +34,7 @@ public class Cabricality implements ModInitializer {
 
 	@Override
 	public void onInitialize(ModContainer mod) {
-		LOGGER.info("Cabricality is initializing!");
+		LOGGER.info("⚙️Cabricality is initializing!");
 
 		Trading.load();
 		DeployerCuttingRecipeHandler.load();
