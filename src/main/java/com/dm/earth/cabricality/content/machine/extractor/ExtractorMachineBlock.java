@@ -1,8 +1,12 @@
 package com.dm.earth.cabricality.content.machine.extractor;
 
+import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.assets.ResourcedBlock;
 import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.util.ItemStackUtil;
 import com.dm.earth.cabricality.util.TransferUtil;
+import net.devtech.arrp.generator.BlockResourceGenerator;
+import net.devtech.arrp.json.loot.JLootTable;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockRenderType;
@@ -24,7 +28,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class ExtractorMachineBlock extends BlockWithEntity {
+public class ExtractorMachineBlock extends BlockWithEntity implements ResourcedBlock {
 	public static int ticks = 0;
 
 	public ExtractorMachineBlock(Settings settings) {
@@ -62,5 +66,10 @@ public class ExtractorMachineBlock extends BlockWithEntity {
 			return ActionResult.SUCCESS;
 		}
 		return ActionResult.PASS;
+	}
+
+	@Override
+	public boolean doLootTable() {
+		return true;
 	}
 }

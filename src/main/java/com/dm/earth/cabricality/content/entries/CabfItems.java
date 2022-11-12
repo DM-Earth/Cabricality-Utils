@@ -14,6 +14,7 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 public class CabfItems {
 	public static void register() {
+		// Trading Cards
 		for (Professions professionEntry : Professions.values()) {
 			Profession profession = professionEntry.get();
 			registerItemModeled("profession_card_" + profession.hashString(), new ProfessionCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("item/card/profession_card").toString()));
@@ -21,6 +22,7 @@ public class CabfItems {
 				registerItemModeled("trade_card_" + entry.hashString(), new TradeCardItem(Properties.CARD), ItemModelGenerator.parented(Cabricality.id("item/card/trade_card").toString()));
 		}
 
+		// Coins
 		for (TradingEntry.CoinTypes coinType : TradingEntry.CoinTypes.values())
 			registerItemModeled(coinType.getId().getPath(), new Item(Properties.DEFAULT.maxCount(16)), ItemModelGenerator.generated("item/coin", coinType.getId().getPath()));
 	}
@@ -38,5 +40,6 @@ public class CabfItems {
 		public static final Item.Settings DEFAULT = new QuiltItemSettings().group(Cabricality.MAIN_GROUP);
 		public static final Item.Settings DEFAULT_SINGLE = DEFAULT.maxCount(1);
 		public static final Item.Settings CARD = new QuiltItemSettings().maxCount(1);
+		public static final Item.Settings JAR = new QuiltItemSettings().maxCount(4);
 	}
 }

@@ -17,6 +17,7 @@ This is a Minecraft mod for [Cabricality](https://github.com/DM-Earth/Cabricalit
 
 - Extractor machines (like thermal's). It can extract resin from trees next to it. Rubber trees can make it faster.
 - Fluids for the modpack, for replacing KubeJS fluid registries.
+- A trading system reimplementation based on Create: Above and Beyond.
 
 ## Functions
 
