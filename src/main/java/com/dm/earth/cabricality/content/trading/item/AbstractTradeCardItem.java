@@ -1,6 +1,7 @@
 package com.dm.earth.cabricality.content.trading.item;
 
 import com.dm.earth.cabricality.client.CabricalityClient;
+import net.devtech.arrp.generator.ItemResourceGenerator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -14,6 +14,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.item.group.api.QuiltItemGroup;
 import org.slf4j.Logger;
@@ -46,6 +47,12 @@ public class Cabricality implements ModInitializer {
 		DataFixerListener.load();
 		UseEntityListener.load();
 
+		initClientAssets();
+		RRPCallback.AFTER_VANILLA.register(list -> list.add(SERVER_RESOURCES));
+	}
+
+	@ClientOnly
+	private static void initClientAssets() {
 		RRPCallback.AFTER_VANILLA.register(list -> list.add(CLIENT_RESOURCES));
 	}
 }

@@ -20,7 +20,7 @@ public class TradeTags {
 			for (TradingEntry entry : professionEntry.get().entries())
 				tradeCardTags.add(Cabricality.id("trade_card_" + entry.hashString()));
 		}
-		Cabricality.SERVER_RESOURCES.addTag(TRADE_CARDS.id(), tradeCardTags);
-		Cabricality.SERVER_RESOURCES.addTag(PROFESSION_CARDS.id(), professionCardTags);
+		Cabricality.SERVER_RESOURCES.addTag(Cabricality.id("items/" + TRADE_CARDS.id().getPath()), tradeCardTags);
+		Cabricality.SERVER_RESOURCES.addTag(Cabricality.id("items/" + PROFESSION_CARDS.id().getPath()), professionCardTags);
 	}
 }
