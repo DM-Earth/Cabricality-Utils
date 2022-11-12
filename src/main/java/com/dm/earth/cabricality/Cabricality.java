@@ -4,7 +4,7 @@ import com.dm.earth.cabricality.content.entries.CabfBlockEntityTypes;
 import com.dm.earth.cabricality.content.entries.CabfBlocks;
 import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.content.entries.CabfItems;
-import com.dm.earth.cabricality.content.trading.recipe.Trading;
+import com.dm.earth.cabricality.content.trading.data.recipe.Trading;
 import com.dm.earth.cabricality.listener.DataFixerListener;
 import com.dm.earth.cabricality.listener.DeployerCuttingRecipeHandler;
 import com.dm.earth.cabricality.listener.UseEntityListener;
@@ -24,6 +24,7 @@ public class Cabricality implements ModInitializer {
 	public static final String ID = "cabricality";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 	public static final RuntimeResourcePack CLIENT_RESOURCES = RuntimeResourcePack.create(id("client_resources"));
+	public static final RuntimeResourcePack SERVER_RESOURCES = RuntimeResourcePack.create(id("server_resources"));
 	public static ItemGroup MAIN_GROUP = QuiltItemGroup.createWithIcon(Cabricality.id("main_group"), () -> Registry.ITEM.get(Cabricality.id("andesite_machine")).getDefaultStack());
 
 	public static Identifier id(String id) {

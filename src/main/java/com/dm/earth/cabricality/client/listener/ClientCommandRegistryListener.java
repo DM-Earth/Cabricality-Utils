@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.listener;
+package com.dm.earth.cabricality.client.listener;
 
 import com.dm.earth.cabricality.content.trading.quest.command.BumpQuestCommand;
 import com.mojang.brigadier.CommandDispatcher;

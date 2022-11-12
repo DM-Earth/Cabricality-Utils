@@ -1,12 +1,12 @@
-package com.dm.earth.cabricality.content.trading.recipe;
+package com.dm.earth.cabricality.content.trading.data.recipe;
 
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
-import com.dm.earth.cabricality.content.trading.recipe.gen.JTradingRecipeGenerator;
+import com.dm.earth.cabricality.content.trading.data.recipe.gen.JTradingRecipeGenerator;
+import com.dm.earth.cabricality.content.trading.data.tag.TradeTags;
 import com.dm.earth.cabricality.util.CabfDebugger;
-import me.steven.indrev.recipes.machines.InfuserRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -37,7 +37,7 @@ public class Trading {
 
 	private static void removeRecipes(RecipeLoadingEvents.RemoveRecipesCallback.RecipeHandler handler) {
 		CabfDebugger.debug("Removing infuse recipes!");
-		handler.removeIf(p -> (!p.getId().getNamespace().equals("cabricality")) && p instanceof InfuserRecipe);
+		handler.removeIf(Registry.RECIPE_TYPE.get(new Identifier("indrev", "infuse")), p -> !p.getId().getNamespace().equals("cabricality"));
 	}
 
 	private static ShapelessRecipe genDupeRecipe(Item item, Identifier id) {
@@ -50,5 +50,6 @@ public class Trading {
 		Professions.load();
 		RecipeManagerHelper.addRecipes(Trading::addRecipes);
 		RecipeManagerHelper.removeRecipes(Trading::removeRecipes);
+		TradeTags.load();
 	}
 }

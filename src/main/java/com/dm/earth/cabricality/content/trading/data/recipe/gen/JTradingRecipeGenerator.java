@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.content.trading.recipe.gen;
+package com.dm.earth.cabricality.content.trading.data.recipe.gen;
 
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;

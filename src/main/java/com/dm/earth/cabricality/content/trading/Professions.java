@@ -145,7 +145,7 @@ public enum Professions {
 			of(FD.id("honey_glazed_ham_block"), 2, SILVER, 1, 0xdf6868),
 			of(FD.id("shepherds_pie_block"), 2, SILVER, 1, 0xeacd81),
 			of(FD.id("sweet_berry_cookie"), 6, SILVER, 1, 0x9a0700),
-			of(FD.id("honey_berry_cookie"), 6, SILVER, 1, 0xd9a514),
+			of(FD.id("honey_cookie"), 6, SILVER, 1, 0xd9a514),
 			of(FD.id("hot_cocoa"), 4, SILVER, 1, 0x855037),
 			of(FD.id("apple_cider"), 4, SILVER, 1, 0xb98142),
 			of(FD.id("melon_juice"), 4, SILVER, 1, 0xa33026),
