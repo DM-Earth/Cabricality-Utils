@@ -1,8 +1,8 @@
 package com.dm.earth.cabricality.content.entries;
 
 import com.dm.earth.cabricality.Cabricality;
-import com.dm.earth.cabricality.assets.gen.fluid.FluidBlockStatesGenerator;
-import com.dm.earth.cabricality.assets.gen.fluid.FluidModelGenerator;
+import com.dm.earth.cabricality.resource.assets.gen.fluid.FluidBlockStatesGenerator;
+import com.dm.earth.cabricality.resource.assets.gen.fluid.FluidModelGenerator;
 import com.dm.earth.cabricality.content.fluids.MoltenMetalFluid;
 import com.dm.earth.cabricality.content.fluids.NumberFluid;
 import com.dm.earth.cabricality.content.fluids.PoweredWater;

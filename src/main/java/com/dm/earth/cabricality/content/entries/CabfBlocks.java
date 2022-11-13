@@ -1,11 +1,11 @@
 package com.dm.earth.cabricality.content.entries;
 
 import com.dm.earth.cabricality.Cabricality;
-import com.dm.earth.cabricality.assets.ResourcedBlock;
-import com.dm.earth.cabricality.content.alchemist.substrates.Reagents;
-import com.dm.earth.cabricality.content.alchemist.substrates.block.BlankJarBlock;
-import com.dm.earth.cabricality.content.alchemist.substrates.block.ReagentJarBlock;
-import com.dm.earth.cabricality.content.alchemist.substrates.core.Reagent;
+import com.dm.earth.cabricality.resource.ResourcedBlock;
+import com.dm.earth.cabricality.content.alchemist.Reagents;
+import com.dm.earth.cabricality.content.alchemist.block.JarBlock;
+import com.dm.earth.cabricality.content.alchemist.block.ReagentJarBlock;
+import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
 import com.dm.earth.cabricality.content.machine.extractor.ExtractorMachineBlock;
 import com.dm.earth.cabricality.core.SettingableBlockItem;
 import net.minecraft.block.*;
@@ -18,7 +18,7 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 public class CabfBlocks {
 	public static ExtractorMachineBlock EXTRACTOR = new ExtractorMachineBlock(QuiltBlockSettings.of(Material.METAL, MapColor.BROWN));
-	public static BlankJarBlock JAR = new BlankJarBlock(QuiltBlockSettings.of(Material.METAL, MapColor.SPRUCE_BROWN));
+	public static JarBlock JAR = new JarBlock(QuiltBlockSettings.of(Material.METAL, MapColor.SPRUCE_BROWN));
 
 	public static void register() {
 		registerBlock("extractor_machine", EXTRACTOR);

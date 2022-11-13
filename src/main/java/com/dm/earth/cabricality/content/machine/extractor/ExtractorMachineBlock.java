@@ -1,12 +1,9 @@
 package com.dm.earth.cabricality.content.machine.extractor;
 
-import com.dm.earth.cabricality.Cabricality;
-import com.dm.earth.cabricality.assets.ResourcedBlock;
+import com.dm.earth.cabricality.resource.ResourcedBlock;
 import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.util.ItemStackUtil;
 import com.dm.earth.cabricality.util.TransferUtil;
-import net.devtech.arrp.generator.BlockResourceGenerator;
-import net.devtech.arrp.json.loot.JLootTable;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockRenderType;

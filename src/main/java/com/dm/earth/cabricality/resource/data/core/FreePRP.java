@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.recipe.core;
+package com.dm.earth.cabricality.resource.data.core;
 
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.content.contraptions.processing.ProcessingOutput;

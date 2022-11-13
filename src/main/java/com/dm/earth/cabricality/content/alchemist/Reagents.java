@@ -1,9 +1,9 @@
-package com.dm.earth.cabricality.content.alchemist.substrates;
+package com.dm.earth.cabricality.content.alchemist;
 
-import com.dm.earth.cabricality.content.alchemist.substrates.block.CatalystJarBlock;
-import com.dm.earth.cabricality.content.alchemist.substrates.block.ReagentJarBlock;
-import com.dm.earth.cabricality.content.alchemist.substrates.core.Catalyst;
-import com.dm.earth.cabricality.content.alchemist.substrates.core.Reagent;
+import com.dm.earth.cabricality.content.alchemist.block.CatalystJarBlock;
+import com.dm.earth.cabricality.content.alchemist.block.ReagentJarBlock;
+import com.dm.earth.cabricality.content.alchemist.substrate.Catalyst;
+import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.dm.earth.cabricality.ModEntry.MC;
-import static com.dm.earth.cabricality.content.alchemist.substrates.core.Reagent.of;
+import static com.dm.earth.cabricality.content.alchemist.substrate.Reagent.of;
 
 //TODO: fill this out
 public enum Reagents {

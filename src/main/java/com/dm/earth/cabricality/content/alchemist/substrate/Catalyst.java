@@ -1,9 +1,9 @@
-package com.dm.earth.cabricality.content.alchemist.substrates.core;
+package com.dm.earth.cabricality.content.alchemist.substrate;
 
 import com.dm.earth.cabricality.Cabricality;
 import net.minecraft.util.Identifier;
 
-public class Catalyst extends AbstractSubstrate {
+public class Catalyst extends Substrate {
 	private Catalyst(Identifier id, int tint) {
 		super(id, tint);
 	}

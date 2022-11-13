@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.assets.gen.fluid;
+package com.dm.earth.cabricality.resource.assets.gen.fluid;
 
 import com.dm.earth.cabricality.Cabricality;
 import net.devtech.arrp.json.models.JModel;

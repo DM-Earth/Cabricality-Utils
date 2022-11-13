@@ -1,12 +1,14 @@
 package com.dm.earth.cabricality.client.listener;
 
-import com.dm.earth.cabricality.content.alchemist.substrates.block.AbstractJarBlock;
+import com.dm.earth.cabricality.content.alchemist.block.SubstrateJarBlock;
 import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
 import com.dm.earth.cabricality.content.trading.item.AbstractTradeCardItem;
 import com.dm.earth.cabricality.content.trading.item.ProfessionCardItem;
 import com.dm.earth.cabricality.content.trading.item.TradeCardItem;
 import com.dm.earth.cabricality.content.trading.util.ProfessionUtil;
+
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -35,7 +37,7 @@ public class ColorRegistryListener {
 	}
 
 	private static int getBlockTint(Block block, int tintIndex) {
-		if (block instanceof AbstractJarBlock jar && (tintIndex == 1 || tintIndex == 0) && jar.getSubstrate() != null)
+		if (block instanceof SubstrateJarBlock jar && (tintIndex == 1 || tintIndex == 0) && jar.getSubstrate() != null)
 			return jar.getSubstrate().getTint();
 		return -1;
 	}
@@ -55,7 +57,7 @@ public class ColorRegistryListener {
 		ArrayList<Block> list = new ArrayList<>();
 		for (Map.Entry<RegistryKey<Block>, Block> set : Registry.BLOCK.getEntries()) {
 			Block block = set.getValue();
-			if (block instanceof AbstractJarBlock) list.add(block);
+			if (block instanceof SubstrateJarBlock) list.add(block);
 		}
 		return list.toArray(new Block[0]);
 	}

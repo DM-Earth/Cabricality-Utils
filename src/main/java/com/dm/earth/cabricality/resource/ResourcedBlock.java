@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.assets;
+package com.dm.earth.cabricality.resource;
 
 import net.devtech.arrp.generator.BlockResourceGenerator;
 

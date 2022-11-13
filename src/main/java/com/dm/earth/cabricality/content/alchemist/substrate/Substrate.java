@@ -1,15 +1,15 @@
-package com.dm.earth.cabricality.content.alchemist.substrates.core;
+package com.dm.earth.cabricality.content.alchemist.substrate;
 
 import com.dm.earth.cabricality.core.IHashStringable;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
-public abstract class AbstractSubstrate implements IHashStringable {
+public abstract class Substrate implements IHashStringable {
 	private final Identifier id;
 	private final int tint;
 
-	public AbstractSubstrate(Identifier id, int tint) {
+	public Substrate(Identifier id, int tint) {
 		this.id = id;
 		this.tint = tint;
 	}

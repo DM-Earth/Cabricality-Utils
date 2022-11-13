@@ -1,12 +1,17 @@
-package com.dm.earth.cabricality.content.alchemist.substrates.core;
+package com.dm.earth.cabricality.content.alchemist.substrate;
 
 import com.dm.earth.cabricality.Cabricality;
-import com.dm.earth.cabricality.content.entries.CabfBlocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.NotNull;
 
-public class Reagent extends AbstractSubstrate {
+public class Reagent extends Substrate {
+	private final Identifier item;
+
 	private Reagent(Identifier id, Identifier item, int tint) {
 		super(id, tint);
+		this.item = item;
 	}
 
 	public static Reagent of(String id, Identifier item, int tint) {
@@ -21,5 +26,14 @@ public class Reagent extends AbstractSubstrate {
 	@Override
 	public boolean consumeSubstrate() {
 		return true;
+	}
+
+	@NotNull
+	public Identifier getItemId() {
+		return this.item;
+	}
+
+	public Item getItem() {
+		return Registry.ITEM.get(this.getItemId());
 	}
 }

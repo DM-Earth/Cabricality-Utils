@@ -1,7 +1,7 @@
 package com.dm.earth.cabricality.content.entries;
 
 import com.dm.earth.cabricality.Cabricality;
-import com.dm.earth.cabricality.assets.gen.item.ItemModelGenerator;
+import com.dm.earth.cabricality.resource.assets.gen.item.ItemModelGenerator;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;

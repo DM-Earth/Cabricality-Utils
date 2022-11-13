@@ -1,4 +1,4 @@
-package com.dm.earth.cabricality.assets.gen.item;
+package com.dm.earth.cabricality.resource.assets.gen.item;
 
 import com.dm.earth.cabricality.Cabricality;
 import net.devtech.arrp.json.models.JModel;

@@ -3,10 +3,12 @@ package com.dm.earth.cabricality.client.rei;
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.util.CabfDebugger;
+
+import net.minecraft.text.TranslatableText;
+
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.entry.CollapsibleEntryRegistry;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.text.TranslatableText;
 
 import static com.dm.earth.cabricality.content.trading.data.tag.TradeTags.PROFESSION_CARDS;
 import static com.dm.earth.cabricality.content.trading.data.tag.TradeTags.TRADE_CARDS;
