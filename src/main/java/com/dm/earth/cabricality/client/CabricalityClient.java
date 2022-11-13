@@ -1,6 +1,6 @@
 package com.dm.earth.cabricality.client;
 
-import com.dm.earth.cabricality.client.listener.ItemColorRegistryListener;
+import com.dm.earth.cabricality.client.listener.ColorRegistryListener;
 import com.dm.earth.cabricality.content.trading.util.ProfessionDebugHelper;
 import com.dm.earth.cabricality.util.ModChecker;
 import org.quiltmc.loader.api.ModContainer;
@@ -18,7 +18,7 @@ public class CabricalityClient implements ClientModInitializer {
 	public void onInitializeClient(ModContainer mod) {
 		ModChecker.check();
 		FluidRendererRegistry.renderFluidInit();
-		ItemColorRegistryListener.load();
+		ColorRegistryListener.load();
 		ProfessionDebugHelper.load();
 	}
 }

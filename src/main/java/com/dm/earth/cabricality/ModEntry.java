@@ -1,6 +1,5 @@
 package com.dm.earth.cabricality;
 
-import com.dm.earth.cabricality.Cabricality;
 import net.minecraft.util.Identifier;
 
 public enum ModEntry {

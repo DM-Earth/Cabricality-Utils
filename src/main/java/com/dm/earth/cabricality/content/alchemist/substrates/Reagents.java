@@ -17,9 +17,9 @@ import static com.dm.earth.cabricality.content.alchemist.substrates.core.Reagent
 //TODO: fill this out
 public enum Reagents {
 	IGNEOUS("igneous", 0x6c8191,
-			of(MC.id("andesite"), 0x868887),
-			of(MC.id("diorite"), 0xe6e2e6),
-			of(MC.id("granite"), 0x9e6b5a)
+			of("andesite", MC.id("andesite"), 0x868887),
+			of("diorite", MC.id("diorite"), 0xe6e2e6),
+			of("granite", MC.id("granite"), 0x9e6b5a)
 	);
 
 	private final String name;

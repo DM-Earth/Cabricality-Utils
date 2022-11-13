@@ -27,6 +27,9 @@ public class VoxelShapeUtil {
 			case EAST -> {
 				returnBox = simpleBox(16 - z1, y1, x1, 16 - z2, y2, x2);
 			}
+			case DOWN -> throw new UnsupportedOperationException("Unimplemented case: " + direction);
+			case UP -> throw new UnsupportedOperationException("Unimplemented case: " + direction);
+			default -> throw new IllegalArgumentException("Unexpected value: " + direction);
 		}
 		return returnBox;
 	}

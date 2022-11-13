@@ -1,18 +1,5 @@
 package com.dm.earth.cabricality;
 
-import com.dm.earth.cabricality.content.entries.CabfBlockEntityTypes;
-import com.dm.earth.cabricality.content.entries.CabfBlocks;
-import com.dm.earth.cabricality.content.entries.CabfFluids;
-import com.dm.earth.cabricality.content.entries.CabfItems;
-import com.dm.earth.cabricality.content.trading.data.recipe.Trading;
-import com.dm.earth.cabricality.listener.DataFixerListener;
-import com.dm.earth.cabricality.listener.DeployerCuttingRecipeHandler;
-import com.dm.earth.cabricality.listener.UseEntityListener;
-import net.devtech.arrp.api.RRPCallback;
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.quiltmc.loader.api.ModContainer;
@@ -21,6 +8,21 @@ import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.item.group.api.QuiltItemGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.dm.earth.cabricality.content.entries.CabfBlockEntityTypes;
+import com.dm.earth.cabricality.content.entries.CabfBlocks;
+import com.dm.earth.cabricality.content.entries.CabfFluids;
+import com.dm.earth.cabricality.content.entries.CabfItems;
+import com.dm.earth.cabricality.content.trading.data.recipe.Trading;
+import com.dm.earth.cabricality.listener.DataFixerListener;
+import com.dm.earth.cabricality.listener.DeployerCuttingRecipeHandler;
+import com.dm.earth.cabricality.listener.UseEntityListener;
+
+import net.devtech.arrp.api.RRPCallback;
+import net.devtech.arrp.api.RuntimeResourcePack;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class Cabricality implements ModInitializer {
 
@@ -37,7 +39,7 @@ public class Cabricality implements ModInitializer {
 	}
 
 	@Override
-	public void onInitialize(ModContainer mod) {
+    public void onInitialize(ModContainer mod) {
 		LOGGER.info("⚙️Cabricality is initializing!");
 
 		Trading.load();

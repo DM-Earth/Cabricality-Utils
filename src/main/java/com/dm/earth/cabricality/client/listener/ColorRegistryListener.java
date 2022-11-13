@@ -1,38 +1,62 @@
 package com.dm.earth.cabricality.client.listener;
 
+import com.dm.earth.cabricality.content.alchemist.substrates.block.AbstractJarBlock;
 import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
 import com.dm.earth.cabricality.content.trading.item.AbstractTradeCardItem;
 import com.dm.earth.cabricality.content.trading.item.ProfessionCardItem;
 import com.dm.earth.cabricality.content.trading.item.TradeCardItem;
 import com.dm.earth.cabricality.content.trading.util.ProfessionUtil;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
-public class ItemColorRegistryListener {
+public class ColorRegistryListener {
 	public static void load() {
 		ColorProviderRegistry.ITEM.register((itemStack, tintIndex) -> {
-			if (tintIndex > 0) {
-				Item item = itemStack.getItem();
+			Item item = itemStack.getItem();
+			if (item instanceof BlockItem blockItem) return getBlockTint(blockItem.getBlock(), tintIndex);
+			if (item instanceof AbstractTradeCardItem && tintIndex > 0) {
 				if (item instanceof TradeCardItem card) return TradingEntryRegistry.fromItem(card).getTint();
 				if (item instanceof ProfessionCardItem card)
 					return Objects.requireNonNull(ProfessionUtil.fromItem(card), "The profession can't be null!").tint();
 			}
 			return -1;
-		}, getCards());
+		}, getItems());
+
+		ColorProviderRegistry.BLOCK.register((blockState, blockRenderView, blockPos, tintIndex) -> getBlockTint(blockState.getBlock(), tintIndex), getBlocks());
 	}
 
-	private static Item[] getCards() {
+	private static int getBlockTint(Block block, int tintIndex) {
+		if (block instanceof AbstractJarBlock jar && (tintIndex == 1 || tintIndex == 0) && jar.getSubstrate() != null)
+			return jar.getSubstrate().getTint();
+		return -1;
+	}
+
+	private static Item[] getItems() {
 		ArrayList<Item> list = new ArrayList<>();
 		for (Map.Entry<RegistryKey<Item>, Item> set : Registry.ITEM.getEntries()) {
 			Item item = set.getValue();
 			if (item instanceof AbstractTradeCardItem) list.add(item);
+			if (item instanceof BlockItem blockItem && Arrays.stream(getBlocks()).anyMatch(block -> blockItem.getBlock() == block))
+				list.add(item);
 		}
 		return list.toArray(new Item[0]);
+	}
+
+	private static Block[] getBlocks() {
+		ArrayList<Block> list = new ArrayList<>();
+		for (Map.Entry<RegistryKey<Block>, Block> set : Registry.BLOCK.getEntries()) {
+			Block block = set.getValue();
+			if (block instanceof AbstractJarBlock) list.add(block);
+		}
+		return list.toArray(new Block[0]);
 	}
 }
