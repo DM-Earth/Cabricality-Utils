@@ -1,16 +1,19 @@
 package com.dm.earth.cabricality.content.entries;
 
 import com.dm.earth.cabricality.Cabricality;
-import com.dm.earth.cabricality.resource.assets.gen.item.ItemModelGenerator;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
 import com.dm.earth.cabricality.content.trading.item.ProfessionCardItem;
 import com.dm.earth.cabricality.content.trading.item.TradeCardItem;
-import net.devtech.arrp.json.models.JModel;
+import com.dm.earth.cabricality.resource.assets.gen.item.ItemModelGenerator;
+
+import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
+
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
-import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
+
+import net.devtech.arrp.json.models.JModel;
 
 public class CabfItems {
 	public static void register() {
@@ -40,6 +43,6 @@ public class CabfItems {
 		public static final Item.Settings DEFAULT = new QuiltItemSettings().group(Cabricality.MAIN_GROUP);
 		public static final Item.Settings DEFAULT_SINGLE = DEFAULT.maxCount(1);
 		public static final Item.Settings CARD = new QuiltItemSettings().maxCount(1);
-		public static final Item.Settings JAR = new QuiltItemSettings().maxCount(4);
+		public static final Item.Settings JAR = new QuiltItemSettings().group(Cabricality.SUBSTRATES_GROUP).maxCount(4);
 	}
 }

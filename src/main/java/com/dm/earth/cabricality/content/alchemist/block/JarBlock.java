@@ -3,16 +3,14 @@ package com.dm.earth.cabricality.content.alchemist.block;
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.Reagents;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
-import com.dm.earth.cabricality.content.entries.CabfItems;
-import com.dm.earth.cabricality.core.SettingableBlockItem;
 import com.dm.earth.cabricality.resource.ResourcedBlock;
 import com.dm.earth.cabricality.util.VoxelShapeUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -25,13 +23,14 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 import net.devtech.arrp.json.blockstate.JBlockStates;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class JarBlock extends Block implements SettingableBlockItem, ResourcedBlock {
+public class JarBlock extends Block implements ResourcedBlock {
 	public JarBlock(Settings settings) {
 		super(settings);
 	}
@@ -47,13 +46,13 @@ public class JarBlock extends Block implements SettingableBlockItem, ResourcedBl
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return world.getBlockState(pos.offset(Direction.DOWN)).isSideSolidFullSquare(world, pos.offset(Direction.DOWN), Direction.UP);
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+		return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
 	}
 
 	@Override
-	public Item.Settings getSettings() {
-		return CabfItems.Properties.JAR;
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+		return world.getBlockState(pos.offset(Direction.DOWN)).isSideSolidFullSquare(world, pos.offset(Direction.DOWN), Direction.UP);
 	}
 
 	@Override

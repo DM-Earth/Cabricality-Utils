@@ -1,5 +1,6 @@
 package com.dm.earth.cabricality.client.listener;
 
+import com.dm.earth.cabricality.content.alchemist.Reagents;
 import com.dm.earth.cabricality.content.alchemist.block.SubstrateJarBlock;
 import com.dm.earth.cabricality.content.trading.core.TradingEntryRegistry;
 import com.dm.earth.cabricality.content.trading.item.AbstractTradeCardItem;
@@ -37,7 +38,7 @@ public class ColorRegistryListener {
 	}
 
 	private static int getBlockTint(Block block, int tintIndex) {
-		if (block instanceof SubstrateJarBlock jar && (tintIndex == 1 || tintIndex == 0) && jar.getSubstrate() != null)
+		if (block instanceof SubstrateJarBlock jar && (tintIndex == 1 || tintIndex == 0 || tintIndex < 0) && jar.getSubstrate() != null)
 			return jar.getSubstrate().getTint();
 		return -1;
 	}
@@ -55,10 +56,7 @@ public class ColorRegistryListener {
 
 	private static Block[] getBlocks() {
 		ArrayList<Block> list = new ArrayList<>();
-		for (Map.Entry<RegistryKey<Block>, Block> set : Registry.BLOCK.getEntries()) {
-			Block block = set.getValue();
-			if (block instanceof SubstrateJarBlock) list.add(block);
-		}
+		list.addAll(Reagents.getJarBlocks(false));
 		return list.toArray(new Block[0]);
 	}
 }

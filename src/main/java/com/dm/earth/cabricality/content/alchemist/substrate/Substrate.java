@@ -38,4 +38,9 @@ public abstract class Substrate implements IHashStringable {
 	public int hashCode() {
 		return this.getId().hashCode();
 	}
+
+	@Override
+	public String toString() {
+		return this.getType() + ":" + this.hashString();
+	}
 }

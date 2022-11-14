@@ -2,12 +2,17 @@ package com.dm.earth.cabricality.content.alchemist.block;
 
 import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.content.alchemist.substrate.Substrate;
+import com.dm.earth.cabricality.content.entries.CabfItems;
+import com.dm.earth.cabricality.core.SettingableBlockItem;
+
+import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class SubstrateJarBlock extends JarBlock {
+public abstract class SubstrateJarBlock extends JarBlock implements SettingableBlockItem {
 	public SubstrateJarBlock(Settings settings) {
 		super(settings);
 	}
@@ -31,7 +36,11 @@ public abstract class SubstrateJarBlock extends JarBlock {
 	@NotNull
 	public abstract Identifier getDefaultBlockId();
 
-
 	@Override
 	public abstract Identifier getBlockModelId();
+
+	@Override
+	public Item.Settings getSettings() {
+		return CabfItems.Properties.JAR;
+	}
 }

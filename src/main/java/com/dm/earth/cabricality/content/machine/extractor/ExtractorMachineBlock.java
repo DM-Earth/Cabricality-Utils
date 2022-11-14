@@ -69,4 +69,9 @@ public class ExtractorMachineBlock extends BlockWithEntity implements ResourcedB
 	public boolean doLootTable() {
 		return true;
 	}
+
+	@Override
+	public boolean doItemModel() {
+		return false;
+	}
 }
