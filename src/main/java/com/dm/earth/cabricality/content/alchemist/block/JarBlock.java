@@ -1,22 +1,33 @@
 package com.dm.earth.cabricality.content.alchemist.block;
 
 import com.dm.earth.cabricality.Cabricality;
-import com.dm.earth.cabricality.resource.ResourcedBlock;
+import com.dm.earth.cabricality.content.alchemist.Reagents;
+import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
 import com.dm.earth.cabricality.content.entries.CabfItems;
 import com.dm.earth.cabricality.core.SettingableBlockItem;
+import com.dm.earth.cabricality.resource.ResourcedBlock;
 import com.dm.earth.cabricality.util.VoxelShapeUtil;
-import net.devtech.arrp.json.blockstate.JBlockStates;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+
+import net.devtech.arrp.json.blockstate.JBlockStates;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
@@ -68,5 +79,27 @@ public class JarBlock extends Block implements SettingableBlockItem, ResourcedBl
 	@Override
 	public Identifier getBlockModelId() {
 		return Cabricality.id("block/jar/jar");
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		ItemStack stack = player.getStackInHand(hand);
+		if (player.isSneaking() || player.getStackInHand(hand).isEmpty() || world.isClient()) return ActionResult.PASS;
+		Reagent reagent = null;
+		for (Reagents reagents : Reagents.values()) {
+			boolean breaked = false;
+			for (Reagent reagentT : reagents.getReagents())
+				if (reagentT.getItem() == stack.getItem()) {
+					reagent = reagentT;
+					breaked = true;
+					break;
+				}
+			if (breaked) break;
+		}
+		if (reagent == null) return ActionResult.PASS;
+		stack.decrement(1);
+		player.setStackInHand(hand, stack);
+		world.setBlockState(pos, Registry.BLOCK.get(Cabricality.id("reagent_jar_" + reagent.hashString())).getDefaultState());
+		return ActionResult.SUCCESS;
 	}
 }

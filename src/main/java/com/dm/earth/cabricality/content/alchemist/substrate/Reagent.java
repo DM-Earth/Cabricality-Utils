@@ -6,6 +6,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class Reagent extends Substrate {
 	private final Identifier item;
 
@@ -24,7 +26,7 @@ public class Reagent extends Substrate {
 	}
 
 	@Override
-	public boolean consumeSubstrate() {
+	public boolean consume() {
 		return true;
 	}
 
@@ -34,6 +36,6 @@ public class Reagent extends Substrate {
 	}
 
 	public Item getItem() {
-		return Registry.ITEM.get(this.getItemId());
+		return Objects.requireNonNull(Registry.ITEM.get(this.getItemId()));
 	}
 }

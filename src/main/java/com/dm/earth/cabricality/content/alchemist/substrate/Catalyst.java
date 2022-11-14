@@ -18,7 +18,7 @@ public class Catalyst extends Substrate {
 	}
 
 	@Override
-	public boolean consumeSubstrate() {
+	public boolean consume() {
 		return false;
 	}
 }

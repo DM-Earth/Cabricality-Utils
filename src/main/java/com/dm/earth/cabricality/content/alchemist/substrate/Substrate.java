@@ -32,7 +32,7 @@ public abstract class Substrate implements IHashStringable {
 
 	public abstract String getType();
 
-	public abstract boolean consumeSubstrate();
+	public abstract boolean consume();
 
 	@Override
 	public int hashCode() {
