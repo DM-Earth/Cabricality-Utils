@@ -45,7 +45,7 @@ dependencies {
 	// Quilted Fabric API will automatically pull in the correct QSL version.
 	modImplementation libs.quilted.fabric.api
 
-    modImplementation "maven.modrinth:ad-astra:${project.ad_astra_version}"
+    modImplementation "maven.modrinth:ad-astra:${project.ad_astra_version}-${project.minecraft_version}"
     modImplementation "maven.modrinth:create-fabric:${project.minecraft_version}-${project.create_version}"
     modImplementation "maven.modrinth:kubejs:${project.kubejs_version}+fabric"
     modImplementation "maven.modrinth:architectury-api:${project.architectury_version}+fabric"
