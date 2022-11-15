@@ -53,6 +53,7 @@ dependencies {
 	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmers_delight_version}"
 	modImplementation "maven.modrinth:roughly-enough-items:${project.rei_version}+fabric"
 	modImplementation "maven.modrinth:led:${project.led_version}"
+	modImplementation "maven.modrinth:interference:${project.interference_version}"
 
 	modImplementation "curse.maven:industrial-revolution-391708:${project.indrev_version}"
 

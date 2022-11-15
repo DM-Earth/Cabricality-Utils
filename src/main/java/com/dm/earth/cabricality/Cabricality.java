@@ -1,5 +1,6 @@
 package com.dm.earth.cabricality;
 
+import com.dm.earth.cabricality.content.alchemist.Alchemist;
 import com.dm.earth.cabricality.content.entries.CabfBlockEntityTypes;
 import com.dm.earth.cabricality.content.entries.CabfBlocks;
 import com.dm.earth.cabricality.content.entries.CabfFluids;
@@ -44,6 +45,7 @@ public class Cabricality implements ModInitializer {
 		LOGGER.info("Cabricality is initializing! 📦");
 
 		Trading.load();
+		Alchemist.load();
 		DeployerCuttingRecipeHandler.load();
 
 		CabfItems.register();

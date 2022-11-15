@@ -116,4 +116,7 @@ public enum Reagents {
 		}
 		return list;
 	}
+
+	public static void load() {
+	}
 }
