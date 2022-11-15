@@ -16,6 +16,11 @@ import net.minecraft.util.registry.Registry;
 import net.devtech.arrp.json.models.JModel;
 
 public class CabfItems {
+	public static final Item BASALZ_SHARD = registerItemModeled("basalz_shard", new Item(Properties.DEFAULT), ItemModelGenerator.generated("basalz_shard"));
+	public static final Item BASALZ_POWDER = registerItemModeled("basalz_powder", new Item(Properties.DEFAULT), ItemModelGenerator.generated("basalz_powder"));
+	public static final Item BLIZZ_CUBE = registerItemModeled("blizz_cube", new Item(Properties.DEFAULT), ItemModelGenerator.generated("blizz_cube"));
+	public static final Item BLIZZ_POWDER = registerItemModeled("blizz_powder", new Item(Properties.DEFAULT), ItemModelGenerator.generated("blizz_powder"));
+
 	public static void register() {
 		// Trading Cards
 		for (Professions professionEntry : Professions.values()) {
@@ -30,13 +35,13 @@ public class CabfItems {
 			registerItemModeled(coinType.getId().getPath(), new Item(Properties.DEFAULT.maxCount(16)), ItemModelGenerator.generated("item/coin", coinType.getId().getPath()));
 	}
 
-	private static void registerItemModeled(String name, Item item, JModel model) {
+	private static Item registerItemModeled(String name, Item item, JModel model) {
 		Cabricality.CLIENT_RESOURCES.addModel(model, Cabricality.id("item/" + name));
-		registerItem(name, item);
+		return registerItem(name, item);
 	}
 
-	private static void registerItem(String name, Item item) {
-		Registry.register(Registry.ITEM, Cabricality.id(name), item);
+	private static Item registerItem(String name, Item item) {
+		return Registry.register(Registry.ITEM, Cabricality.id(name), item);
 	}
 
 	public static final class Properties {
