@@ -1,11 +1,14 @@
 package com.dm.earth.cabricality.content.alchemist.block;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.Reagents;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
 import com.dm.earth.cabricality.resource.ResourcedBlock;
 import com.dm.earth.cabricality.util.VoxelShapeUtil;
 
+import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,9 +28,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class JarBlock extends Block implements ResourcedBlock {
@@ -95,6 +95,7 @@ public class JarBlock extends Block implements ResourcedBlock {
 				}
 			if (breaked) break;
 		}
+		
 		if (reagent == null) return ActionResult.PASS;
 		stack.decrement(1);
 		player.setStackInHand(hand, stack);
