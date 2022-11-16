@@ -35,12 +35,13 @@ public enum Reagents {
 			of("granite", MC.id("granite"), 0x9e6b5a),
 			of("cobblestone", MC.id("cobblestone"), 0xa6a6a6),
 			of("basalt", MC.id("basalt"), 0x32333D),
+			of("tuff", MC.id("tuff"), 0x85837b),
 			of("limestone", CR.id("limestone"), 0xbbb6a9),
 			of("scoria", CR.id("scoria"), 0x493a34),
 			of("blunite", PMD.id("blunite"), 0x5f6874),
 			of("carbonite", PMD.id("carbonite"), 0x514e52)),
 
-	SPECIAL("chaos", 0xb200ed, false,
+	CHAOTIC("chaos", 0xb200ed, false,
 			of("silver", IV.id("silver_dust"), 0x9fadb4),
 			of("silicon", AE2.id("silicon"), 0x85837b));
 
