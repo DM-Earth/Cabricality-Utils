@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -143,18 +144,17 @@ public class Alchemist {
 	}
 
 	private static <T> @NotNull ArrayList<T> randomSelect(List<T> list, int max, long seed) {
+		Random random = new Random(seed);
+
 		ArrayList<T> processList = new ArrayList<>(list);
 		ArrayList<T> returnList = new ArrayList<>();
 		while (!(processList.size() <= 0 || returnList.size() >= max)) {
-			int index = randomIntSeeded(processList.size() - 1, seed);
+			int index = random.nextInt(processList.size());
+			if (index < 0) index *= -1;
 			returnList.add(processList.get(index));
 			processList.remove(index);
 		}
 		return returnList;
-	}
-
-	private static int randomIntSeeded(int max, long seed) {
-		return ((Double) Math.ceil(((seed * 9301 + 49297) % 233280) / 233280.0 * max)).intValue();
 	}
 
 	public static class AlchemistInformationCommand implements Command<ServerCommandSource> {

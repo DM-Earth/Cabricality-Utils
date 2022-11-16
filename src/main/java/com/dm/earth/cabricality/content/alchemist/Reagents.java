@@ -1,8 +1,10 @@
 package com.dm.earth.cabricality.content.alchemist;
 
 import static com.dm.earth.cabricality.ModEntry.AE2;
+import static com.dm.earth.cabricality.ModEntry.CR;
 import static com.dm.earth.cabricality.ModEntry.IV;
 import static com.dm.earth.cabricality.ModEntry.MC;
+import static com.dm.earth.cabricality.ModEntry.PMD;
 import static com.dm.earth.cabricality.content.alchemist.substrate.Reagent.of;
 
 import java.util.ArrayList;
@@ -30,11 +32,17 @@ public enum Reagents {
 	IGNEOUS("igneous", 0x6c8191, true,
 			of("andesite", MC.id("andesite"), 0x868887),
 			of("diorite", MC.id("diorite"), 0xe6e2e6),
-			of("granite", MC.id("granite"), 0x9e6b5a)),
+			of("granite", MC.id("granite"), 0x9e6b5a),
+			of("cobblestone", MC.id("cobblestone"), 0xa6a6a6),
+			of("basalt", MC.id("basalt"), 0x32333D),
+			of("limestone", CR.id("limestone"), 0xbbb6a9),
+			of("scoria", CR.id("scoria"), 0x493a34),
+			of("blunite", PMD.id("blunite"), 0x5f6874),
+			of("carbonite", PMD.id("carbonite"), 0x514e52)),
 
 	SPECIAL("chaos", 0xb200ed, false,
-			of("silver", IV.id("silver_dust"), 0xb200ed),
-			of("silicon", AE2.id("silicon"), 0x474449));
+			of("silver", IV.id("silver_dust"), 0x9fadb4),
+			of("silicon", AE2.id("silicon"), 0x85837b));
 
 	private final String name;
 	private final int tint;
