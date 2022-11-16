@@ -1,5 +1,18 @@
 package com.dm.earth.cabricality.content.alchemist;
 
+import static com.dm.earth.cabricality.ModEntry.AE2;
+import static com.dm.earth.cabricality.ModEntry.IV;
+import static com.dm.earth.cabricality.ModEntry.MC;
+import static com.dm.earth.cabricality.content.alchemist.substrate.Reagent.of;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.block.CatalystJarBlock;
 import com.dm.earth.cabricality.content.alchemist.block.JarBlock;
@@ -12,35 +25,29 @@ import net.minecraft.block.Block;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static com.dm.earth.cabricality.ModEntry.MC;
-import static com.dm.earth.cabricality.content.alchemist.substrate.Reagent.of;
-
 //TODO: fill this out
 public enum Reagents {
-	IGNEOUS("igneous", 0x6c8191,
+	IGNEOUS("igneous", 0x6c8191, true,
 			of("andesite", MC.id("andesite"), 0x868887),
 			of("diorite", MC.id("diorite"), 0xe6e2e6),
-			of("granite", MC.id("granite"), 0x9e6b5a)
-	);
+			of("granite", MC.id("granite"), 0x9e6b5a)),
+
+	SPECIAL("chaos", 0xb200ed, false,
+			of("silver", IV.id("silver_dust"), 0xb200ed),
+			of("silicon", AE2.id("silicon"), 0x474449));
 
 	private final String name;
 	private final int tint;
 	private final List<Reagent> entries;
 	private final Catalyst catalyst;
+	private final boolean link;
 
-	Reagents(String name, int tint, Reagent... reagents) {
+	Reagents(String name, int tint, boolean link, Reagent... reagents) {
 		this.name = name;
 		this.tint = tint;
 		this.entries = List.of(reagents);
 		this.catalyst = Catalyst.of(name, tint);
+		this.link = link;
 	}
 
 	@Nullable
@@ -55,7 +62,8 @@ public enum Reagents {
 	@Nullable
 	public static Catalyst getCatalystFromHash(String hashStr) {
 		for (Reagents reagents : values())
-			if (reagents.getCatalyst().hashString().equals(hashStr)) return reagents.getCatalyst();
+			if (reagents.getCatalyst().hashString().equals(hashStr))
+				return reagents.getCatalyst();
 		return null;
 	}
 
@@ -108,13 +116,36 @@ public enum Reagents {
 		return catalyst;
 	}
 
+	@Contract(pure = true)
+	public boolean isLinked() {
+		return link;
+	}
+
 	public static List<Block> getJarBlocks(boolean includeBlank) {
 		ArrayList<Block> list = new ArrayList<>();
 		for (Map.Entry<RegistryKey<Block>, Block> set : Registry.BLOCK.getEntries()) {
 			Block block = set.getValue();
-			if (block instanceof SubstrateJarBlock || (includeBlank && block instanceof JarBlock)) list.add(block);
+			if (block instanceof SubstrateJarBlock || (includeBlank && block instanceof JarBlock))
+				list.add(block);
 		}
 		return list;
+	}
+
+	@Nullable
+	public static Reagents get(Catalyst catalyst) {
+		for (Reagents reagents : values())
+			if (reagents.getCatalyst().equals(catalyst))
+				return reagents;
+		return null;
+	}
+
+	@Nullable
+	public static Reagents get(Reagent reagent) {
+		for (Reagents reagents : values())
+			for (Reagent reagent1 : reagents.getReagents())
+				if (reagent1.equals(reagent))
+					return reagents;
+		return null;
 	}
 
 	public static void load() {

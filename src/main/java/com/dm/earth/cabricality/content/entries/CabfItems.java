@@ -1,5 +1,7 @@
 package com.dm.earth.cabricality.content.entries;
 
+import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
@@ -8,18 +10,15 @@ import com.dm.earth.cabricality.content.trading.item.ProfessionCardItem;
 import com.dm.earth.cabricality.content.trading.item.TradeCardItem;
 import com.dm.earth.cabricality.resource.assets.gen.item.ItemModelGenerator;
 
-import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
-
+import net.devtech.arrp.json.models.JModel;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
-import net.devtech.arrp.json.models.JModel;
-
 public class CabfItems {
-	public static final Item BASALZ_SHARD = registerItemModeled("basalz_shard", new Item(Properties.DEFAULT), ItemModelGenerator.generated("basalz_shard"));
-	public static final Item BASALZ_POWDER = registerItemModeled("basalz_powder", new Item(Properties.DEFAULT), ItemModelGenerator.generated("basalz_powder"));
-	public static final Item BLIZZ_CUBE = registerItemModeled("blizz_cube", new Item(Properties.DEFAULT), ItemModelGenerator.generated("blizz_cube"));
-	public static final Item BLIZZ_POWDER = registerItemModeled("blizz_powder", new Item(Properties.DEFAULT), ItemModelGenerator.generated("blizz_powder"));
+	public static final Item BASALZ_SHARD = registerItemModeled("basalz_shard", new Item(Properties.DEFAULT), ItemModelGenerator.generated("item/basalz_shard"));
+	public static final Item BASALZ_POWDER = registerItemModeled("basalz_powder", new Item(Properties.DEFAULT), ItemModelGenerator.generated("item/basalz_powder"));
+	public static final Item BLIZZ_CUBE = registerItemModeled("blizz_cube", new Item(Properties.DEFAULT), ItemModelGenerator.generated("item/blizz_cube"));
+	public static final Item BLIZZ_POWDER = registerItemModeled("blizz_powder", new Item(Properties.DEFAULT), ItemModelGenerator.generated("item/blizz_powder"));
 
 	public static void register() {
 		// Trading Cards

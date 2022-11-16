@@ -1,5 +1,9 @@
 package com.dm.earth.cabricality.content.alchemist.block;
 
+import java.util.Objects;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.Reagents;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
@@ -15,11 +19,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
-
-@SuppressWarnings("deprecation")
 public class ReagentJarBlock extends SubstrateJarBlock {
 	public ReagentJarBlock(Settings settings) {
 		super(settings);
