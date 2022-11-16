@@ -1,6 +1,7 @@
 package com.dm.earth.cabricality.content.alchemist.substrate;
 
 import com.dm.earth.cabricality.core.IHashStringable;
+
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -41,6 +42,6 @@ public abstract class Substrate implements IHashStringable {
 
 	@Override
 	public String toString() {
-		return this.getType() + ":" + this.hashString();
+		return "[" + this.getType() + "] " + this.getId().toString();
 	}
 }

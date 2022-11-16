@@ -52,36 +52,47 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 			assert world != null;
 			if (!world.isClient()) {
 				PacketByteBuf buf = PacketByteBufs.create();
-				PlayerLookup.tracking(ExtractorMachineBlockEntity.this).forEach(player -> ServerPlayNetworking.send(player, Cabricality.id("extractor_buf"), buf));
+				PlayerLookup.tracking(ExtractorMachineBlockEntity.this)
+						.forEach(player -> ServerPlayNetworking.send(player, Cabricality.id("extractor_buf"), buf));
 			}
 		}
-	};	public static final BlockEntityType<ExtractorMachineBlockEntity> TYPE = QuiltBlockEntityTypeBuilder.create(ExtractorMachineBlockEntity::new, CabfBlocks.EXTRACTOR).build();
+	};
+	public static final BlockEntityType<ExtractorMachineBlockEntity> TYPE = QuiltBlockEntityTypeBuilder
+			.create(ExtractorMachineBlockEntity::new, CabfBlocks.EXTRACTOR).build();
 
 	public ExtractorMachineBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(TYPE, blockPos, blockState);
 	}
 
-	public static void tick(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
+	public static void tick(World world, BlockPos blockPos, BlockState blockState,
+			ExtractorMachineBlockEntity blockEntity) {
 		if (!world.isClient()) {
 			ExtractorMachineBlock.ticks++;
-			if (ExtractorMachineBlock.ticks >= 360) ExtractorMachineBlock.ticks = 0;
-			else return;
-			debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: " + blockEntity.storage.getCapacity());
+			if (ExtractorMachineBlock.ticks >= 360)
+				ExtractorMachineBlock.ticks = 0;
+			else
+				return;
+			debug("randomTick from extractor block entity at " + blockPos.toShortString() + " capacity: "
+					+ blockEntity.storage.getCapacity());
 			float f = isNextToTree(world, blockPos, blockState, blockEntity);
 			if (f > 0.0F && blockEntity.storage.amount < blockEntity.storage.getCapacity()) {
 				debug("extractor block entity: inserting to storage");
-				blockEntity.storage.insert(FluidVariant.of(CabfFluids.RESIN), (long) (f * FluidConstants.INGOT), TransferUtil.getTransaction());
+				blockEntity.storage.insert(FluidVariant.of(CabfFluids.RESIN), (long) (f * FluidConstants.INGOT),
+						TransferUtil.getTransaction());
 			}
 		}
 	}
 
-	private static float isNextToTree(World world, BlockPos blockPos, BlockState blockState, ExtractorMachineBlockEntity blockEntity) {
+	private static float isNextToTree(World world, BlockPos blockPos, BlockState blockState,
+			ExtractorMachineBlockEntity blockEntity) {
 		assert world != null;
-		for (Direction direction : Arrays.stream(Direction.values()).filter((direction -> direction != Direction.UP && direction != Direction.DOWN)).toArray(Direction[]::new)) {
+		for (Direction direction : Arrays.stream(Direction.values())
+				.filter((direction -> direction != Direction.UP && direction != Direction.DOWN))
+				.toArray(Direction[]::new)) {
 			BlockState targetState = world.getBlockState(blockPos.offset(direction));
 			if (isVecLog(targetState)) {
 				debug("extractor block entity: found log at " + blockPos.offset(direction).toShortString());
-				//check if there are enough logs
+				// check if there are enough logs
 				boolean enoughLogs = false;
 				BlockPos targetPos = blockPos.offset(direction);
 				int i = 1;
@@ -95,7 +106,8 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 					if (isVecLog(world.getBlockState(targetPos.offset(Direction.UP, i)))) {
 						i++;
 						ii++;
-					} else break;
+					} else
+						break;
 				}
 				i = 1;
 				while (true) {
@@ -105,22 +117,29 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 					if (isVecLog(world.getBlockState(targetPos.offset(Direction.DOWN, i)))) {
 						i++;
 						ii++;
-					} else break;
+					} else
+						break;
 				}
 				if (enoughLogs) {
 					debug("extractor block entity: found enough logs at " + targetPos.toShortString());
-					//check if there are leaves
+					// check if there are leaves
 					boolean enoughLeaves = true;
-					for (Direction leafDirection : Arrays.stream(Direction.values()).filter((leafDirection -> leafDirection != Direction.DOWN)).toArray(Direction[]::new)) {
-						if (!isPersistentLeaves(world, upPos, leafDirection)) enoughLeaves = false;
+					for (Direction leafDirection : Arrays.stream(Direction.values())
+							.filter((leafDirection -> leafDirection != Direction.DOWN)).toArray(Direction[]::new)) {
+						if (!isPersistentLeaves(world, upPos, leafDirection))
+							enoughLeaves = false;
 					}
 					if (enoughLeaves) {
 						debug("extractor block entity: found enough leaves at " + upPos.toShortString());
-						if (Registry.BLOCK.getId(world.getBlockState(targetPos).getBlock()).getPath().contains("rubber"))
+						if (Registry.BLOCK.getId(world.getBlockState(targetPos).getBlock()).getPath()
+								.contains("rubber"))
 							return 1.5F;
-						else return 1.0F;
-					} else debug("extractor block entity: not enough leaves at " + upPos.toShortString());
-				} else return 0.0F;
+						else
+							return 1.0F;
+					} else
+						debug("extractor block entity: not enough leaves at " + upPos.toShortString());
+				} else
+					return 0.0F;
 			}
 		}
 		return 0.0F;
@@ -128,11 +147,15 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 
 	private static boolean isPersistentLeaves(World world, BlockPos blockPos, Direction direction) {
 		BlockState blockState = world.getBlockState(blockPos.offset(direction));
-		return Registry.BLOCK.getTag(BlockTags.LEAVES).get().stream().anyMatch(blockHolder -> blockHolder.value() == blockState.getBlock()) && !blockState.get(LeavesBlock.PERSISTENT);
+		return Registry.BLOCK.getTag(BlockTags.LEAVES).get().stream().anyMatch(
+				blockHolder -> blockHolder.value() == blockState.getBlock()) && !blockState.get(LeavesBlock.PERSISTENT);
 	}
 
 	private static boolean isVecLog(BlockState blockState) {
-		return blockState.getBlock() instanceof PillarBlock block && Registry.BLOCK.getTag(BlockTags.LOGS).get().stream().anyMatch(blockHolder -> blockHolder.value() == block) && blockState.get(PillarBlock.AXIS) == Direction.Axis.Y;
+		return blockState.getBlock() instanceof PillarBlock block
+				&& Registry.BLOCK.getTag(BlockTags.LOGS).get().stream()
+						.anyMatch(blockHolder -> blockHolder.value() == block)
+				&& blockState.get(PillarBlock.AXIS) == Direction.Axis.Y;
 	}
 
 	@Override
@@ -153,6 +176,5 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 	public boolean addToGoggleTooltip(List<Text> tooltip, boolean isPlayerSneaking) {
 		return true;
 	}
-
 
 }

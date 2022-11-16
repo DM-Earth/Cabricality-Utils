@@ -23,6 +23,9 @@
       "client_events":[
         "com.dm.earth.cabricality.client.listener.ClientCommandRegistryListener"
       ],
+      "events":[
+        "com.dm.earth.cabricality.listener.CommandRegistryListener"
+      ],
       "rei_client": "com.dm.earth.cabricality.client.rei.CabricalityREIClientPlugin"
     },
     "accessWidener": "cabricality.accesswidener",

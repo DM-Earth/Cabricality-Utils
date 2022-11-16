@@ -1,7 +1,9 @@
 package com.dm.earth.cabricality.content.alchemist;
 
+import static com.dm.earth.cabricality.util.CabfDebugger.debug;
+
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +17,18 @@ import com.dm.earth.cabricality.content.alchemist.laser.LaserCore;
 import com.dm.earth.cabricality.content.alchemist.laser.LaserProperties;
 import com.dm.earth.cabricality.content.alchemist.substrate.Catalyst;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.vehicle.HopperMinecartEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.registry.Registry;
 
 public class Alchemist {
@@ -30,7 +37,6 @@ public class Alchemist {
 		LaserCore.load();
 	}
 
-	@Nullable
 	public static void processChaoticRecipe(HopperMinecartEntity minecart, LaserProperties properties) {
 		if (!(minecart.getWorld() instanceof ServerWorld))
 			return;
@@ -56,8 +62,11 @@ public class Alchemist {
 		HashMap<Integer, Item> addSlots = new HashMap<>();
 
 		// Reagents -> Catalysts
-		Map<Catalyst, List<Reagent>> possibleReagentMap = possibleReagentMap(world);
-		Catalyst catalystTargetTemp = getTargetMatchedCatalyst(reagents.values(), possibleReagentMap);
+		Map<Catalyst, ArrayList<Reagent>> possibleReagentMap = possibleReagentMap(world);
+		ArrayList<Reagent> reagents2 = mapToList(reagents);
+		Catalyst catalystTargetTemp = getMatchedCatalyst(reagents2, possibleReagentMap);
+		debug(reagents2.toString());
+
 		if (catalystTargetTemp != null)
 			for (var i : reagents.keySet())
 				addSlots.put(i, Registry.ITEM.get(Cabricality.id("catalyst_jar_" + catalystTargetTemp.hashString())));
@@ -71,8 +80,18 @@ public class Alchemist {
 		return;
 	}
 
+	private static <T> ArrayList<T> mapToList(Map<Integer, T> map) {
+		ArrayList<T> list = new ArrayList<>();
+		Integer[] ints = (new ArrayList<>(map.keySet())).toArray(new Integer[0]);
+		Arrays.sort(ints);
+		for (int i : ints)
+			list.add(map.get(i));
+		return list;
+	}
+
 	@Nullable
-	private static Catalyst getTargetMatchedCatalyst(Collection<Reagent> existed, Map<Catalyst, List<Reagent>> map) {
+	private static Catalyst getMatchedCatalyst(ArrayList<Reagent> existed,
+			Map<Catalyst, ArrayList<Reagent>> map) {
 		for (var entry : map.entrySet()) {
 			if (entry.getValue().equals(existed))
 				return entry.getKey();
@@ -80,8 +99,8 @@ public class Alchemist {
 		return null;
 	}
 
-	private static Map<Catalyst, List<Reagent>> possibleReagentMap(ServerWorld world) {
-		HashMap<Catalyst, List<Reagent>> map = new HashMap<>();
+	private static Map<Catalyst, ArrayList<Reagent>> possibleReagentMap(ServerWorld world) {
+		HashMap<Catalyst, ArrayList<Reagent>> map = new HashMap<>();
 		for (Reagents reagentsEntry : Reagents.values()) {
 			if (!reagentsEntry.isLinked())
 				continue;
@@ -90,12 +109,11 @@ public class Alchemist {
 		return map;
 	}
 
-	private static <T> List<T> randomSelect(List<T> list, int max, long seed) {
-		ArrayList<T> processList = new ArrayList<>();
+	private static <T> ArrayList<T> randomSelect(List<T> list, int max, long seed) {
+		ArrayList<T> processList = new ArrayList<>(list);
 		ArrayList<T> returnList = new ArrayList<>();
-		processList.addAll(list);
-		while (processList.size() > max) {
-			int index = randomIntSeeded(processList.size(), seed) - 1;
+		while (!(processList.size() <= 0 || returnList.size() >= max)) {
+			int index = randomIntSeeded(processList.size() - 1, seed);
 			returnList.add(processList.get(index));
 			processList.remove(index);
 		}
@@ -103,6 +121,23 @@ public class Alchemist {
 	}
 
 	private static int randomIntSeeded(int max, long seed) {
-		return (int) Math.ceil(((seed * 9301 + 49297) % 233280) / 233280.0 * max);
+		return ((Double) Math.ceil(((seed * 9301 + 49297) % 233280) / 233280.0 * max)).intValue();
+	}
+
+	public static class AlchemistInformationCommand implements Command<ServerCommandSource> {
+
+		@Override
+		public int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+			ServerWorld world = context.getSource().getWorld();
+			Map<Catalyst, ArrayList<Reagent>> reagentMap = possibleReagentMap(world);
+			ArrayList<String> output = new ArrayList<>();
+			for (var entry : reagentMap.entrySet())
+				output.add(entry.getKey().toString() + " -> " + entry.getValue().toString());
+
+			for (String string : output)
+				context.getSource().sendFeedback(Text.of(string), false);
+
+			return SINGLE_SUCCESS;
+		}
 	}
 }
