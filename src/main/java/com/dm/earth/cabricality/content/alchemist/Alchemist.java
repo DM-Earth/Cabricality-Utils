@@ -22,11 +22,12 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import net.darktree.led.LED;
 import net.minecraft.block.Block;
 import net.minecraft.entity.vehicle.HopperMinecartEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
@@ -59,25 +60,57 @@ public class Alchemist {
 			}
 		}
 
-		HashMap<Integer, Item> addSlots = new HashMap<>();
+		HashMap<Integer, ItemStack> addSlots = new HashMap<>();
 		ArrayList<Reagent> reagentsList = mapToList(reagents);
 
-		// Reagents -> Catalysts
-		Map<Catalyst, ArrayList<Reagent>> possibleReagentMap = possibleReagentMap(world);
-		Catalyst catalystTargetTemp = getMatchedCatalyst(reagentsList, possibleReagentMap);
-		debug(reagentsList.toString());
+		boolean success = false;
 
-		if (catalystTargetTemp != null) {
-			ArrayList<Integer> tempList = new ArrayList<Integer>(reagents.keySet());
-			tempList.sort(null);
-			addSlots.put(tempList.get(0), Registry.ITEM.get(Cabricality.id("catalyst_jar_" + catalystTargetTemp.hashString())));
+		// Reagents -> Catalysts
+		if (!success) {
+			Map<Catalyst, ArrayList<Reagent>> possibleReagentMap = possibleReagentMap(world);
+			Catalyst catalystTargetTemp = getMatchedCatalyst(reagentsList, possibleReagentMap);
+			debug(reagentsList.toString());
+
+			if (catalystTargetTemp != null) {
+				ArrayList<Integer> tempList = new ArrayList<Integer>(reagents.keySet());
+				tempList.sort(null);
+				addSlots.put(tempList.get(0),
+						new ItemStack(
+								Registry.ITEM.get(Cabricality.id("catalyst_jar_" + catalystTargetTemp.hashString()))));
+				success = true;
+			} else if (reagentsList.size() > 0 && catalysts.isEmpty()) {
+				// Reagents -> Dusts
+				Catalyst targetCatalyst = Reagents.get(reagentsList.get(0)).getCatalyst();
+				boolean canContinue = true;
+				for (Reagent reagent : reagentsList)
+					if (Reagents.get(reagent).getCatalyst() != targetCatalyst)
+						canContinue = false;
+				if (canContinue) {
+					ArrayList<Reagent> expected = possibleReagentMap.get(targetCatalyst);
+					int correct = 0;
+					int wrongPos = 0;
+					for (Reagent reagent : expected) {
+						if (reagentsList.contains(reagent))
+							if (reagentsList.indexOf(reagent) == expected.indexOf(reagent))
+								correct++;
+							else
+								wrongPos++;
+					}
+					ArrayList<Integer> tempList = new ArrayList<Integer>(reagents.keySet());
+					tempList.sort(null);
+					if (correct > 0)
+						addSlots.put(tempList.get(0), new ItemStack(Items.REDSTONE, correct));
+					if (wrongPos > 0)
+						addSlots.put(tempList.get(correct > 0 ? 1 : 0), new ItemStack(LED.SHADE, wrongPos));
+					success = true;
+				}
+			}
 		}
 
 		for (Integer slot : reagents.keySet())
 			minecart.removeStack(slot);
-
 		for (var entry : addSlots.entrySet())
-			minecart.setStack(entry.getKey(), entry.getValue().getDefaultStack());
+			minecart.setStack(entry.getKey(), entry.getValue());
 	}
 
 	private static <T> @NotNull ArrayList<T> mapToList(@NotNull Map<Integer, T> map) {
@@ -91,11 +124,10 @@ public class Alchemist {
 
 	@Nullable
 	private static Catalyst getMatchedCatalyst(ArrayList<Reagent> existed,
-	                                           @NotNull Map<Catalyst, ArrayList<Reagent>> map) {
-		for (var entry : map.entrySet()) {
+			@NotNull Map<Catalyst, ArrayList<Reagent>> map) {
+		for (var entry : map.entrySet())
 			if (entry.getValue().equals(existed))
 				return entry.getKey();
-		}
 		return null;
 	}
 
@@ -104,7 +136,8 @@ public class Alchemist {
 		for (Reagents reagentsEntry : Reagents.values()) {
 			if (!reagentsEntry.isLinked())
 				continue;
-			map.put(reagentsEntry.getCatalyst(), randomSelect(reagentsEntry.getReagents(), 4, world.getSeed()));
+			// Define number of reagents here, it shouldn't greater than 5!
+			map.put(reagentsEntry.getCatalyst(), randomSelect(reagentsEntry.getReagents(), 3, world.getSeed()));
 		}
 		return map;
 	}
