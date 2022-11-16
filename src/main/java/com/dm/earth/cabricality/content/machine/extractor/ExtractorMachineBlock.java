@@ -1,9 +1,12 @@
 package com.dm.earth.cabricality.content.machine.extractor;
 
-import com.dm.earth.cabricality.resource.ResourcedBlock;
+import org.jetbrains.annotations.Nullable;
+
 import com.dm.earth.cabricality.content.entries.CabfFluids;
+import com.dm.earth.cabricality.resource.ResourcedBlock;
 import com.dm.earth.cabricality.util.ItemStackUtil;
 import com.dm.earth.cabricality.util.TransferUtil;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockRenderType;
@@ -22,9 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ExtractorMachineBlock extends BlockWithEntity implements ResourcedBlock {
 	public static int ticks = 0;
 

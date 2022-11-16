@@ -44,8 +44,9 @@ public class TitleScreenMixin extends Screen {
 
 	@Inject(method = "render", at = @At("TAIL"))
 	public void renderInjectedTail(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-		if (!ModChecker.isFullLoaded()) {
-			Screen screen = Objects.requireNonNull(MinecraftClient.getInstance().currentScreen);
+		MinecraftClient client = MinecraftClient.getInstance();
+		if (!ModChecker.isFullLoaded() && client != null) {
+			Screen screen = Objects.requireNonNull(client.currentScreen);
 			TextRenderer textRenderer = ((ScreenAccessor) screen).getTextRenderer();
 
 			ArrayList<Text> TEXTS = new ArrayList<>();

@@ -1,5 +1,10 @@
 package com.dm.earth.cabricality.content.trading.quest.command;
 
+import java.util.ArrayList;
+
+import org.jetbrains.annotations.NotNull;
+import org.quiltmc.qsl.command.api.client.QuiltClientCommandSource;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.content.trading.Professions;
@@ -7,12 +12,9 @@ import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
-import org.jetbrains.annotations.NotNull;
-import org.quiltmc.qsl.command.api.client.QuiltClientCommandSource;
-
-import java.util.ArrayList;
 
 public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 	@NotNull
@@ -77,8 +79,12 @@ public class BumpQuestCommand implements Command<QuiltClientCommandSource> {
 				col++;
 			}
 		}
-		MinecraftClient.getInstance().keyboard.setClipboard(String.join("\n\n", list));
-		context.getSource().sendFeedback(Text.of("Copied to clipboard!"));
-		return SINGLE_SUCCESS;
+		MinecraftClient client = MinecraftClient.getInstance();
+		if (client != null) {
+			client.keyboard.setClipboard(String.join("\n\n", list));
+			context.getSource().sendFeedback(Text.of("Copied to clipboard!"));
+			return SINGLE_SUCCESS;
+		}
+		return 0;
 	}
 }

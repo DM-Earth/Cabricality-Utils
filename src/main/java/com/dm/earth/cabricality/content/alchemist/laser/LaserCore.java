@@ -59,7 +59,7 @@ public class LaserCore implements AttackBlockCallback, UseBlockCallback {
 				double z = startPos.getZ() + 0.5D + (director.getOffsetZ() * i);
 				world.addParticle(properties.toDustParticleEffect(), x, y, z, 0.0D, 0.0D, 0.0D);
 			}
-			ActionResult processResult = LaserBehaviors.process(world, startPos, director, properties);
+			LaserBehaviors.process(world, startPos, director, properties);
 			world.playSound(startPos.getX() + 0.5D, startPos.getY() + 0.5D, startPos.getZ() + 0.5D,
 					SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, SoundCategory.BLOCKS, 0.55F, 0.5F, false);
 		}

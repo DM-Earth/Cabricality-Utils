@@ -1,10 +1,21 @@
 package com.dm.earth.cabricality.content.machine.extractor;
 
+import static com.dm.earth.cabricality.util.CabfDebugger.debug;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
+import org.quiltmc.qsl.networking.api.PacketByteBufs;
+import org.quiltmc.qsl.networking.api.PlayerLookup;
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.entries.CabfBlocks;
 import com.dm.earth.cabricality.content.entries.CabfFluids;
 import com.dm.earth.cabricality.util.TransferUtil;
 import com.simibubi.create.content.contraptions.goggles.IHaveGoggleInformation;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -21,15 +32,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
-import org.quiltmc.qsl.networking.api.PlayerLookup;
-import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static com.dm.earth.cabricality.util.CabfDebugger.debug;
 
 @SuppressWarnings("UnstableApiUsage")
 public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGoggleInformation {
@@ -85,7 +87,6 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 				int i = 1;
 				int ii = 1;
 				BlockPos upPos = blockPos;
-				BlockPos downPos = blockPos;
 				while (true) {
 					if (ii >= 4) {
 						upPos = targetPos.offset(Direction.UP, i - 1);
@@ -99,7 +100,6 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 				i = 1;
 				while (true) {
 					if (ii >= 4) {
-						downPos = targetPos.offset(Direction.DOWN, i - 1);
 						enoughLogs = true;
 					}
 					if (isVecLog(world.getBlockState(targetPos.offset(Direction.DOWN, i)))) {
@@ -112,7 +112,7 @@ public class ExtractorMachineBlockEntity extends BlockEntity implements IHaveGog
 					//check if there are leaves
 					boolean enoughLeaves = true;
 					for (Direction leafDirection : Arrays.stream(Direction.values()).filter((leafDirection -> leafDirection != Direction.DOWN)).toArray(Direction[]::new)) {
-						if (!isPersistentLeaves(world, upPos, direction)) enoughLeaves = false;
+						if (!isPersistentLeaves(world, upPos, leafDirection)) enoughLeaves = false;
 					}
 					if (enoughLeaves) {
 						debug("extractor block entity: found enough leaves at " + upPos.toShortString());
