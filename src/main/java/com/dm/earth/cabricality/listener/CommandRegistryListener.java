@@ -18,7 +18,7 @@ public class CommandRegistryListener implements CommandRegistrationCallback {
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, boolean integrated,
             boolean dedicated) {
         dispatcher.register(literal("cabricality")
-                .then(literal("getPossibleReagentMap").executes(new AlchemistInformationCommand())
+                .then(literal("getAlchemistInformation").executes(new AlchemistInformationCommand())
                         .requires(requirePermission(2)))
                 .then(literal("debug").executes(new DebugCommand()).requires(requirePermission(2))));
     }

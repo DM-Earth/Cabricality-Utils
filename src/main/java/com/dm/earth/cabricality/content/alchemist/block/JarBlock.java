@@ -9,6 +9,7 @@ import com.dm.earth.cabricality.resource.ResourcedBlock;
 import com.dm.earth.cabricality.util.VoxelShapeUtil;
 
 import net.devtech.arrp.json.blockstate.JBlockStates;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -42,17 +43,21 @@ public class JarBlock extends Block implements ResourcedBlock {
 
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return VoxelShapes.union(VoxelShapeUtil.simpleBox(4, 0, 4, 12, 12, 12), VoxelShapeUtil.simpleBox(5, 12, 5, 11, 14, 11));
+		return VoxelShapes.union(VoxelShapeUtil.simpleBox(4, 0, 4, 12, 12, 12),
+				VoxelShapeUtil.simpleBox(5, 12, 5, 11, 14, 11));
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+			WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+		return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState()
+				: super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
 	}
 
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return world.getBlockState(pos.offset(Direction.DOWN)).isSideSolidFullSquare(world, pos.offset(Direction.DOWN), Direction.UP);
+		return world.getBlockState(pos.offset(Direction.DOWN)).isSideSolidFullSquare(world, pos.offset(Direction.DOWN),
+				Direction.UP);
 	}
 
 	@Override
@@ -80,26 +85,39 @@ public class JarBlock extends Block implements ResourcedBlock {
 		return Cabricality.id("block/jar/jar");
 	}
 
-	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		ItemStack stack = player.getStackInHand(hand);
-		if (player.isSneaking() || player.getStackInHand(hand).isEmpty() || world.isClient()) return ActionResult.PASS;
-		Reagent reagent = null;
-		for (Reagents reagents : Reagents.values()) {
-			boolean breaked = false;
-			for (Reagent reagentT : reagents.getReagents())
-				if (reagentT.getItem() == stack.getItem()) {
-					reagent = reagentT;
-					breaked = true;
+	private static class UseBehavior implements UseBlockCallback {
+
+		@Override
+		public ActionResult interact(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
+			BlockPos pos = hitResult.getBlockPos();
+			ItemStack stack = player.getStackInHand(hand);
+			if (player.isSneaking() || player.getStackInHand(hand).isEmpty() || world.isClient())
+				return ActionResult.PASS;
+			Reagent reagent = null;
+			for (Reagents reagents : Reagents.values()) {
+				boolean braked = false;
+				for (Reagent reagentT : reagents.getReagents())
+					if (reagentT.getItem() == stack.getItem()) {
+						reagent = reagentT;
+						braked = true;
+						break;
+					}
+				if (braked)
 					break;
-				}
-			if (breaked) break;
+			}
+
+			if (reagent == null)
+				return ActionResult.PASS;
+			stack.decrement(1);
+			player.setStackInHand(hand, stack);
+			world.setBlockState(pos,
+					Registry.BLOCK.get(Cabricality.id("reagent_jar_" + reagent.hashString())).getDefaultState());
+			return ActionResult.SUCCESS;
 		}
-		
-		if (reagent == null) return ActionResult.PASS;
-		stack.decrement(1);
-		player.setStackInHand(hand, stack);
-		world.setBlockState(pos, Registry.BLOCK.get(Cabricality.id("reagent_jar_" + reagent.hashString())).getDefaultState());
-		return ActionResult.SUCCESS;
+
+	}
+
+	public static void load() {
+		UseBlockCallback.EVENT.register(new UseBehavior());
 	}
 }

@@ -35,6 +35,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.registry.Registry;
 
 public class Alchemist {
+	public static final int MAX_REAGENT_JARS = 3;
+	public static final Catalyst CHAOTIC_CATALYST = Reagents.CHAOTIC.getCatalyst();
+
 	public static void load() {
 		Reagents.load();
 		LaserCore.load();
@@ -108,6 +111,33 @@ public class Alchemist {
 			}
 		}
 
+		// Catalysts -> Chaotic Catalyst
+		if (!success && reagents.isEmpty() && catalysts.size() > 0) {
+			ArrayList<Catalyst> existed = mapToList(catalysts);
+			ArrayList<Catalyst> expected = possibleChaoticCatalystList(world);
+			ArrayList<Integer> tempList = new ArrayList<Integer>(reagents.keySet());
+			tempList.sort(null);
+			if (existed.equals(expected)) {
+				addSlots.put(tempList.get(0), new ItemStack(
+						Registry.ITEM.get(Cabricality.id("catalyst_jar_" + CHAOTIC_CATALYST.hashString()))));
+				success = true;
+			} else if (!existed.contains(CHAOTIC_CATALYST)) {
+				int correct = 0;
+				int wrongPos = 0;
+				for (Catalyst catalyst : expected)
+					if (existed.contains(catalyst))
+						if (existed.indexOf(catalyst) == expected.indexOf(catalyst))
+							correct++;
+						else
+							wrongPos++;
+				if (correct > 0)
+					addSlots.put(tempList.get(0), new ItemStack(Items.REDSTONE, correct));
+				if (wrongPos > 0)
+					addSlots.put(tempList.get(correct > 0 ? 1 : 0), new ItemStack(LED.SHADE, wrongPos));
+				success = true;
+			}
+		}
+
 		for (Integer slot : reagents.keySet())
 			minecart.removeStack(slot);
 		for (var entry : addSlots.entrySet())
@@ -121,6 +151,14 @@ public class Alchemist {
 		for (int i : ints)
 			list.add(map.get(i));
 		return list;
+	}
+
+	private static @NotNull ArrayList<Catalyst> possibleChaoticCatalystList(ServerWorld world) {
+		ArrayList<Catalyst> list = new ArrayList<>();
+		for (Reagents reagents : Reagents.values())
+			if (reagents.isLinked())
+				list.add(reagents.getCatalyst());
+		return randomSelect(list, MAX_REAGENT_JARS, world.getSeed());
 	}
 
 	@Nullable
@@ -137,8 +175,8 @@ public class Alchemist {
 		for (Reagents reagentsEntry : Reagents.values()) {
 			if (!reagentsEntry.isLinked())
 				continue;
-			// Define number of reagents here, it shouldn't greater than 5!
-			map.put(reagentsEntry.getCatalyst(), randomSelect(reagentsEntry.getReagents(), 3, world.getSeed()));
+			map.put(reagentsEntry.getCatalyst(),
+					randomSelect(reagentsEntry.getReagents(), MAX_REAGENT_JARS, world.getSeed()));
 		}
 		return map;
 	}
@@ -150,7 +188,8 @@ public class Alchemist {
 		ArrayList<T> returnList = new ArrayList<>();
 		while (!(processList.size() <= 0 || returnList.size() >= max)) {
 			int index = random.nextInt(processList.size());
-			if (index < 0) index *= -1;
+			if (index < 0)
+				index *= -1;
 			returnList.add(processList.get(index));
 			processList.remove(index);
 		}
@@ -167,6 +206,8 @@ public class Alchemist {
 			for (var entry : reagentMap.entrySet())
 				output.add(entry.getKey().toString() + " -> " + entry.getValue().toString());
 
+			output.add(CHAOTIC_CATALYST.toString() + " -> " + possibleChaoticCatalystList(world).toString());
+			
 			for (String string : output)
 				context.getSource().sendFeedback(Text.of(string), false);
 

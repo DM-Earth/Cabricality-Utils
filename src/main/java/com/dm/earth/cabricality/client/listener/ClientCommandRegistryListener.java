@@ -11,7 +11,7 @@ import com.mojang.brigadier.CommandDispatcher;
 public class ClientCommandRegistryListener implements ClientCommandRegistrationCallback {
 	@Override
 	public void registerCommands(CommandDispatcher<QuiltClientCommandSource> dispatcher) {
-		dispatcher.register(literal("cabricalityclient")
-				.then(literal("dumptradingquests").executes(new BumpQuestCommand())));
+		dispatcher.register(literal("cabricalityClient")
+				.then(literal("dumpTradingQuests").executes(new BumpQuestCommand())));
 	}
 }

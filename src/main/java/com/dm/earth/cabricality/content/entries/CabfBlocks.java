@@ -1,5 +1,7 @@
 package com.dm.earth.cabricality.content.entries;
 
+import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.Reagents;
 import com.dm.earth.cabricality.content.alchemist.block.CatalystJarBlock;
@@ -10,9 +12,11 @@ import com.dm.earth.cabricality.content.machine.extractor.ExtractorMachineBlock;
 import com.dm.earth.cabricality.core.SettingableBlockItem;
 import com.dm.earth.cabricality.resource.ResourcedBlock;
 
-import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
-
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.Material;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.util.Identifier;

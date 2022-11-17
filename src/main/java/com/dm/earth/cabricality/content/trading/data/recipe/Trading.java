@@ -1,12 +1,17 @@
 package com.dm.earth.cabricality.content.trading.data.recipe;
 
+import org.quiltmc.qsl.recipe.api.RecipeLoadingEvents;
+import org.quiltmc.qsl.recipe.api.RecipeManagerHelper;
+
 import com.dm.earth.cabricality.Cabricality;
+import com.dm.earth.cabricality.content.alchemist.block.JarBlock;
 import com.dm.earth.cabricality.content.trading.Professions;
 import com.dm.earth.cabricality.content.trading.core.Profession;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
 import com.dm.earth.cabricality.content.trading.data.recipe.gen.JTradingRecipeGenerator;
 import com.dm.earth.cabricality.content.trading.data.tag.TradeTags;
 import com.dm.earth.cabricality.util.CabfDebugger;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -15,8 +20,6 @@ import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
-import org.quiltmc.qsl.recipe.api.RecipeLoadingEvents;
-import org.quiltmc.qsl.recipe.api.RecipeManagerHelper;
 
 public class Trading {
 	private static void addRecipes(RecipeLoadingEvents.AddRecipesCallback.RecipeHandler handler) {
@@ -51,5 +54,6 @@ public class Trading {
 		RecipeManagerHelper.addRecipes(Trading::addRecipes);
 		RecipeManagerHelper.removeRecipes(Trading::removeRecipes);
 		TradeTags.load();
+		JarBlock.load();
 	}
 }
