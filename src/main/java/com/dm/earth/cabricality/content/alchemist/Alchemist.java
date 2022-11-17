@@ -115,7 +115,7 @@ public class Alchemist {
 		if (!success && reagents.isEmpty() && catalysts.size() > 0) {
 			ArrayList<Catalyst> existed = mapToList(catalysts);
 			ArrayList<Catalyst> expected = possibleChaoticCatalystList(world);
-			ArrayList<Integer> tempList = new ArrayList<Integer>(reagents.keySet());
+			ArrayList<Integer> tempList = new ArrayList<Integer>(catalysts.keySet());
 			tempList.sort(null);
 			if (existed.equals(expected)) {
 				addSlots.put(tempList.get(0), new ItemStack(

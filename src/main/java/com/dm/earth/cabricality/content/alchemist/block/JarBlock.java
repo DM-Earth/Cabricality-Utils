@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.Reagents;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
+import com.dm.earth.cabricality.content.entries.CabfBlocks;
 import com.dm.earth.cabricality.resource.ResourcedBlock;
 import com.dm.earth.cabricality.util.VoxelShapeUtil;
 
@@ -90,6 +91,9 @@ public class JarBlock extends Block implements ResourcedBlock {
 		@Override
 		public ActionResult interact(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
 			BlockPos pos = hitResult.getBlockPos();
+			if (world.getBlockState(pos).getBlock() != CabfBlocks.JAR)
+				return ActionResult.PASS;
+
 			ItemStack stack = player.getStackInHand(hand);
 			if (player.isSneaking() || player.getStackInHand(hand).isEmpty() || world.isClient())
 				return ActionResult.PASS;

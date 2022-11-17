@@ -41,6 +41,19 @@ public enum Reagents {
 			of("blunite", PMD.id("blunite"), 0x5f6874),
 			of("carbonite", PMD.id("carbonite"), 0x514e52)),
 
+	HERBAL("herbal", 0xB5CDA3, true,
+			of("white", MC.id("lily_of_the_valley"), 0xe8e8e8),
+			of("orange", MC.id("orange_tulip"), 0xfd9e28),
+			of("magenta", MC.id("allium"), 0xba63e2),
+			of("light_blue", MC.id("blue_orchid"), 0x21c1fd),
+			of("yellow", MC.id("dandelion"), 0xffec4e),
+			of("pink", MC.id("pink_tulip"), 0xf7c8fe),
+			of("light_gray", MC.id("white_tulip"), 0xd0e9e9),
+			of("blue", MC.id("cornflower"), 0x2f6eec),
+			of("red", MC.id("red_tulip"), 0xeb3334),
+			of("black", MC.id("wither_rose"), 0x45322b)
+	),
+
 	CHAOTIC("chaos", 0xb200ed, false,
 			of("silver", IV.id("silver_dust"), 0x9fadb4),
 			of("silicon", AE2.id("silicon"), 0x85837b));
