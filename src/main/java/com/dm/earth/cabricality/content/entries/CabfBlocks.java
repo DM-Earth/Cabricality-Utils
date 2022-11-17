@@ -5,6 +5,7 @@ import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.Reagents;
 import com.dm.earth.cabricality.content.alchemist.block.CatalystJarBlock;
+import com.dm.earth.cabricality.content.alchemist.block.ChaoticCatalystJarBlock;
 import com.dm.earth.cabricality.content.alchemist.block.JarBlock;
 import com.dm.earth.cabricality.content.alchemist.block.ReagentJarBlock;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
@@ -23,7 +24,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class CabfBlocks {
-	public static ExtractorMachineBlock EXTRACTOR = new ExtractorMachineBlock(QuiltBlockSettings.of(Material.METAL, MapColor.BROWN));
+	public static ExtractorMachineBlock EXTRACTOR = new ExtractorMachineBlock(
+			QuiltBlockSettings.of(Material.METAL, MapColor.BROWN));
 	public static JarBlock JAR = new JarBlock(QuiltBlockSettings.of(Material.METAL, MapColor.SPRUCE_BROWN));
 
 	public static void register() {
@@ -32,9 +34,15 @@ public class CabfBlocks {
 		// Substrate Jars
 		registerBlock("jar", JAR);
 		for (Reagents reagents : Reagents.values()) {
-			registerBlock("catalyst_jar_" + reagents.getCatalyst().hashString(), new CatalystJarBlock(QuiltBlockSettings.of(Material.GLASS, MapColor.BROWN)));
+			if (reagents == Reagents.CHAOTIC)
+				registerBlock("catalyst_jar_" + reagents.getCatalyst().hashString(),
+						new ChaoticCatalystJarBlock(QuiltBlockSettings.of(Material.GLASS, MapColor.BROWN)));
+			else
+				registerBlock("catalyst_jar_" + reagents.getCatalyst().hashString(),
+						new CatalystJarBlock(QuiltBlockSettings.of(Material.GLASS, MapColor.BROWN)));
 			for (Reagent reagent : reagents.getReagents())
-				registerBlock("reagent_jar_" + reagent.hashString(), new ReagentJarBlock(QuiltBlockSettings.of(Material.GLASS, MapColor.SPRUCE_BROWN)));
+				registerBlock("reagent_jar_" + reagent.hashString(),
+						new ReagentJarBlock(QuiltBlockSettings.of(Material.GLASS, MapColor.SPRUCE_BROWN)));
 		}
 	}
 
@@ -51,10 +59,14 @@ public class CabfBlocks {
 			Registry.register(Registry.ITEM, Cabricality.id(name), new BlockItem(block, CabfItems.Properties.DEFAULT));
 
 		if (block instanceof ResourcedBlock resourced) {
-			if (resourced.doModel()) resourced.writeBlockModel(Cabricality.CLIENT_RESOURCES);
-			if (resourced.doLootTable()) resourced.writeLootTable(Cabricality.SERVER_RESOURCES);
-			if (resourced.doBlockStates()) resourced.writeBlockStates(Cabricality.CLIENT_RESOURCES);
-			if (resourced.doItemModel()) resourced.writeItemModel(Cabricality.CLIENT_RESOURCES);
+			if (resourced.doModel())
+				resourced.writeBlockModel(Cabricality.CLIENT_RESOURCES);
+			if (resourced.doLootTable())
+				resourced.writeLootTable(Cabricality.SERVER_RESOURCES);
+			if (resourced.doBlockStates())
+				resourced.writeBlockStates(Cabricality.CLIENT_RESOURCES);
+			if (resourced.doItemModel())
+				resourced.writeItemModel(Cabricality.CLIENT_RESOURCES);
 		}
 	}
 }

@@ -69,8 +69,10 @@ public class Alchemist {
 
 		boolean success = false;
 
-		// Reagents -> Catalysts
-		if (!success) {
+		// Reagents -> Catalyst
+		if ((!success) && catalysts.size() == 0) {
+			debug("Init Reagents -> Catalyst");
+
 			Map<Catalyst, ArrayList<Reagent>> possibleReagentMap = possibleReagentMap(world);
 			Catalyst catalystTargetTemp = getMatchedCatalyst(reagentsList, possibleReagentMap);
 			debug(reagentsList.toString());
@@ -112,7 +114,9 @@ public class Alchemist {
 		}
 
 		// Catalysts -> Chaotic Catalyst
-		if (!success && reagents.isEmpty() && catalysts.size() > 0) {
+		if (!success && reagents.isEmpty() && catalysts.size() > 1) {
+			debug("Init Catalysts -> Chaotic Catalyst");
+
 			ArrayList<Catalyst> existed = mapToList(catalysts);
 			ArrayList<Catalyst> expected = possibleChaoticCatalystList(world);
 			ArrayList<Integer> tempList = new ArrayList<Integer>(catalysts.keySet());
@@ -136,6 +140,37 @@ public class Alchemist {
 					addSlots.put(tempList.get(correct > 0 ? 1 : 0), new ItemStack(LED.SHADE, wrongPos));
 				success = true;
 			}
+
+			if (success) {
+				for (int i : catalysts.keySet())
+					minecart.removeStack(i);
+			}
+		}
+
+		// Chaotic Catalyst + Reagent -> Reagent
+		if ((!success) && reagents.size() == 1 && catalysts.size() == 1) {
+			boolean canContinue = true;
+
+			for (var catalyst : catalysts.entrySet())
+				if (catalyst.getValue() != CHAOTIC_CATALYST)
+					canContinue = false;
+
+			if (canContinue) {
+				debug("Init Chaotic Catalyst + Reagent -> Reagent");
+
+				Reagent reagent = mapToList(reagents).get(0);
+				Map<Reagent, Reagent> map = possibleSpecialReagentChaoticMap(world);
+				ArrayList<Integer> tempList = new ArrayList<Integer>(reagents.keySet());
+				for (Map.Entry<Reagent, Reagent> entry : map.entrySet())
+					if (entry.getValue() == reagent) {
+						addSlots.put(tempList.get(0),
+								new ItemStack(
+										Registry.ITEM
+												.get(Cabricality.id("reagent_jar_" + entry.getKey().hashString()))));
+						success = true;
+						break;
+					}
+			}
 		}
 
 		for (Integer slot : reagents.keySet())
@@ -151,6 +186,22 @@ public class Alchemist {
 		for (int i : ints)
 			list.add(map.get(i));
 		return list;
+	}
+
+	private static Map<Reagent, Reagent> possibleSpecialReagentChaoticMap(ServerWorld world) {
+		HashMap<Reagent, Reagent> map = new HashMap<>();
+		ArrayList<Reagent> reagents = new ArrayList<>();
+		for (Reagents reagentsT : Reagents.values())
+			if (reagentsT.isLinked())
+				reagents.addAll(reagentsT.getReagents());
+
+		int i = 0;
+		for (Reagent reagent : Reagents.CHAOTIC.getReagents()) {
+			i++;
+			Random random = new Random(world.getSeed() + i);
+			map.put(reagent, reagents.get(random.nextInt(reagents.size())));
+		}
+		return map;
 	}
 
 	private static @NotNull ArrayList<Catalyst> possibleChaoticCatalystList(ServerWorld world) {
@@ -207,7 +258,10 @@ public class Alchemist {
 				output.add(entry.getKey().toString() + " -> " + entry.getValue().toString());
 
 			output.add(CHAOTIC_CATALYST.toString() + " -> " + possibleChaoticCatalystList(world).toString());
-			
+
+			for (var entry : possibleSpecialReagentChaoticMap(world).entrySet())
+				output.add(entry.getKey().toString() + " -> (Chaotic) " + entry.getValue().toString());
+
 			for (String string : output)
 				context.getSource().sendFeedback(Text.of(string), false);
 

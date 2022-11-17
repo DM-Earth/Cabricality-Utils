@@ -94,8 +94,8 @@ public class JarBlock extends Block implements ResourcedBlock {
 			if (world.getBlockState(pos).getBlock() != CabfBlocks.JAR)
 				return ActionResult.PASS;
 
-			ItemStack stack = player.getStackInHand(hand);
-			if (player.isSneaking() || player.getStackInHand(hand).isEmpty() || world.isClient())
+			ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
+			if (player.isSneaking() || player.getStackInHand(Hand.MAIN_HAND).isEmpty() || world.isClient())
 				return ActionResult.PASS;
 			Reagent reagent = null;
 			for (Reagents reagents : Reagents.values()) {
@@ -113,7 +113,7 @@ public class JarBlock extends Block implements ResourcedBlock {
 			if (reagent == null)
 				return ActionResult.PASS;
 			stack.decrement(1);
-			player.setStackInHand(hand, stack);
+			player.setStackInHand(Hand.MAIN_HAND, stack);
 			world.setBlockState(pos,
 					Registry.BLOCK.get(Cabricality.id("reagent_jar_" + reagent.hashString())).getDefaultState());
 			return ActionResult.SUCCESS;

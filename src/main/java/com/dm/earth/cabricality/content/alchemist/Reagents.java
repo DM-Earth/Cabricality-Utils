@@ -4,6 +4,7 @@ import static com.dm.earth.cabricality.ModEntry.AE2;
 import static com.dm.earth.cabricality.ModEntry.CR;
 import static com.dm.earth.cabricality.ModEntry.IV;
 import static com.dm.earth.cabricality.ModEntry.MC;
+import static com.dm.earth.cabricality.ModEntry.MUL;
 import static com.dm.earth.cabricality.ModEntry.PMD;
 import static com.dm.earth.cabricality.content.alchemist.substrate.Reagent.of;
 
@@ -41,7 +42,7 @@ public enum Reagents {
 			of("blunite", PMD.id("blunite"), 0x5f6874),
 			of("carbonite", PMD.id("carbonite"), 0x514e52)),
 
-	HERBAL("herbal", 0xB5CDA3, true,
+	HERBAL("herbal", 0xb5cda3, true,
 			of("white", MC.id("lily_of_the_valley"), 0xe8e8e8),
 			of("orange", MC.id("orange_tulip"), 0xfd9e28),
 			of("magenta", MC.id("allium"), 0xba63e2),
@@ -52,6 +53,25 @@ public enum Reagents {
 			of("blue", MC.id("cornflower"), 0x2f6eec),
 			of("red", MC.id("red_tulip"), 0xeb3334),
 			of("black", MC.id("wither_rose"), 0x45322b)
+	),
+
+	VOLATILE("volatile", 0x9f5f80, true,
+			of("blaze", MC.id("blaze_powder"), 0xfda228),
+			of("slime", MC.id("slime_ball"), 0x8cd382),
+			of("nether", MC.id("nether_wart"), 0xa42733),
+			of("obsidian", CR.id("powdered_obsidian"), 0x271f3c),
+			of("gunpowder", MC.id("gunpowder"), 0x727272),
+			of("prismarine", MC.id("prismarine_shard"), 0xa5d1c2),
+			of("hex", MUL.id("hex_ash"), 0xa235bc),
+			of("ender", AE2.id("ender_dust"), 0x38ccb1)
+	),
+
+	CRYSTAL("crystal", 0xffb037, true,
+			of("sulfur", IV.id("sulfur_dust"), 0xc7a94a),
+			of("certus_quartz", AE2.id("certus_quartz_dust"), 0xbbdcfd),
+			of("cinnabar", MC.id("redstone"), 0xe8364f),
+			of("blazing_quartz", MUL.id("blazing_quartz"), 0xfee568),
+			of("nether_quartz", MC.id("quartz"), 0xddd4c7)
 	),
 
 	CHAOTIC("chaos", 0xb200ed, false,
