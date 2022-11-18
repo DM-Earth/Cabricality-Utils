@@ -10,7 +10,7 @@ import com.dm.earth.cabricality.content.alchemist.block.JarBlock;
 import com.dm.earth.cabricality.content.alchemist.block.ReagentJarBlock;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
 import com.dm.earth.cabricality.content.machine.extractor.ExtractorMachineBlock;
-import com.dm.earth.cabricality.core.SettingableBlockItem;
+import com.dm.earth.cabricality.core.ISettingableBlockItem;
 import com.dm.earth.cabricality.resource.ResourcedBlock;
 
 import net.minecraft.block.Block;
@@ -53,7 +53,7 @@ public class CabfBlocks {
 	private static void registerBlock(String name, Block block) {
 		Registry.register(Registry.BLOCK, Cabricality.id(name), block);
 
-		if (block instanceof SettingableBlockItem settingable)
+		if (block instanceof ISettingableBlockItem settingable)
 			Registry.register(Registry.ITEM, Cabricality.id(name), new BlockItem(block, settingable.getSettings()));
 		else
 			Registry.register(Registry.ITEM, Cabricality.id(name), new BlockItem(block, CabfItems.Properties.DEFAULT));

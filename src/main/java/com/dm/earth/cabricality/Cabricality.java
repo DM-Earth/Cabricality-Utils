@@ -29,10 +29,16 @@ public class Cabricality implements ModInitializer {
 
 	public static final String ID = "cabricality";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
+
+	// RRPs
 	public static final RuntimeResourcePack CLIENT_RESOURCES = RuntimeResourcePack.create(id("client_resources"));
 	public static final RuntimeResourcePack SERVER_RESOURCES = RuntimeResourcePack.create(id("server_resources"));
-	public static ItemGroup MAIN_GROUP = QuiltItemGroup.createWithIcon(Cabricality.id("main"), () -> Registry.ITEM.get(Cabricality.id("andesite_machine")).getDefaultStack());
-	public static ItemGroup SUBSTRATES_GROUP = QuiltItemGroup.createWithIcon(Cabricality.id("substrates"), () -> Registry.ITEM.get(Cabricality.id("jar")).getDefaultStack());
+
+	// Item Groups
+	public static ItemGroup MAIN_GROUP = QuiltItemGroup.createWithIcon(Cabricality.id("main"),
+			() -> Registry.ITEM.get(Cabricality.id("andesite_machine")).getDefaultStack());
+	public static ItemGroup SUBSTRATES_GROUP = QuiltItemGroup.createWithIcon(Cabricality.id("substrates"),
+			() -> Registry.ITEM.get(Cabricality.id("jar")).getDefaultStack());
 
 	@Contract("_ -> new")
 	public static @NotNull Identifier id(String id) {

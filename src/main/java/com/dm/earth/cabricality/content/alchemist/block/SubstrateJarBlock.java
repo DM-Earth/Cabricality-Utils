@@ -1,18 +1,18 @@
 package com.dm.earth.cabricality.content.alchemist.block;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.dm.earth.cabricality.client.CabricalityClient;
 import com.dm.earth.cabricality.content.alchemist.substrate.Substrate;
 import com.dm.earth.cabricality.content.entries.CabfItems;
-import com.dm.earth.cabricality.core.SettingableBlockItem;
+import com.dm.earth.cabricality.core.ISettingableBlockItem;
 
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-public abstract class SubstrateJarBlock extends JarBlock implements SettingableBlockItem {
+public abstract class SubstrateJarBlock extends JarBlock implements ISettingableBlockItem {
 	public SubstrateJarBlock(Settings settings) {
 		super(settings);
 	}

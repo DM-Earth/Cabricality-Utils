@@ -17,14 +17,13 @@ This is a Minecraft mod for [Cabricality](https://github.com/DM-Earth/Cabricalit
 
 - Extractor machines (like thermal's). It can extract resin from trees next to it. Rubber trees can make it faster.
 - Fluids for the modpack, for replacing KubeJS fluid registries.
-- A trading system reimplementation based on Create: Above and Beyond.
+- A trading system re-implementation based on Create: Above and Beyond.
+- A chaotic alchemist system re-implementation based on Create: Above and Beyond.
 
 ## Functions
 
-- Make Trade Cards and Profession Cards easier to translate.
 - Replace Ad Astra and Bits and Chisels' wrench with the Create one.
 - Catch the registrations with namespace of `cabricality` and add them to modded DataFixers.
-- Move items form KubeJS to a new item group instead of that KubeJS one.
 - Use (water) bucket to kill blazes.
 
 When certain necessary mods are not loaded:
