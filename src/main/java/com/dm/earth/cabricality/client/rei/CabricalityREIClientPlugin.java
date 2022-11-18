@@ -1,7 +1,7 @@
 package com.dm.earth.cabricality.client.rei;
 
-import static com.dm.earth.cabricality.content.alchemist.data.JarTags.CATALYST_JARS;
-import static com.dm.earth.cabricality.content.alchemist.data.JarTags.REAGENT_JARS;
+import static com.dm.earth.cabricality.content.alchemist.data.JarData.CATALYST_JARS;
+import static com.dm.earth.cabricality.content.alchemist.data.JarData.REAGENT_JARS;
 import static com.dm.earth.cabricality.content.trading.data.tag.TradeTags.PROFESSION_CARDS;
 import static com.dm.earth.cabricality.content.trading.data.tag.TradeTags.TRADE_CARDS;
 

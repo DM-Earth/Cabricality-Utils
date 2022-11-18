@@ -1,11 +1,12 @@
 package com.dm.earth.cabricality.content.trading.data.recipe.gen;
 
+import static com.dm.earth.cabricality.util.JRecipeUtil.itemEntry;
+
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.trading.core.TradingEntry;
 import com.dm.earth.cabricality.content.trading.util.ProfessionUtil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.util.Identifier;
 
 /*
  * This util class in used to generate the JSON objects for the trading recipes.
@@ -46,13 +47,6 @@ public class JTradingRecipeGenerator {
 		json.add("output", itemEntry(entry.getItemId(), entry.getItemCount()));
 
 		json.addProperty("processTime", 125);
-		return json;
-	}
-
-	private static JsonObject itemEntry(Identifier id, int count) {
-		JsonObject json = new JsonObject();
-		json.addProperty("item", id.toString());
-		json.addProperty("count", count);
 		return json;
 	}
 }

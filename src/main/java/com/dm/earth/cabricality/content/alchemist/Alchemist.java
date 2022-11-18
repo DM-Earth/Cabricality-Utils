@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import com.dm.earth.cabricality.Cabricality;
 import com.dm.earth.cabricality.content.alchemist.block.CatalystJarBlock;
 import com.dm.earth.cabricality.content.alchemist.block.ReagentJarBlock;
-import com.dm.earth.cabricality.content.alchemist.data.JarTags;
+import com.dm.earth.cabricality.content.alchemist.data.JarData;
 import com.dm.earth.cabricality.content.alchemist.laser.LaserCore;
 import com.dm.earth.cabricality.content.alchemist.laser.LaserProperties;
 import com.dm.earth.cabricality.content.alchemist.substrate.Catalyst;
@@ -42,7 +42,7 @@ public class Alchemist {
 	public static void load() {
 		Reagents.load();
 		LaserCore.load();
-		JarTags.load();
+		JarData.load();
 	}
 
 	public static void processChaoticRecipe(@NotNull HopperMinecartEntity minecart, LaserProperties properties) {
