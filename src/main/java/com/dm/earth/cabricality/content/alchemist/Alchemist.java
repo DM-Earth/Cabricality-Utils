@@ -5,7 +5,6 @@ import static com.dm.earth.cabricality.util.CabfDebugger.debug;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -20,6 +19,7 @@ import com.dm.earth.cabricality.content.alchemist.laser.LaserCore;
 import com.dm.earth.cabricality.content.alchemist.laser.LaserProperties;
 import com.dm.earth.cabricality.content.alchemist.substrate.Catalyst;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
+import com.dm.earth.cabricality.util.RandomMathUtil;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -211,7 +211,7 @@ public class Alchemist {
 		for (Reagents reagents : Reagents.values())
 			if (reagents.isLinked())
 				list.add(reagents.getCatalyst());
-		return randomSelect(list, MAX_REAGENT_JARS, world.getSeed());
+		return RandomMathUtil.randomSelect(list, MAX_REAGENT_JARS, world.getSeed());
 	}
 
 	@Nullable
@@ -229,24 +229,9 @@ public class Alchemist {
 			if (!reagentsEntry.isLinked())
 				continue;
 			map.put(reagentsEntry.getCatalyst(),
-					randomSelect(reagentsEntry.getReagents(), MAX_REAGENT_JARS, world.getSeed()));
+					RandomMathUtil.randomSelect(reagentsEntry.getReagents(), MAX_REAGENT_JARS, world.getSeed()));
 		}
 		return map;
-	}
-
-	private static <T> @NotNull ArrayList<T> randomSelect(List<T> list, int max, long seed) {
-		Random random = new Random(seed);
-
-		ArrayList<T> processList = new ArrayList<>(list);
-		ArrayList<T> returnList = new ArrayList<>();
-		while (!(processList.size() <= 0 || returnList.size() >= max)) {
-			int index = random.nextInt(processList.size());
-			if (index < 0)
-				index *= -1;
-			returnList.add(processList.get(index));
-			processList.remove(index);
-		}
-		return returnList;
 	}
 
 	public static class AlchemistInformationCommand implements Command<ServerCommandSource> {

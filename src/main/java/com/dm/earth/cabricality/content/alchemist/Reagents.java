@@ -30,7 +30,7 @@ import net.minecraft.util.registry.RegistryKey;
 
 //TODO: fill this out
 public enum Reagents {
-	IGNEOUS("igneous", 0x6c8191, true,
+	IGNEOUS("igneous", 0x6c8191, 16, true,
 			of("andesite", MC.id("andesite"), 0x868887),
 			of("diorite", MC.id("diorite"), 0xe6e2e6),
 			of("granite", MC.id("granite"), 0x9e6b5a),
@@ -42,7 +42,7 @@ public enum Reagents {
 			of("blunite", PMD.id("blunite"), 0x5f6874),
 			of("carbonite", PMD.id("carbonite"), 0x514e52)),
 
-	HERBAL("herbal", 0xb5cda3, true,
+	HERBAL("herbal", 0xb5cda3, 1, true,
 			of("white", MC.id("lily_of_the_valley"), 0xe8e8e8),
 			of("orange", MC.id("orange_tulip"), 0xfd9e28),
 			of("magenta", MC.id("allium"), 0xba63e2),
@@ -55,7 +55,7 @@ public enum Reagents {
 			of("black", MC.id("wither_rose"), 0x45322b)
 	),
 
-	VOLATILE("volatile", 0x9f5f80, true,
+	VOLATILE("volatile", 0x9f5f80, 1, true,
 			of("blaze", MC.id("blaze_powder"), 0xfda228),
 			of("slime", MC.id("slime_ball"), 0x8cd382),
 			of("nether", MC.id("nether_wart"), 0xa42733),
@@ -66,7 +66,7 @@ public enum Reagents {
 			of("ender", AE2.id("ender_dust"), 0x38ccb1)
 	),
 
-	CRYSTAL("crystal", 0xffb037, true,
+	CRYSTAL("crystal", 0xffb037, 1, true,
 			of("sulfur", IV.id("sulfur_dust"), 0xc7a94a),
 			of("certus_quartz", AE2.id("certus_quartz_dust"), 0xbbdcfd),
 			of("cinnabar", MC.id("redstone"), 0xe8364f),
@@ -74,19 +74,21 @@ public enum Reagents {
 			of("nether_quartz", MC.id("quartz"), 0xddd4c7)
 	),
 
-	CHAOTIC("chaos", 0xb200ed, false,
+	CHAOTIC("chaos", 0xb200ed, 1, false,
 			of("silver", IV.id("silver_dust"), 0x9fadb4),
 			of("silicon", AE2.id("silicon"), 0x85837b));
 
 	private final String name;
 	private final int tint;
+	private final int price;
 	private final List<Reagent> entries;
 	private final Catalyst catalyst;
 	private final boolean link;
 
-	Reagents(String name, int tint, boolean link, Reagent... reagents) {
+	Reagents(String name, int tint, int price, boolean link, Reagent... reagents) {
 		this.name = name;
 		this.tint = tint;
+		this.price = price;
 		this.entries = List.of(reagents);
 		this.catalyst = Catalyst.of(name, tint);
 		this.link = link;
@@ -161,6 +163,11 @@ public enum Reagents {
 	@Contract(pure = true)
 	public boolean isLinked() {
 		return link;
+	}
+
+	@Contract(pure = true)
+	public int getPrice() {
+		return price;
 	}
 
 	public static List<Block> getJarBlocks(boolean includeBlank) {

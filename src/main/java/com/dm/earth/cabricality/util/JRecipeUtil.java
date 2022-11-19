@@ -12,6 +12,12 @@ public class JRecipeUtil {
 		return json;
 	}
 
+    public static JsonObject itemEntry(Identifier id) {
+		JsonObject json = new JsonObject();
+		json.addProperty("item", id.toString());
+		return json;
+	}
+
     public static JsonObject itemEntry(Identifier id, int count, double chance) {
 		JsonObject json = itemEntry(id, count);
         json.addProperty("chance", chance);
