@@ -53,10 +53,15 @@ public class CabfBlocks {
 	private static void registerBlock(String name, Block block) {
 		Registry.register(Registry.BLOCK, Cabricality.id(name), block);
 
-		if (block instanceof ISettingableBlockItem settingable)
-			Registry.register(Registry.ITEM, Cabricality.id(name), new BlockItem(block, settingable.getSettings()));
-		else
-			Registry.register(Registry.ITEM, Cabricality.id(name), new BlockItem(block, CabfItems.Properties.DEFAULT));
+		Registry.register(
+				Registry.ITEM, Cabricality.id(name),
+				new BlockItem(
+						block,
+						(block instanceof SettingableBlockItem settingable)
+								? settingable.getSettings()
+								: CabfItems.Properties.DEFAULT
+						)
+		);
 
 		if (block instanceof ResourcedBlock resourced) {
 			if (resourced.doModel())

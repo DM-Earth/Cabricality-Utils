@@ -9,9 +9,12 @@ import static com.dm.earth.cabricality.ModEntry.PMD;
 import static com.dm.earth.cabricality.content.alchemist.substrate.Reagent.of;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.dm.earth.cabricality.client.CabricalityClient;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -113,14 +116,30 @@ public enum Reagents {
 
 	@NotNull
 	public static Reagent getReagentFromBlock(ReagentJarBlock block) {
-		Reagent reagent = getReagentFromHash(Registry.BLOCK.getId(block).getPath().replaceAll("reagent_jar_", ""));
+		Reagent reagent = getReagentFromHash(
+				Registry.BLOCK
+						.getId(block)
+						.getPath()
+						.replaceAll(
+								block.getDefaultBlockId().getPath() + "_", ""
+						)
+		);
+		// Check Content Validity
 		if (reagent == null) {
-			ArrayList<String> reagents = new ArrayList<>();
-			for (Reagents reagents1 : Reagents.values())
-				for (Reagent reagent1 : reagents1.getReagents())
-					reagents.add(reagent1.toString());
-			Cabricality.LOGGER.error("Reagents:");
-			Cabricality.LOGGER.error(String.join(", ", reagents));
+			Cabricality.LOGGER.error(
+					"Invalid Reagent " + Registry.BLOCK.getId(block) + "! Valid Reagents:"
+							+ Arrays.stream(Reagents.values())
+							.map(
+									reagents -> reagents.getReagents()
+											.stream()
+											.map(
+													value -> "\n" + value.getName()
+															.getString()
+											)
+											.collect(Collectors.joining())
+							)
+							.collect(Collectors.joining())
+			);
 			throw new EnumConstantNotPresentException(Reagents.class, Registry.BLOCK.getId(block).toString());
 		}
 		return reagent;
@@ -128,13 +147,22 @@ public enum Reagents {
 
 	@NotNull
 	public static Catalyst getCatalystFromBlock(CatalystJarBlock block) {
-		Catalyst catalyst = getCatalystFromHash(Registry.BLOCK.getId(block).getPath().replaceAll("catalyst_jar_", ""));
+		Catalyst catalyst = getCatalystFromHash(
+				Registry.BLOCK
+						.getId(block)
+						.getPath()
+						.replaceAll(
+								block.getDefaultBlockId().getPath() + "_", ""
+						)
+		);
+		// Check Content Validity
 		if (catalyst == null) {
-			ArrayList<String> catalysts = new ArrayList<>();
-			for (Reagents reagents : Reagents.values())
-				catalysts.add(reagents.getCatalyst().toString());
-			Cabricality.LOGGER.error("Catalysts:");
-			Cabricality.LOGGER.error(String.join(", ", catalysts));
+			Cabricality.LOGGER.error(
+					"Invalid Catalyst" + Registry.BLOCK.getId(block) + "! Valid Catalysts:"
+							+ Arrays.stream(Reagents.values())
+							.map(value -> "\n" + value.getCatalyst().toString())
+							.collect(Collectors.joining())
+			);
 			throw new EnumConstantNotPresentException(Reagents.class, Registry.BLOCK.getId(block).toString());
 		}
 		return catalyst;

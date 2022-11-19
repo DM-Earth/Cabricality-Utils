@@ -21,7 +21,7 @@ public abstract class AbstractTradeCardItem extends Item {
 
 	@Override
 	public String getTranslationKey() {
-		return new TranslatableText(CabricalityClient.genTranslationKey("item", this.getType())).getString() + " §r- "
+		return CabricalityClient.genTranslatableText("item", this.getType()).getString() + " §r- "
 				+ this.getContentString();
 	}
 

@@ -22,7 +22,7 @@ public class ProfessionCardItem extends AbstractTradeCardItem {
 	@Override
 	@SuppressWarnings("ConstantConditions")
 	public String getContentString() {
-		return new TranslatableText(CabricalityClient.genTranslationKey("profession", ProfessionUtil.fromItem(this).id().getPath())).getString();
+		return CabricalityClient.genTranslatableText("profession", ProfessionUtil.fromItem(this).id().getPath()).getString();
 	}
 
 	@Override

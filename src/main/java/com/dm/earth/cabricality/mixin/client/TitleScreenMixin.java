@@ -50,7 +50,7 @@ public class TitleScreenMixin extends Screen {
 			TextRenderer textRenderer = ((ScreenAccessor) screen).getTextRenderer();
 
 			ArrayList<Text> TEXTS = new ArrayList<>();
-			TEXTS.add(new TranslatableText(CabricalityClient.genTranslationKey("util", "warn")));
+			TEXTS.add(CabricalityClient.genTranslatableText("util", "warn"));
 
 			for (String mod : ModChecker.missingModList)
 				TEXTS.add(new LiteralText("§c<" + mod + ">"));
@@ -60,7 +60,7 @@ public class TitleScreenMixin extends Screen {
 
 			for (Text text : TEXTS) {
 				matrices.push();
-				matrices.translate(width / 2, yMultiple += height / (TEXTS.size() + 1), 0.0);
+				matrices.translate(width / 2.0, yMultiple += height / (TEXTS.size() + 1), 0.0);
 				matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-20.0f));
 				float h = 1.8f - MathHelper.abs(
 						MathHelper.sin((float) (Util.getMeasuringTimeMs() % 1000L) / 1000.0f * ((float) Math.PI * 2))

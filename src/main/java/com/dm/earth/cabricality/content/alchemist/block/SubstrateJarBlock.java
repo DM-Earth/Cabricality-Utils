@@ -20,14 +20,13 @@ public abstract class SubstrateJarBlock extends JarBlock implements ISettingable
 	@Override
 	public String getTranslationKey() {
 		if (this.getContent() == null)
-			return new TranslatableText(CabricalityClient.genTranslationKey("block", this.getDefaultBlockId().getPath())).getString();
-		return new TranslatableText(CabricalityClient.genTranslationKey("block", this.getDefaultBlockId().getPath())).getString() + " - " + this.getContent();
+			return CabricalityClient.genTranslatableText("block", this.getDefaultBlockId().getPath()).getString();
+		return this.getContent();
 	}
 
 	@Nullable
 	public String getContent() {
-		if (this.getSubstrate() == null) return null;
-		return new TranslatableText(CabricalityClient.genTranslationKey(this.getSubstrate().getType(), this.getSubstrate().getId().getPath())).getString();
+		return CabricalityClient.genTranslatableText("block", this.getSubstrate().getType() + "_" + this.getSubstrate().getId().getPath()).getString();
 	}
 
 	@Nullable
