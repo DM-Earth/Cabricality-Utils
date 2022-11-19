@@ -9,7 +9,6 @@ import com.dm.earth.cabricality.content.entries.CabfItems;
 import com.dm.earth.cabricality.core.ISettingableBlockItem;
 
 import net.minecraft.item.Item;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public abstract class SubstrateJarBlock extends JarBlock implements ISettingableBlockItem {
