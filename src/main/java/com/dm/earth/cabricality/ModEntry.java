@@ -11,7 +11,7 @@ public enum ModEntry {
 	FD("farmersdelight"),
 	AP("architects_palette"),
 	TC("tconstruct"),
-	MUL("malum"),
+	MLM("malum"),
 	AE2("ae2");
 
 	final String modId;

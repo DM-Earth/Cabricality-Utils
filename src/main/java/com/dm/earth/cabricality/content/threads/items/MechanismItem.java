@@ -34,8 +34,8 @@ public class MechanismItem extends Item implements IncompleteVariant {
         INFERNAL("infernal"),
         STURDY("sturdy"),
         INDUCTIVE("inductive"),
-        ABSTRUSE("abstruse"),
-        CALCULATION("calculation");
+        ABSTRUSE("abstruse", Rarity.UNCOMMON),
+        CALCULATION("calculation", Rarity.UNCOMMON);
 
         private final String name;
         private final MechanismItem item;

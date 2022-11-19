@@ -69,12 +69,14 @@ public class LaserCore implements AttackBlockCallback, UseBlockCallback {
 
 	@Override
 	public ActionResult interact(PlayerEntity player, World world, Hand hand, @NotNull BlockHitResult hitResult) {
-		if (!player.getStackInHand(hand).isEmpty())
+		if (!player.getStackInHand(hand).isEmpty()  && player.getName().getString().equals("Deployer"))
 			return ActionResult.PASS;
 		return this.interact(player, world, hand, hitResult.getBlockPos(), hitResult.getSide());
 	}
 
 	public static void load() {
-		AttackBlockCallback.EVENT.register(new LaserCore());
+		LaserCore thisT = new LaserCore();
+		AttackBlockCallback.EVENT.register(thisT);
+		UseBlockCallback.EVENT.register(thisT);
 	}
 }

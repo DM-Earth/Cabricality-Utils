@@ -17,6 +17,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -34,7 +35,7 @@ import net.minecraft.world.WorldView;
 @SuppressWarnings("deprecation")
 public class JarBlock extends Block implements ResourcedBlock {
 	public JarBlock(Settings settings) {
-		super(settings);
+		super(settings.strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	}
 
 	@Override

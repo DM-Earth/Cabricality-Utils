@@ -10,6 +10,7 @@ import com.dm.earth.cabricality.content.alchemist.block.JarBlock;
 import com.dm.earth.cabricality.content.alchemist.block.ReagentJarBlock;
 import com.dm.earth.cabricality.content.alchemist.substrate.Reagent;
 import com.dm.earth.cabricality.content.machine.extractor.ExtractorMachineBlock;
+import com.dm.earth.cabricality.content.threads.blocks.MachineBlockEntry;
 import com.dm.earth.cabricality.core.ISettingableBlockItem;
 import com.dm.earth.cabricality.resource.ResourcedBlock;
 
@@ -44,6 +45,10 @@ public class CabfBlocks {
 				registerBlock("reagent_jar_" + reagent.hashString(),
 						new ReagentJarBlock(QuiltBlockSettings.of(Material.GLASS, MapColor.SPRUCE_BROWN)));
 		}
+
+		// Machine Blocks
+		for (MachineBlockEntry entry : MachineBlockEntry.values())
+			registerBlock(entry.getId().getPath(), entry.getBlock());
 	}
 
 	public static void registerFluidBlock(Identifier id, FlowableFluid fluid) {

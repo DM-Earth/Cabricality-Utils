@@ -4,7 +4,7 @@ import static com.dm.earth.cabricality.ModEntry.AE2;
 import static com.dm.earth.cabricality.ModEntry.CR;
 import static com.dm.earth.cabricality.ModEntry.IV;
 import static com.dm.earth.cabricality.ModEntry.MC;
-import static com.dm.earth.cabricality.ModEntry.MUL;
+import static com.dm.earth.cabricality.ModEntry.MLM;
 import static com.dm.earth.cabricality.ModEntry.PMD;
 import static com.dm.earth.cabricality.content.alchemist.substrate.Reagent.of;
 
@@ -64,7 +64,7 @@ public enum Reagents {
 			of("obsidian", CR.id("powdered_obsidian"), 0x271f3c),
 			of("gunpowder", MC.id("gunpowder"), 0x727272),
 			of("prismarine", MC.id("prismarine_shard"), 0xa5d1c2),
-			of("hex", MUL.id("hex_ash"), 0xa235bc),
+			of("hex", MLM.id("hex_ash"), 0xa235bc),
 			of("ender", AE2.id("ender_dust"), 0x38ccb1)
 	),
 
@@ -72,7 +72,7 @@ public enum Reagents {
 			of("sulfur", IV.id("sulfur_dust"), 0xc7a94a),
 			of("certus_quartz", AE2.id("certus_quartz_dust"), 0xbbdcfd),
 			of("cinnabar", MC.id("redstone"), 0xe8364f),
-			of("blazing_quartz", MUL.id("blazing_quartz"), 0xfee568),
+			of("blazing_quartz", MLM.id("blazing_quartz"), 0xfee568),
 			of("nether_quartz", MC.id("quartz"), 0xddd4c7)
 	),
 
