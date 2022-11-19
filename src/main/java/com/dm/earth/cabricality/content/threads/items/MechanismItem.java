@@ -29,7 +29,13 @@ public class MechanismItem extends Item implements IncompleteVariant {
     }
 
     public static enum Type {
-        KINETIC("kinetic");
+        KINETIC("kinetic"),
+        SEALED("sealed"),
+        INFERNAL("infernal"),
+        STURDY("sturdy"),
+        INDUCTIVE("inductive"),
+        ABSTRUSE("abstruse"),
+        CALCULATION("calculation");
 
         private final String name;
         private final MechanismItem item;
