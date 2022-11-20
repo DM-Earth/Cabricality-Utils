@@ -23,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
@@ -79,7 +78,7 @@ public abstract class AbstractMachineBlock extends HorizontalFacingBlock impleme
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return this.isFull() ? VoxelShapes.fullCube() : VoxelShapeUtil.simpleBox(1, 0, 1, 15, 14, 15);
+        return VoxelShapeUtil.simpleBox(1, 0, 1, 15, this.isFull() ? 16 : 14, 15);
     }
 
     @Override
